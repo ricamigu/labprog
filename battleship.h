@@ -5,17 +5,26 @@
 #include <stdlib.h>
 
 /***** Structures *****/
-typedef struct Coordinate{
+typedef struct Coordinate {
 	int x;
 	int y;
-};
-typedef 
-typedef
+} Coordinate;
+
+typedef struct {
+
+	char **matriz;
+	int lin, col;
+
+} game;
+
 
 // Coordinates
 
-/***** Constructures *****/
+// Constructures
 
-Coordinate new_coord(int a, int b);
+Coordinate* new_coord(int a, int b);
+
+void print_tabuleiro(game *board);
+void create_matriz(game *board);
 
 #endif
