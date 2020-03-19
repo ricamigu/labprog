@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "battleship.h"
 
-void create_matrix(int n);
 
 int main(){
 	char p1[20],p2[20];
@@ -11,7 +10,7 @@ int main(){
 	int x1, x2, tam, vh;
 	Coordinate p;
 
-
+	printf("\n\n");
 	printf("-----------------------\n");
 	printf("|   Battleship Game   |\n");
 	printf("-----------------------\n\n");
@@ -71,9 +70,14 @@ int main(){
  	}
 
  	create_matriz(p1m1);
+ 	create_matriz(p1m2);
+ 	create_matriz(p2m1);
+ 	create_matriz(p2m2);
 
- 	//-------------------------------------------------------------------
 
+ 	//-----------------------------------------------------------------------
+ 	
+ 	int opt;
  	printf("Enter the number of boats: ");
  	scanf("%d", &b);
  	//peca* boats1[b+1];
@@ -82,9 +86,18 @@ int main(){
  	peca *boats1 = (peca *) malloc(b * sizeof(peca*));
  	peca *boats2 = (peca *) malloc(b * sizeof(peca*));
 
-
+ 	//ciclo para criar as peças
  	for(int i=1; i<=b; i++){
- 		printf("\nPlayer %s coordinate for boat %d: ", p1, i);
+ 		printf("Choose the type of boat\n");
+ 		print_barcoQuad();
+		print_barcoRect();
+		print_barcoT();
+		print_barcoU();
+		print_barcoL();
+		printf("> ");
+
+		scanf("%d", &opt);
+		printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
  		scanf("%d", &x1);
  		scanf("%d", &x2);
  		a = new_coord(x1,x2);
@@ -96,6 +109,19 @@ int main(){
  		scanf("%d", &vh);
  		boats1[i].o = vh;
 		system("clear");
+
+		switch(opt){
+			case 1: print_barcoQuad();
+					break;
+			case 2: print_barcoRect();
+					break;
+			case 3: print_barcoT();
+					break;
+			case 4: print_barcoU();
+					break;
+			case 5: print_barcoL();
+					break;
+		}
 	}
 
 	/*
