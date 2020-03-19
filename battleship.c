@@ -1,15 +1,16 @@
 #include "battleship.h"
 
 
-/*
 
+// Criar nova coordenada
 Coordinate* new_coord(int a, int b) {
 	Coordinate* c = (Coordinate *) malloc(sizeof(Coordinate*));
 	c -> x = a;
 	c -> y = b;
-	return *c;
-}*/
+	return c;
+}
 
+//print da matriz
 void print_tabuleiro(game *board){
 
 	for(int i=0; i < board->lin ; i++){
@@ -21,6 +22,8 @@ void print_tabuleiro(game *board){
 	printf("\n");
 }
 
+
+//Criar matriz
 void create_matriz(game *board) {
 
 	for(int i=0; i < board->lin ; i++){

@@ -17,6 +17,15 @@ typedef struct {
 
 } game;
 
+typedef struct Peca {
+
+	Coordinate c;
+	int n;
+	int o;
+	game m1;
+
+} peca;
+
 
 // Coordinates
 
