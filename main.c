@@ -95,7 +95,6 @@ int main(){
 		print_barcoU();
 		print_barcoL();
 		printf("> ");
-
 		scanf("%d", &opt);
 		printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
  		scanf("%d", &x1);
@@ -108,6 +107,7 @@ int main(){
  		printf("\nPlace Horizontally(0) or Vertically(1): ");
  		scanf("%d", &vh);
  		boats1[i].o = vh;
+ 		boats1[i].cont = 0;
 		system("clear");
 
 		switch(opt){

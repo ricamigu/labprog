@@ -135,3 +135,19 @@ void print_barcoL(){
 	}
 	printf("\n");
 }
+
+
+void put_QuadH(game *board, int x, int y, int n) {
+
+	if(x+n>board -> lin)
+		return;
+
+	for(int i=0; i < board->lin ; i++){
+		for(int j=0; j< board->col;j++){
+			if(i>=x && i<=x+n) board -> matriz[i][j] = '#';
+			else if(j>=y && j<=y+n) board -> matriz[i][j] = '#';
+			else board -> matriz[i][j] = '.';
+		}
+	}
+	//print_tabuleiro(board);
+}
