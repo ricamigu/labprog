@@ -44,5 +44,5 @@ void print_barcoRect();
 void print_barcoT();
 void print_barcoU();
 void print_barcoL();
-
+void put_QuadH(game *board, int x, int y, int n);
 #endif
