@@ -101,19 +101,18 @@ int main(){
  		scanf("%d", &x2);
  		a = new_coord(x1,x2);
  		boats1[i].c = *a;
- 		printf("\nSize of boat %d: ", i);
- 		scanf("%d", &tam);
- 		boats1[i].n = tam;
- 		printf("\nPlace Horizontally(0) or Vertically(1): ");
+ 		//printf("\nPlace Horizontally(0) or Vertically(1): ");
+ 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
  		scanf("%d", &vh);
  		boats1[i].o = vh;
- 		boats1[i].cont = 0;
+ 		boats1[i].shot_count = 0;
 		system("clear");
 
 		switch(opt){
 			case 1: print_barcoQuad();
 					break;
-			case 2: print_barcoRect();
+			case 2: boats1[i].m1 = create_rect0(boats1[i].c, p1m1);
+					print_tabuleiro(p1m1);
 					break;
 			case 3: print_barcoT();
 					break;

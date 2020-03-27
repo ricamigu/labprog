@@ -10,6 +10,7 @@ Coordinate* new_coord(int a, int b) {
 	return c;
 }
 
+
 //print da matriz
 void print_tabuleiro(game *board){
 
@@ -119,7 +120,7 @@ void print_barcoU(){
 void print_barcoL(){
 
 	printf("\n--------------");
- 	printf("\n| 4. L Shape |");
+ 	printf("\n| 5. L Shape |");
  	printf("\n--------------");
 	printf("\n");
 
@@ -136,7 +137,7 @@ void print_barcoL(){
 	printf("\n");
 }
 
-
+/*
 void put_QuadH(game *board, int x, int y, int n) {
 
 	if(x+n>board -> lin)
@@ -150,4 +151,28 @@ void put_QuadH(game *board, int x, int y, int n) {
 		}
 	}
 	//print_tabuleiro(board);
+}*/
+
+
+//criar bitmap
+bitmap create_rect0(Coordinate ini, game *board) {
+
+	bitmap matriz;
+
+	for(int i=0; i < 5 ; i++){
+		for(int j=0; j< 5;j++){
+			if(i==0) {
+				matriz.m[i][j] = '1';
+				board -> matriz[i + ini.x][j + ini.y] = '1';
+			}
+			else {
+				matriz.m[i][j] = '0';
+				board -> matriz[i + ini.x][j + ini.y] = '0';
+			}
+		}
+	}
+
+	return matriz;
+
+	print_tabuleiro(board);
 }

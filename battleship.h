@@ -17,13 +17,18 @@ typedef struct {
 
 } game;
 
+typedef struct {
+
+	char m[5][5];
+
+} bitmap;
+
 typedef struct Peca {
 
 	Coordinate c;
-	int n;
 	int o;
-	game m1;
-	int cont;
+	bitmap m1;
+	int shot_count;
 
 } peca;
 
@@ -45,4 +50,10 @@ void print_barcoT();
 void print_barcoU();
 void print_barcoL();
 void put_QuadH(game *board, int x, int y, int n);
+
+
+
+
+// funcoes que colocam as peças no board
+bitmap create_rect0(Coordinate ini, game *board);
 #endif
