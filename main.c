@@ -24,6 +24,33 @@ int main(){
 	printf("\n");
 	system("clear");
 
+
+	//matrizes do jogo
+	game m1, m2;
+
+
+	//matriz do jogador 1
+	game *p1m = &m1;
+	p1m -> size = n;
+
+	p1m -> board = (Cell ** )malloc (sizeof(Cell *) * p1m-> size);
+	for(int i=0;i< p1m -> size; i++) {
+ 		p1m -> board[i] = (Cell *) malloc(sizeof(Cell)* p1m -> size);
+ 	}
+
+ 	//matriz do 2 jogador
+ 	game *p2m= &m2;
+	p2m-> size = n;
+
+	p2m -> board = (Cell ** )malloc (sizeof(Cell *) * p2m-> size);
+	for(int i=0;i< p2m -> size; i++) {
+ 		p2m -> board[i] = (Cell *) malloc(sizeof(Cell)* p2m -> size);
+ 	}
+
+
+ 	create_matriz(p1m);
+
+	/*
 	// matrizes iniciais
 	game m1 , m2 ,m3 ,m4;
 
@@ -74,6 +101,8 @@ int main(){
  	create_matriz(p2m1);
  	create_matriz(p2m2);
 
+ 	*/
+
 
  	//-----------------------------------------------------------------------
  	
@@ -111,8 +140,8 @@ int main(){
 		switch(opt){
 			case 1: print_barcoQuad();
 					break;
-			case 2: boats1[i].m1 = create_rect0(boats1[i].c, p1m1);
-					print_tabuleiro(p1m1);
+			//case 2: boats1[i].m1 = create_rect0(boats1[i].c, p1m1);
+			//		print_tabuleiro(p1m1);
 					break;
 			case 3: print_barcoT();
 					break;

@@ -12,10 +12,10 @@ typedef struct Coordinate {
 
 typedef struct {
 
-	char **matriz;
-	int lin, col;
+	char* apont;
+	int field_shot;
 
-} game;
+} Cell;
 
 typedef struct {
 
@@ -23,7 +23,7 @@ typedef struct {
 
 } bitmap;
 
-typedef struct Peca {
+typedef struct {
 
 	Coordinate c;
 	int o;
@@ -31,6 +31,13 @@ typedef struct Peca {
 	int shot_count;
 
 } peca;
+
+typedef struct {
+
+	int size;
+	Cell** board;
+
+} game;
 
 
 // Coordinates

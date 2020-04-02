@@ -12,11 +12,11 @@ Coordinate* new_coord(int a, int b) {
 
 
 //print da matriz
-void print_tabuleiro(game *board){
+void print_tabuleiro(game *tabuleiro){
 
-	for(int i=0; i < board->lin ; i++){
-		for(int j=0; j< board->col;j++){
-			printf(" %c ", board -> matriz[i][j]);
+	for(int i=0; i < tabuleiro->size ; i++){
+		for(int j=0; j< tabuleiro->size;j++){
+			printf(" %s ", tabuleiro -> board[i][j].apont);
 		}
 		printf("\n");
 	}
@@ -25,15 +25,20 @@ void print_tabuleiro(game *board){
 
 
 //Criar matriz
-void create_matriz(game *board) {
+void create_matriz(game *tabuleiro) {
 
-	for(int i=0; i < board->lin ; i++){
-		for(int j=0; j< board->col;j++){
-			board -> matriz[i][j] = '.';
+	char b = '~';
+	char* a = &b;
+
+
+	for(int i=0; i < tabuleiro->size ; i++){
+		for(int j=0; j< tabuleiro->size;j++){
+			tabuleiro -> board[i][j].apont = a;
+			tabuleiro -> board[i][j].field_shot = 0;
 		}
 	}
 
-	//print_tabuleiro(board);
+	print_tabuleiro(tabuleiro);
 
 }
 
@@ -153,7 +158,7 @@ void put_QuadH(game *board, int x, int y, int n) {
 	//print_tabuleiro(board);
 }*/
 
-
+/*
 //criar bitmap
 bitmap create_rect0(Coordinate ini, game *board) {
 
@@ -175,4 +180,4 @@ bitmap create_rect0(Coordinate ini, game *board) {
 	return matriz;
 
 	print_tabuleiro(board);
-}
+}*/
