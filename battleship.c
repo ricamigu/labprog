@@ -1,7 +1,5 @@
 #include "battleship.h"
 
-
-
 // Criar nova coordenada
 Coordinate* new_coord(int a, int b) {
 	Coordinate* c = (Coordinate *) malloc(sizeof(Coordinate*));
@@ -12,11 +10,11 @@ Coordinate* new_coord(int a, int b) {
 
 
 //print da matriz
-void print_tabuleiro(game *tabuleiro){
+void print_tabuleiro(game *board){
 
-	for(int i=0; i < tabuleiro->size ; i++){
-		for(int j=0; j< tabuleiro->size;j++){
-			printf(" %s ", tabuleiro -> board[i][j].apont);
+	for(int i=0; i < board->lin ; i++){
+		for(int j=0; j< board->col;j++){
+			printf(" %c ", board -> matriz[i][j]);
 		}
 		printf("\n");
 	}
@@ -25,23 +23,43 @@ void print_tabuleiro(game *tabuleiro){
 
 
 //Criar matriz
-void create_matriz(game *tabuleiro) {
+void create_matriz(game *board) {
 
-	char b = '~';
-	char* a = &b;
-
-
-	for(int i=0; i < tabuleiro->size ; i++){
-		for(int j=0; j< tabuleiro->size;j++){
-			tabuleiro -> board[i][j].apont = a;
-			tabuleiro -> board[i][j].field_shot = 0;
+	for(int i=0; i < board->lin ; i++){
+		for(int j=0; j< board->col;j++){
+			board -> matriz[i][j] = '.';
 		}
 	}
 
-	print_tabuleiro(tabuleiro);
+	//print_tabuleiro(board);
 
 }
 
+void create_matrix(int n ){
+	char matrix[n][n];
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(i==0 && j==0)
+				matrix[i][j] = '-';
+			else 
+				matrix[i][j]='-';
+		}
+
+
+	}
+
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			printf("%c ", matrix[i][j] );
+		}
+			printf("\n");
+		}
+
+}
+
+void instructions(){
+ 	printf("ola!\n");
+ }
 
 
 // TIPOS DE BARCOS
@@ -142,12 +160,10 @@ void print_barcoL(){
 	printf("\n");
 }
 
-/*
-void put_QuadH(game *board, int x, int y, int n) {
 
+void put_QuadH(game *board, int x, int y, int n) {
 	if(x+n>board -> lin)
 		return;
-
 	for(int i=0; i < board->lin ; i++){
 		for(int j=0; j< board->col;j++){
 			if(i>=x && i<=x+n) board -> matriz[i][j] = '#';
@@ -156,28 +172,55 @@ void put_QuadH(game *board, int x, int y, int n) {
 		}
 	}
 	//print_tabuleiro(board);
-}*/
+}
 
-/*
-//criar bitmap
+
+//criar bitmap 
 bitmap create_rect0(Coordinate ini, game *board) {
 
 	bitmap matriz;
 
-	for(int i=0; i < 5 ; i++){
+for(int i=0; i < 5; i++){
 		for(int j=0; j< 5;j++){
-			if(i==0) {
-				matriz.m[i][j] = '1';
-				board -> matriz[i + ini.x][j + ini.y] = '1';
-			}
-			else {
 				matriz.m[i][j] = '0';
 				board -> matriz[i + ini.x][j + ini.y] = '0';
+				
 			}
+		}
+
+	for(int i=0; i < 2; i++){
+		for(int j=0; j< 3;j++){
+				matriz.m[i][j] = '1';
+				board -> matriz[i + ini.x][j + ini.y] = '1';
 		}
 	}
 
 	return matriz;
 
 	print_tabuleiro(board);
-}*/
+}
+
+bitmap create_square0(Coordinate ini,game *board){
+	
+	bitmap matriz;
+
+for(int i=0; i < 5; i++){
+		for(int j=0; j< 5;j++){
+				matriz.m[i][j] = '0';
+				board -> matriz[i + ini.x][j + ini.y] = '0';
+				
+			}
+		}
+
+	for(int i=0; i < 2; i++){
+		for(int j=0; j< 2;j++){
+				matriz.m[i][j] = '1';
+				board -> matriz[i + ini.x][j + ini.y] = '1';
+		}
+	}
+
+	return matriz;
+
+	print_tabuleiro(board);
+
+}

@@ -12,10 +12,19 @@ typedef struct Coordinate {
 
 typedef struct {
 
-	char* apont;
-	int field_shot;
+	char **matriz;
+	int lin, col;
 
-} Cell;
+} game;
+
+/*typedef struct {
+
+	char **bit;
+	int lin,col;
+
+} bitmap;
+
+*/
 
 typedef struct {
 
@@ -23,7 +32,7 @@ typedef struct {
 
 } bitmap;
 
-typedef struct {
+typedef struct Peca {
 
 	Coordinate c;
 	int o;
@@ -31,13 +40,6 @@ typedef struct {
 	int shot_count;
 
 } peca;
-
-typedef struct {
-
-	int size;
-	Cell** board;
-
-} game;
 
 
 // Coordinates
@@ -63,4 +65,5 @@ void put_QuadH(game *board, int x, int y, int n);
 
 // funcoes que colocam as peças no board
 bitmap create_rect0(Coordinate ini, game *board);
+bitmap create_square0(Coordinate ini,game*board);
 #endif
