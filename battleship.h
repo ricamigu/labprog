@@ -80,4 +80,8 @@ void inserir_barco(Coordinate c, piece boat, game* tabuleiro);
 //verifica se é possível inserir um barco
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro);
 
+
+//test
+void acertou(Coordinate c, game* tabuleiro);
+
 #endif

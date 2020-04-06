@@ -50,10 +50,13 @@ void create_matriz(game *tabuleiro) {
 
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 
+
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			if((boat.mb.m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL)))
+			if((boat.mb.m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL))){
+				printf("\nInvalid coordinate.\n");
 				return false;
+			}
 		}
 	}
 
@@ -73,7 +76,19 @@ void inserir_barco(Coordinate c, piece boat, game* tabuleiro){
 			}
 		}
 	}
-	else printf("\nInvalid coordinate.\n");
+}
+
+
+void acertou(Coordinate c, game* tabuleiro){
+
+	printf(" %c ", (tabuleiro -> board[c.x][c.y].apont ) -> mb.m[c.x+2][c.y+2]);
+
+	for(int i=0;i<5;i++){
+		for(int j=0;j<5;j++){
+			//if(tabuleiro[c.x][c.y].apont)
+		}
+	}
+
 }
 
 
