@@ -1,4 +1,6 @@
 #include "battleship.h"
+#include <stdbool.h>
+
 
 // Criar nova coordenada
 Coordinate* new_coord(int a, int b) {
@@ -10,11 +12,16 @@ Coordinate* new_coord(int a, int b) {
 
 
 //print da matriz
-void print_tabuleiro(game *board){
+void print_tabuleiro(game *tabuleiro){
 
-	for(int i=0; i < board->lin ; i++){
-		for(int j=0; j< board->col;j++){
-			printf(" %c ", board -> matriz[i][j]);
+
+	for(int i=0; i < tabuleiro->size ; i++){
+		for(int j=0; j< tabuleiro->size;j++){
+			if(tabuleiro -> board[i][j].apont == NULL)
+				printf(" . ");
+			else{
+				printf(" 1 ");
+			}
 		}
 		printf("\n");
 	}
@@ -23,204 +30,88 @@ void print_tabuleiro(game *board){
 
 
 //Criar matriz
-void create_matriz(game *board) {
+void create_matriz(game *tabuleiro) {
 
-	for(int i=0; i < board->lin ; i++){
-		for(int j=0; j< board->col;j++){
-			board -> matriz[i][j] = '.';
+	//char b;
+	//char *a = (char * )malloc (sizeof(char *));
+	//a = &b;
+
+	for(int i=0; i < tabuleiro->size ; i++){
+		for(int j=0; j< tabuleiro->size;j++){
+			tabuleiro -> board[i][j].apont = NULL;
+			tabuleiro -> board[i][j].field_shot = 0;
 		}
 	}
 
-	//print_tabuleiro(board);
+	print_tabuleiro(tabuleiro);
 
 }
 
-void create_matrix(int n ){
-	char matrix[n][n];
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			if(i==0 && j==0)
-				matrix[i][j] = '-';
-			else 
-				matrix[i][j]='-';
+
+bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
+
+	for(int i=0;i<5;i++){
+		for(int j=0;j<5;j++){
+			if((boat.mb.m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL)))
+				return false;
 		}
-
-
 	}
 
-	for(int i=0;i<n;i++){
-		for(int j=0;j<n;j++){
-			printf("%c ", matrix[i][j] );
-		}
-			printf("\n");
-		}
-
-}
-
-void instructions(){
- 	printf("ola!\n");
- }
-
-
-// TIPOS DE BARCOS
-void print_barcoQuad(){
-
-	printf("\n-------------");
- 	printf("\n| 1. Square |");
- 	printf("\n-------------");
-	printf("\n");
-	
-	for(int i=0; i < 2 ; i++){
-		printf("| ");
-		for(int j=0; j< 2;j++){
-			printf(" x ");
-		}
-		printf(" |");
-		printf("\n");
-	}
-	printf("\n");
-
-}
-
-void print_barcoRect(){
-
-	printf("\n----------------");
- 	printf("\n| 2. Rectangle |");
- 	printf("\n----------------");
-	printf("\n");
-
-	for(int i=0; i < 2 ; i++){
-		printf("| ");
-		for(int j=0; j< 3;j++){
-			printf(" x ");
-		}
-		printf(" |");
-		printf("\n");
-	}
-	printf("\n");
-}
-
-void print_barcoT(){
-
-	printf("\n--------------");
- 	printf("\n| 3. T Shape |");
- 	printf("\n--------------");
-	printf("\n");
-
-	for(int i=0; i < 3 ; i++){
-		printf("| ");
-		for(int j=0; j< 3;j++){
-			if(i==0) printf(" x ");
-			else if(j==1) printf(" x ");
-			else printf("   ");
-		}
-		printf(" |");
-		printf("\n");
-	}
-	printf("\n");
-}
-
-void print_barcoU(){
-
-	printf("\n--------------");
- 	printf("\n| 4. U Shape |");
- 	printf("\n--------------");
-	printf("\n");
-
-	for(int i=0; i < 3 ; i++){
-		printf("| ");
-		for(int j=0; j< 3;j++){
-			if((j==0) || j==2)printf(" x ");
-			else if(i==2) printf(" x ");
-			else printf("   ");
-		}
-		printf(" |");
-		printf("\n");
-	}
-	printf("\n");
-}
-
-void print_barcoL(){
-
-	printf("\n--------------");
- 	printf("\n| 5. L Shape |");
- 	printf("\n--------------");
-	printf("\n");
-
-	for(int i=0; i<3;i++){
-		printf("| ");
-		for(int j=0; j<3;j++){
-			if(j==0) printf(" x ");
-			else if(i==2) printf("x ");
-			else printf("  ");
-		}
-		printf(" |");
-		printf("\n");
-	}
-	printf("\n");
+	return true;
 }
 
 
-void put_QuadH(game *board, int x, int y, int n) {
-	if(x+n>board -> lin)
-		return;
-	for(int i=0; i < board->lin ; i++){
-		for(int j=0; j< board->col;j++){
-			if(i>=x && i<=x+n) board -> matriz[i][j] = '#';
-			else if(j>=y && j<=y+n) board -> matriz[i][j] = '#';
-			else board -> matriz[i][j] = '.';
-		}
-	}
-	//print_tabuleiro(board);
-}
+//inserir na matriz de jogo
+void inserir_barco(Coordinate c, piece boat, game* tabuleiro){
 
+	if(pode_inserir(c, boat, tabuleiro)){
 
-//criar bitmap 
-bitmap create_rect0(Coordinate ini, game *board) {
-
-	bitmap matriz;
-
-for(int i=0; i < 5; i++){
-		for(int j=0; j< 5;j++){
-				matriz.m[i][j] = '0';
-				board -> matriz[i + ini.x][j + ini.y] = '0';
-				
+		for(int i=0;i<5;i++){
+			for(int j=0;j<5;j++){
+				if( boat.mb.m[i][j] =='1' )
+					tabuleiro -> board[i + c.x - 2][j + c.y-2].apont = &boat;
 			}
 		}
-
-	for(int i=0; i < 2; i++){
-		for(int j=0; j< 3;j++){
-				matriz.m[i][j] = '1';
-				board -> matriz[i + ini.x][j + ini.y] = '1';
-		}
 	}
-
-	return matriz;
-
-	print_tabuleiro(board);
+	else printf("\nInvalid coordinate.\n");
 }
 
-bitmap create_square0(Coordinate ini,game *board){
-	
+
+/*
+bitmap create_quad0(Coordinate ini, game *tabuleiro) {
+
 	bitmap matriz;
+	char *a = (char * )malloc (2058*sizeof(char *));
+	char *b = (char * )malloc (sizeof(char *));
+	int k=0;
 
-for(int i=0; i < 5; i++){
+	for(int i=0; i < 5 ; i++){
 		for(int j=0; j< 5;j++){
-				matriz.m[i][j] = '0';
-				board -> matriz[i + ini.x][j + ini.y] = '0';
-				
-			}
-		}
-
-	for(int i=0; i < 2; i++){
-		for(int j=0; j< 2;j++){
+			if(i<3 && j<3) {
 				matriz.m[i][j] = '1';
-				board -> matriz[i + ini.x][j + ini.y] = '1';
+				b = &matriz.m[i][j];
+				//printf(" %c ", *b);
+				a[k] = *b;
+				//int* b = &matriz.m[i][j];
+				tabuleiro -> board[i + ini.x][j + ini.y].apont = &a[k];
+
+			}
+			else {
+				matriz.m[i][j] = '0';
+				b = &matriz.m[i][j];
+				//printf(" %c ", *b);
+				a[k] = *b;
+				//int *b = &matriz.m[i][j];
+				tabuleiro -> board[i + ini.x][j + ini.y].apont = &a[k];
+
+			}
+			k++;
 		}
+		//printf("\n");
 	}
 
+	//print_tabuleiro(tabuleiro);
+
 	return matriz;
-
-	print_tabuleiro(board);
-
 }
+*/

@@ -1,7 +1,7 @@
 #include "battleship.h"
 
 //criar o bitmap do retangulo
-bitmap create_rect0() {
+bitmap create_rect() {
 
       bitmap matriz;
 
@@ -16,7 +16,7 @@ bitmap create_rect0() {
 }
 
 //criar o bitmap do quadrado
-bitmap create_quad0(){
+bitmap create_quad(){
 
       bitmap matriz;
       
@@ -30,7 +30,7 @@ bitmap create_quad0(){
 }
 
 //criar o bitmap do T
-bitmap create_barcoT0(){
+bitmap create_barcoT(){
       
       bitmap matriz;
       
@@ -44,7 +44,7 @@ bitmap create_barcoT0(){
 }
 
 //criar o bitmap do L
-bitmap create_barcoL0(){
+bitmap create_barcoL(){
       
       bitmap matriz;
       
@@ -58,7 +58,7 @@ bitmap create_barcoL0(){
 }
 
 //criar o bitmap do U
-bitmap create_barcoU0(){
+bitmap create_barcoU(){
       
       bitmap matriz;
       

@@ -1,9 +1,11 @@
 #ifndef _battleship_h_
 #define _battleship_h_
 #define _bitmaps_c_
+#define _menus_c_
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 
 /***** Structures *****/
@@ -11,13 +13,6 @@ typedef struct Coordinate {
 	int x;
 	int y;
 } Coordinate;
-
-typedef struct {
-
-	char* apont;
-	int field_shot;
-
-} Cell;
 
 typedef struct {
 
@@ -29,10 +24,17 @@ typedef struct {
 
 	Coordinate c;
 	int o;
-	bitmap m1;
+	bitmap mb;
 	int shot_count;
 
-} peca;
+} piece;
+
+typedef struct {
+
+	piece* apont;
+	int field_shot;
+
+} Cell;
 
 typedef struct {
 
@@ -42,40 +44,40 @@ typedef struct {
 } game;
 
 
+
 //variavel global
 extern bitmap quad,rect,bT,bL,bU;
-//extern bitmap mquad;
+extern char p1[20],p2[20];
 
 // Constructures
-
 Coordinate* new_coord(int a, int b);
 
+//battleship.c
 void print_tabuleiro(game *board);
 void create_matriz(game *board);
 
-
-//funcoes que fazem print dos exemplos das peças
-void print_bitmap(bitmap matriz);
-void print_barcoQuad();
-void print_barcoRect();
-void print_barcoT();
-void print_barcoU();
-void print_barcoL();
-void put_QuadH(game *board, int x, int y, int n);
-
+//menus
+void print_menuB(bitmap a, bitmap b, bitmap c, bitmap d, bitmap e);
 
 //bitmaps.c
 void print_bitmap(bitmap matriz);
 
 // funcoes que criam bitmaps
-bitmap create_rect0();
-bitmap create_quad0();
-bitmap create_barcoT0();
-bitmap create_barcoL0();
-bitmap create_barcoU0();
+bitmap create_rect();
+bitmap create_quad();
+bitmap create_barcoT();
+bitmap create_barcoL();
+bitmap create_barcoU();
 
 //funcoes que rodam o bitmap
 bitmap rotate_90(bitmap matriz);
 bitmap rotate_180(bitmap matriz);
 bitmap rotate_270(bitmap matriz);
+
+//funcao que insere barco
+void inserir_barco(Coordinate c, piece boat, game* tabuleiro);
+
+//verifica se é possível inserir um barco
+bool pode_inserir(Coordinate c, piece boat, game* tabuleiro);
+
 #endif
