@@ -1,8 +1,10 @@
 #ifndef _battleship_h_
 #define _battleship_h_
+#define _bitmaps_c_
 
 #include <stdio.h>
 #include <stdlib.h>
+
 
 /***** Structures *****/
 typedef struct Coordinate {
@@ -12,19 +14,10 @@ typedef struct Coordinate {
 
 typedef struct {
 
-	char **matriz;
-	int lin, col;
+	char* apont;
+	int field_shot;
 
-} game;
-
-/*typedef struct {
-
-	char **bit;
-	int lin,col;
-
-} bitmap;
-
-*/
+} Cell;
 
 typedef struct {
 
@@ -32,7 +25,7 @@ typedef struct {
 
 } bitmap;
 
-typedef struct Peca {
+typedef struct {
 
 	Coordinate c;
 	int o;
@@ -41,8 +34,17 @@ typedef struct Peca {
 
 } peca;
 
+typedef struct {
 
-// Coordinates
+	int size;
+	Cell** board;
+
+} game;
+
+
+//variavel global
+extern bitmap quad,rect,bT,bL,bU;
+//extern bitmap mquad;
 
 // Constructures
 
@@ -53,6 +55,7 @@ void create_matriz(game *board);
 
 
 //funcoes que fazem print dos exemplos das peças
+void print_bitmap(bitmap matriz);
 void print_barcoQuad();
 void print_barcoRect();
 void print_barcoT();
@@ -61,9 +64,18 @@ void print_barcoL();
 void put_QuadH(game *board, int x, int y, int n);
 
 
+//bitmaps.c
+void print_bitmap(bitmap matriz);
 
+// funcoes que criam bitmaps
+bitmap create_rect0();
+bitmap create_quad0();
+bitmap create_barcoT0();
+bitmap create_barcoL0();
+bitmap create_barcoU0();
 
-// funcoes que colocam as peças no board
-bitmap create_rect0(Coordinate ini, game *board);
-bitmap create_square0(Coordinate ini,game*board);
+//funcoes que rodam o bitmap
+bitmap rotate_90(bitmap matriz);
+bitmap rotate_180(bitmap matriz);
+bitmap rotate_270(bitmap matriz);
 #endif
