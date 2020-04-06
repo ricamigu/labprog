@@ -65,7 +65,7 @@ int main(){
  	piece *boats1 = (piece *) malloc((b+1)* sizeof(piece*));
  	piece *boats2 = (piece *) malloc((b+1) * sizeof(piece*));
 
- 	//ciclo para criar os barcos
+ 	//ciclo para criar os barcos do p1
  	for(int i=1; i<=b; i++){
 
  		pode = false;
@@ -114,7 +114,6 @@ int main(){
 									  }
 									  break;
 						}
-						print_tabuleiro(p1m);
 						break;
 
 				case 2: switch(boats1[i].o){
@@ -143,7 +142,6 @@ int main(){
 									 }
 									 break;
 						}
-						print_tabuleiro(p1m);
 						break;
 
 				case 3: switch(boats1[i].o){
@@ -172,7 +170,6 @@ int main(){
 									}
 									break;
 						}
-						print_tabuleiro(p1m);
 						break;
 
 				case 4: switch(boats1[i].o){
@@ -201,7 +198,6 @@ int main(){
 									}
 									break;
 						}
-						print_tabuleiro(p1m);
 						break;
 
 				case 5: switch(boats1[i].o){
@@ -230,14 +226,179 @@ int main(){
 									}
 									break;
 						}
-						print_tabuleiro(p1m);
 						break;
 			}
+		}
+		print_tabuleiro(p1m);
+	}
 
-			if (!pode) {
-				printf("Posição inválida!\n");
+
+
+	//ciclo para criar os barcos do p2
+ 	for(int i=1; i<=b; i++){
+
+ 		pode = false;
+ 		while(!pode){
+
+	 		printf("\nChoose the type of boat\n");
+			print_menuB(quad, rect, bT, bU, bL);	//menu dos barcos em menus.c
+			printf("> ");
+			scanf("%d", &opt);
+			printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
+	 		scanf("%d", &x1);
+	 		scanf("%d", &x2);
+	 		a = new_coord(x1,x2);
+	 		boats2[i].c = *a;
+	 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
+	 		scanf("%d", &vh);
+	 		boats2[i].o = vh;
+	 		boats2[i].shot_count = 0;
+
+	 		system("clear");
+
+			switch(opt){
+				case 1: switch(boats2[i].o){
+							case 0: boats2[i].mb = create_quad();
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)){
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 90: boats2[i].mb = rotate_90(create_quad());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);	
+									 	pode = true;
+									 }	
+									 break;
+							case 180: boats2[i].mb = rotate_180(create_quad());
+									  if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									  	inserir_barco(boats2[i].c, boats2[i], p1m);
+									  	pode = true;
+									  }
+									  break;
+							case 270: boats2[i].mb = rotate_270(create_quad());
+									  if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									  	inserir_barco(boats2[i].c, boats2[i], p1m);
+									  	pode = true;
+									  }
+									  break;
+						}
+						break;
+
+				case 2: switch(boats2[i].o){
+							case 0: boats2[i].mb = create_rect();
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 90: boats2[i].mb = rotate_90(create_rect());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									 break;
+							case 180: boats2[i].mb = rotate_180(create_rect());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									 break;
+							case 270: boats2[i].mb = rotate_270(create_rect());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									 break;
+						}
+						break;
+
+				case 3: switch(boats2[i].o){
+							case 0: boats2[i].mb = create_barcoT();
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 90: boats2[i].mb = rotate_90(create_barcoT());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									break;
+							case 180: boats2[i].mb = rotate_180(create_barcoT());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									break;
+							case 270: boats2[i].mb = rotate_270(create_barcoT());
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+						}
+						break;
+
+				case 4: switch(boats2[i].o){
+							case 0: boats2[i].mb = create_barcoL();
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 90: boats2[i].mb = rotate_90(create_barcoL());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									 }
+									 break;
+							case 180: boats2[i].mb = rotate_180(create_barcoL());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									}
+									break;
+							case 270: boats2[i].mb = rotate_270(create_barcoL());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									}
+									break;
+						}
+						break;
+
+				case 5: switch(boats2[i].o){
+							case 0: boats2[i].mb = create_barcoU();
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 90: boats2[i].mb = rotate_90(create_barcoU());
+									 if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+									 	inserir_barco(boats2[i].c, boats2[i], p1m);
+									 	pode = true;
+									}
+									break;
+							case 180: boats2[i].mb = rotate_180(create_barcoU());
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+							case 270: boats2[i].mb = rotate_270(create_barcoU());
+									if (pode_inserir(boats2[i].c, boats2[i], p1m)) {
+										inserir_barco(boats2[i].c, boats2[i], p1m);
+										pode = true;
+									}
+									break;
+						}
+						break;
 			}
 		}
+		print_tabuleiro(p1m);
 	}
 
 
