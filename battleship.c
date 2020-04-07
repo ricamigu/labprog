@@ -19,6 +19,7 @@ void print_tabuleiro(game *tabuleiro){
 		for(int j=0; j< tabuleiro->size;j++){
 			if(tabuleiro -> board[i][j].apont == NULL)
 				printf(" . ");
+			else if((tabuleiro -> board[i][j].field_shot == 1)) printf(" x ");
 			else 
 			{
 				printf(" 1 ");
@@ -54,7 +55,7 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			if((boat.mb.m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL))){
+			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL))){
 				printf("\nInvalid coordinate.\n");
 				return false;
 			}
@@ -73,7 +74,7 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
 		for(int i=0;i<5;i++){
 			for(int j=0;j<5;j++){
-				if( boat -> mb.m[i][j] == '1' ){
+				if( boat -> mb -> m[i][j] == '1' ){
 					tabuleiro -> board[i + c.x - 2][j + c.y-2].apont = boat;
 				}
 			}
@@ -105,9 +106,10 @@ bool acertou(Coordinate cord, game* tabuleiro){
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
 			//(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
-			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] == '1')){
-				(tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] = '2';
+			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1')){
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '2';
 				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
+				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
 				return true;
 			}
 			//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j]);

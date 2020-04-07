@@ -24,7 +24,7 @@ typedef struct {
 
 	Coordinate c;
 	int o;
-	bitmap mb;
+	bitmap* mb;
 	//bitmap* mbb;
 	int shot_count;
 
