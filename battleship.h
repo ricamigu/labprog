@@ -75,13 +75,13 @@ bitmap rotate_180(bitmap matriz);
 bitmap rotate_270(bitmap matriz);
 
 //funcao que insere barco
-void inserir_barco(Coordinate c, piece boat, game* tabuleiro);
+void inserir_barco(Coordinate c, piece* boat, game* tabuleiro);
 
 //verifica se é possível inserir um barco
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro);
 
 
 //test
-void acertou(Coordinate c, game* tabuleiro);
+bool acertou(Coordinate c, game* tabuleiro);
 
 #endif

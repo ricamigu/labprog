@@ -62,8 +62,12 @@ int main(){
  	bool pode = false;
 
  	Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
- 	piece *boats1 = (piece *) malloc((b+1)* sizeof(piece*));
- 	piece *boats2 = (piece *) malloc((b+1) * sizeof(piece*));
+ 	piece boat1, boat2;
+
+ 	piece *boats1 = &boat1;
+ 	piece *boats2 = &boat2;
+ 	//piece *boats1 = (piece *) malloc((8*b)* sizeof(piece*));
+ 	//piece *boats2 = (piece *) malloc((8*b) * sizeof(piece*));
 
  	//ciclo para criar os barcos
  	for(int i=1; i<=b; i++){
@@ -81,32 +85,21 @@ int main(){
 	 		scanf("%d", &vh);
 	 		boats1[i].o = vh;
 	 		boats1[i].shot_count = 0;
-/*
-	 		switch(opt){
-	 			case 1: pode_inserir(boats1[i].c);
-	 					break;
-	 			case 2: break;
-	 			case 3: break;
-	 			case 4: break;
-	 			case 5: break;
-	 		}
-		
-		}*/
 
 
 		switch(opt){
 			case 1: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_quad();
-								inserir_barco(boats1[i].c, boats1[i], p1m);
+								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: boats1[i].mb = rotate_90(create_quad());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);		
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);		
 								 break;
 						case 180: boats1[i].mb = rotate_180(create_quad());
-								  inserir_barco(boats1[i].c, boats1[i], p1m);
+								  inserir_barco(boats1[i].c, &boats1[i], p1m);
 								  break;
 						case 270: boats1[i].mb = rotate_270(create_quad());
-								  inserir_barco(boats1[i].c, boats1[i], p1m);
+								  inserir_barco(boats1[i].c, &boats1[i], p1m);
 								  break;
 					}
 					print_tabuleiro(p1m);
@@ -114,16 +107,16 @@ int main(){
 
 			case 2: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_rect();
-								inserir_barco(boats1[i].c, boats1[i], p1m);
+								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: boats1[i].mb = rotate_90(create_rect());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: boats1[i].mb = rotate_180(create_rect());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: boats1[i].mb = rotate_270(create_rect());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
 					print_tabuleiro(p1m);
@@ -131,16 +124,16 @@ int main(){
 
 			case 3: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_barcoT();
-								inserir_barco(boats1[i].c, boats1[i], p1m);
+								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: boats1[i].mb = rotate_90(create_barcoT());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: boats1[i].mb = rotate_180(create_barcoT());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: boats1[i].mb = rotate_270(create_barcoT());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
 					print_tabuleiro(p1m);
@@ -148,16 +141,16 @@ int main(){
 
 			case 4: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_barcoL();
-								inserir_barco(boats1[i].c, boats1[i], p1m);
+								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: boats1[i].mb = rotate_90(create_barcoL());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: boats1[i].mb = rotate_180(create_barcoL());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: boats1[i].mb = rotate_270(create_barcoL());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
 					print_tabuleiro(p1m);
@@ -165,16 +158,16 @@ int main(){
 
 			case 5: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_barcoU();
-								inserir_barco(boats1[i].c, boats1[i], p1m);
+								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: boats1[i].mb = rotate_90(create_barcoU());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: boats1[i].mb = rotate_180(create_barcoU());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: boats1[i].mb = rotate_270(create_barcoU());
-								 inserir_barco(boats1[i].c, boats1[i], p1m);
+								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
 					print_tabuleiro(p1m);
@@ -182,6 +175,23 @@ int main(){
 			}
 		}
 	
-		return 0;
+	
+	Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
+	cc = new_coord(20,19);
 
-	}
+
+	printf(" %d \n", acertou(*cc, p1m));
+
+	print_tabuleiro(p1m);
+
+
+
+
+
+
+
+	return 0;
+
+}
+
+

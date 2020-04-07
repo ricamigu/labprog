@@ -65,14 +65,16 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 
 
 //inserir na matriz de jogo
-void inserir_barco(Coordinate c, piece boat, game* tabuleiro){
+void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
-	if(pode_inserir(c, boat, tabuleiro)){
+
+	if(pode_inserir(c, *boat, tabuleiro)){
 
 		for(int i=0;i<5;i++){
 			for(int j=0;j<5;j++){
-				if( boat.mb.m[i][j] =='1' )
-					tabuleiro -> board[i + c.x - 2][j + c.y-2].apont = &boat;
+				if( boat -> mb.m[i][j] == '1' ){
+					tabuleiro -> board[i + c.x - 2][j + c.y-2].apont = boat;
+				}
 			}
 		}
 	}
@@ -85,26 +87,54 @@ void inserir_barco(Coordinate c, piece boat, game* tabuleiro){
 		scanf("%d", &x);
 		scanf("%d", &y);
 		a = new_coord(x,y);
-		boat.c = *a;
-		inserir_barco(boat.c, boat, tabuleiro);
+		boat -> c = *a;
+		inserir_barco(boat -> c, boat, tabuleiro);
 	}
 }
 
 
-void acertou(Coordinate c, game* tabuleiro){
+bool acertou(Coordinate cord, game* tabuleiro){
 
-	printf(" %c ", (tabuleiro -> board[c.x][c.y].apont ) -> mb.m[c.x+2][c.y+2]);
+	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
+	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
+
+
+	printf("\n (%d,%d)\n", xa, ya);
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			//if(tabuleiro[c.x][c.y].apont)
+			if((xa == cord.x) && (ya ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] == '1')){
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] = '2';
+				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
+			}
+			//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j]);
 		}
+		//printf("\n");
 	}
-
+	return false;
 }
 
 
 /*
+
+
+bool acertou(Coordinate c, game* tabuleiro){
+
+	int xa = (c.x)%5;
+	int ya = (c.y)%5;
+
+	if(tabuleiro -> board[c.x][c.y].apont != NULL){
+		tabuleiro -> board[c.x][c.y].apont = NULL;
+		return true;
+	}
+	return false;
+}
+
+
+
+
+
+
 bitmap create_quad0(Coordinate ini, game *tabuleiro) {
 
 	bitmap matriz;
