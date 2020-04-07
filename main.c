@@ -198,6 +198,7 @@ int main(){
 		}
 	
 	
+	//UM EXEMPLO DE COMO FUNCIONA
 	Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
 	cc = new_coord(20,19);
 
