@@ -98,7 +98,6 @@ int main(){
 			case 1: switch(boats1[i].o){
 						case 0: boats1[i].mb = create_quad();
 								inserir_barco(boats1[i].c, boats1[i], p1m);
-								pode = true;
 								break;
 						case 90: boats1[i].mb = rotate_90(create_quad());
 								 inserir_barco(boats1[i].c, boats1[i], p1m);		

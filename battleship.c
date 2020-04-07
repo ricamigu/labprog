@@ -76,6 +76,18 @@ void inserir_barco(Coordinate c, piece boat, game* tabuleiro){
 			}
 		}
 	}
+
+	else {
+
+		int x,y;
+		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
+		printf("\n\nCoordinate for the boat again: ");
+		scanf("%d", &x);
+		scanf("%d", &y);
+		a = new_coord(x,y);
+		boat.c = *a;
+		inserir_barco(boat.c, boat, tabuleiro);
+	}
 }
 
 
