@@ -120,15 +120,23 @@ int main(){
 
 			case 2: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_rect();
+								mapas[i] = create_rect();
+								boats1[i].mb = &mapas[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_rect());
+								mapas[i] = rotate_90(create_rect());
+								boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_rect());
+								 mapas[i] = rotate_180(create_rect());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_rect());
+								 mapas[i] = rotate_270(create_rect());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -136,15 +144,23 @@ int main(){
 
 			case 3: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_barcoT();
+								mapas[i] = create_barcoT();
+								boats1[i].mb = &mapas[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_barcoT());
+								 mapas[i] = rotate_90(create_barcoT());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_barcoT());
+								 mapas[i] = rotate_180(create_barcoT());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_barcoT());
+								 mapas[i] = rotate_270(create_barcoT());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -152,15 +168,23 @@ int main(){
 
 			case 4: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_barcoL();
+								mapas[i] = create_barcoL();
+								boats1[i].mb = &mapas[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_barcoL());
+								 mapas[i] = rotate_90(create_barcoL());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_barcoL());
+								 mapas[i] = rotate_180(create_barcoL());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_barcoL());
+								 mapas[i] = rotate_270(create_barcoL());
+								 boats1[i].mb = &mapas[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -198,15 +222,25 @@ int main(){
 		}
 	
 	
-	//UM EXEMPLO DE COMO FUNCIONA
 	Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
-	cc = new_coord(20,19);
+	cc = new_coord(20,19);	// coordenada de teste ao inserir tipo U em (22,17)
 
-	printf(" %d \n", acertou(*cc, p1m));
+	acertou(*cc, p1m);
+	//printf(" %d \n", acertou(*cc, p1m));
 
 	//print_bitmapas(boats1[0].mbb);
 	print_tabuleiro(p1m);
 
+	//print_bitmap(mapas[0]);
+
+/*	
+	for(int i=0;i<5;i++){
+		for(int j=0;j<5;j++){
+			printf(" %c ",boats1[0].mb->m[i][j]);
+		}
+		printf("\n")
+	}
+*/
 	return 0;
 
 }

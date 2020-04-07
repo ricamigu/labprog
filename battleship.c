@@ -100,7 +100,6 @@ bool acertou(Coordinate cord, game* tabuleiro){
 	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
 
-
 	printf("\n (%d,%d)\n", xa, ya);
 
 	for(int i=0;i<5;i++){
@@ -109,12 +108,13 @@ bool acertou(Coordinate cord, game* tabuleiro){
 			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1')){
 				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '2';
 				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
+				//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
 				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
 				return true;
 			}
-			//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j]);
+			//else printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
 		}
-		//printf("\n");
+		printf("\n");
 	}
 	return false;
 }
