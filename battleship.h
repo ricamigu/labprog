@@ -25,6 +25,7 @@ typedef struct {
 	Coordinate c;
 	int o;
 	bitmap mb;
+	bitmap* mbb;
 	int shot_count;
 
 } piece;
@@ -83,5 +84,6 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro);
 
 //test
 bool acertou(Coordinate c, game* tabuleiro);
+void print_bitmapas(bitmap* matriz);
 
 #endif

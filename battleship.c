@@ -19,7 +19,8 @@ void print_tabuleiro(game *tabuleiro){
 		for(int j=0; j< tabuleiro->size;j++){
 			if(tabuleiro -> board[i][j].apont == NULL)
 				printf(" . ");
-			else{
+			else 
+			{
 				printf(" 1 ");
 			}
 		}
@@ -103,9 +104,11 @@ bool acertou(Coordinate cord, game* tabuleiro){
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			if((xa == cord.x) && (ya ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] == '1')){
-				(tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] = '2';
+			//(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
+			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] == '1')){
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
 				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
+				return true;
 			}
 			//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j]);
 		}
@@ -171,4 +174,4 @@ bitmap create_quad0(Coordinate ini, game *tabuleiro) {
 
 	return matriz;
 }
-*/
+*/ 	

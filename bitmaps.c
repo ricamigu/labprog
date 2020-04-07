@@ -136,3 +136,14 @@ void print_bitmap(bitmap matriz){
       }
       printf("\n");
 }
+
+void print_bitmapas(bitmap* matriz){
+
+      for(int i=0; i<5;i++){
+            for(int j=0;j<5;j++){
+                  printf(" %c ", matriz -> m[i][j]);
+            }
+            printf("\n");
+      }
+      printf("\n");
+}
