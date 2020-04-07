@@ -105,8 +105,8 @@ bool acertou(Coordinate cord, game* tabuleiro){
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
 			//(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
-			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] == '1')){
-				(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
+			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] == '1')){
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mb.m[i][j] = '2';
 				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
 				return true;
 			}
