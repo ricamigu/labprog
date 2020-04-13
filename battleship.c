@@ -101,7 +101,7 @@ bool acertou(Coordinate cord, game* tabuleiro){
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
 
 	printf("\n (%d,%d)\n", xa, ya);
-
+ 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
 			//(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';

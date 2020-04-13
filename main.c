@@ -62,18 +62,21 @@ int main(){
  	bool pode = false;
 
  	Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
- 	piece boat1, boat2;
+ 	//piece boat1, boat2;
+ 	piece boat1[b+1],boat2[b+1];
 
- 	piece *boats1 = &boat1;
- 	piece *boats2 = &boat2;
- 	
- 	bitmap mapass;
- 	bitmap* mapas = &mapass;
+ 	//piece *boats1 = &boat1;
+ 	//piece *boats2 = &boat2;
+ 	piece *boats1 = (piece *) malloc(sizeof(piece*));
+ 	piece *boats2 = (piece *) malloc(sizeof(piece*));
 
+ 	bitmap mapass[b+1];
+ 	//bitmap* mapas;
 
  	//ciclo para criar os barcos
  	for(int i=1; i<=b; i++){
 
+ 			//boats1[i] = boat1[i];
 	 		printf("\nChoose the type of boat\n");
 			print_menuB(quad, rect, bT, bU, bL);	//menu dos barcos em menus.c
 			printf("> ");
@@ -82,6 +85,7 @@ int main(){
 	 		scanf("%d", &x1);
 	 		scanf("%d", &x2);
 	 		a = new_coord(x1,x2);
+
 	 		boats1[i].c = *a;
 	 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 	 		scanf("%d", &vh);
@@ -91,28 +95,24 @@ int main(){
 
 		switch(opt){
 			case 1: switch(boats1[i].o){
-						case 0: //boats1[i].mb = create_quad();			
-								//boats1[i].mbb = &boats1[i].mb;
-								mapas[i] = create_quad();
-								boats1[i].mb = &mapas[i];
+						case 0: mapass[i] = create_quad();
+								boats1[i].mb = &mapass[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
-						case 90: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_90(create_quad());
-								 boats1[i].mb = &mapas[i];
+						case 90: mapass[i] = rotate_90(create_quad());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);		
 								 break;
-						case 180: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_180(create_quad());
-								 boats1[i].mb = &mapas[i];
+						case 180: 
+								 //mapas[i] = rotate_180(create_quad());
+								 //boats1[i].mb = &mapas[i];
+								  mapass[i] = rotate_180(create_quad());
+								  boats1[i].mb = &mapass[i];
 								  inserir_barco(boats1[i].c, &boats1[i], p1m);
 								  break;
-						case 270: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_270(create_quad());
-								 boats1[i].mb = &mapas[i];
+						case 270: 
+								 mapass[i] = rotate_270(create_quad());
+								 boats1[i].mb = &mapass[i];
 								  inserir_barco(boats1[i].c, &boats1[i], p1m);
 								  break;
 					}
@@ -120,23 +120,23 @@ int main(){
 
 			case 2: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_rect();
-								mapas[i] = create_rect();
-								boats1[i].mb = &mapas[i];
+								mapass[i] = create_rect();
+								boats1[i].mb = &mapass[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_rect());
-								mapas[i] = rotate_90(create_rect());
-								boats1[i].mb = &mapas[i];
+								mapass[i] = rotate_90(create_rect());
+								boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_rect());
-								 mapas[i] = rotate_180(create_rect());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_180(create_rect());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_rect());
-								 mapas[i] = rotate_270(create_rect());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_270(create_rect());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -144,23 +144,23 @@ int main(){
 
 			case 3: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_barcoT();
-								mapas[i] = create_barcoT();
-								boats1[i].mb = &mapas[i];
+								mapass[i] = create_barcoT();
+								boats1[i].mb = &mapass[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_barcoT());
-								 mapas[i] = rotate_90(create_barcoT());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_90(create_barcoT());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_barcoT());
-								 mapas[i] = rotate_180(create_barcoT());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_180(create_barcoT());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_barcoT());
-								 mapas[i] = rotate_270(create_barcoT());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_270(create_barcoT());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -168,23 +168,23 @@ int main(){
 
 			case 4: switch(boats1[i].o){
 						case 0: //boats1[i].mb = create_barcoL();
-								mapas[i] = create_barcoL();
-								boats1[i].mb = &mapas[i];
+								mapass[i] = create_barcoL();
+								boats1[i].mb = &mapass[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_barcoL());
-								 mapas[i] = rotate_90(create_barcoL());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_90(create_barcoL());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_180(create_barcoL());
-								 mapas[i] = rotate_180(create_barcoL());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_180(create_barcoL());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270: //boats1[i].mb = rotate_270(create_barcoL());
-								 mapas[i] = rotate_270(create_barcoL());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_270(create_barcoL());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -193,26 +193,26 @@ int main(){
 			case 5: switch(boats1[i].o){
 						case 0: //boats1[i].mb = rotate_90(create_quad());
 								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = create_barcoU();
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = create_barcoU();
+								 boats1[i].mb = &mapass[i];
 								inserir_barco(boats1[i].c, &boats1[i], p1m);
 								break;
 						case 90: //boats1[i].mb = rotate_90(create_quad());
 								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_90(create_barcoU());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_90(create_barcoU());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 180: //boats1[i].mb = rotate_90(create_quad());
 								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_180(create_barcoU());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_180(create_barcoU());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 						case 270://boats1[i].mb = rotate_90(create_quad());
 								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas[i] = rotate_270(create_barcoU());
-								 boats1[i].mb = &mapas[i];
+								 mapass[i] = rotate_270(create_barcoU());
+								 boats1[i].mb = &mapass[i];
 								 inserir_barco(boats1[i].c, &boats1[i], p1m);
 								 break;
 					}
@@ -225,6 +225,8 @@ int main(){
 	Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
 	cc = new_coord(20,19);	// coordenada de teste ao inserir tipo U em (22,17)
 
+
+	// se nao acertar entao vai dar segmentation fault!!!
 	acertou(*cc, p1m);
 	//printf(" %d \n", acertou(*cc, p1m));
 
