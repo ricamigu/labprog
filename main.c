@@ -399,9 +399,18 @@ int main(){
 			print_tabuleiro(p2m);
 		}
 	
-
+	system("clear");
 	print_tabuleiro(p1m);
 	print_tabuleiro(p2m);
+
+
+
+
+
+
+
+
+
 
 	return 0;
 
