@@ -1,6 +1,6 @@
 #include "battleship.h"
 
-void print_menuB(bitmap a, bitmap b, bitmap c, bitmap d, bitmap e){
+void print_menuB(){
 
 	printf("\n---------------");
  	printf("\n|  1. Square  |");

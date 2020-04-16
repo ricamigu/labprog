@@ -15,11 +15,17 @@ Coordinate* new_coord(int a, int b) {
 void print_tabuleiro(game *tabuleiro){
 
 
+
+
 	for(int i=0; i < tabuleiro->size ; i++){
 		for(int j=0; j< tabuleiro->size;j++){
-			if(tabuleiro -> board[i][j].apont == NULL)
-				printf(" . ");
-			else if((tabuleiro -> board[i][j].field_shot == 1)) printf(" x ");
+			if(tabuleiro -> board[i][j].apont == NULL){
+				printf("\033[1;34m");
+				printf(" 0 ");
+				printf("\033[0m");
+			}
+			else if((tabuleiro -> board[i][j].field_shot == 2)) printf(" 2 ");
+			else if((tabuleiro -> board[i][j].field_shot == 1)) printf(" 1 ");
 			else 
 			{
 				printf(" 1 ");
@@ -31,12 +37,11 @@ void print_tabuleiro(game *tabuleiro){
 }
 
 
+
+
+
 //Criar matriz
 void create_matriz(game *tabuleiro) {
-
-	//char b;
-	//char *a = (char * )malloc (sizeof(char *));
-	//a = &b;
 
 	for(int i=0; i < tabuleiro->size ; i++){
 		for(int j=0; j< tabuleiro->size;j++){
@@ -52,10 +57,18 @@ void create_matriz(game *tabuleiro) {
 
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 
+	int xx = c.x -2;
+	int yy = c.y -2;
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i + c.x - 2][j + c.y-2].apont != NULL))){
+
+			if(((boat.mb -> m[i][j] == '1') && (((i+xx) < 0 || (i+xx) > tabuleiro->size) || ((j+yy)<0 || (j+yy > tabuleiro->size))))){
+				//printf("\n %c (%d,%d)", boat.mb -> m[i][j], i+xx, j+yy);
+				printf("\nFora do tabuleiro\n");
+				return false;
+			}
+			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i+xx][j+yy].apont != NULL))){
 				printf("\nInvalid coordinate.\n");
 				return false;
 			}
@@ -97,83 +110,35 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
 bool acertou(Coordinate cord, game* tabuleiro){
 
+	if(tabuleiro -> board[cord.x][cord.y].apont == NULL){
+		printf("\nMissed shot!\n");
+		return false;
+	}
+
 	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
-
-	printf("\n (%d,%d)\n", xa, ya);
  
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-			//(tabuleiro -> board[cord.x][cord.y].apont) -> mbb -> m[i][j] = '2';
 			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1')){
 				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '2';
 				(tabuleiro -> board[cord.x][cord.y].apont) -> shot_count++;
-				//printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
-				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
+				(tabuleiro -> board[cord.x][cord.y].field_shot) = 2;
 				return true;
 			}
-			//else printf(" %c ", (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
+			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '0')){
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '3';
+				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
+				printf("Missed shot!\n");
+				return false;
+			}
+			if(((i+xa-2 == cord.x) && (j+ya-2 ==cord.y)) && (((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '2') || (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '3')){
+				printf("Shot already taken!\n");
+				return false;
+			}
 		}
 		printf("\n");
 	}
+
 	return false;
 }
-
-
-/*
-
-
-bool acertou(Coordinate c, game* tabuleiro){
-
-	int xa = (c.x)%5;
-	int ya = (c.y)%5;
-
-	if(tabuleiro -> board[c.x][c.y].apont != NULL){
-		tabuleiro -> board[c.x][c.y].apont = NULL;
-		return true;
-	}
-	return false;
-}
-
-
-
-
-
-
-bitmap create_quad0(Coordinate ini, game *tabuleiro) {
-
-	bitmap matriz;
-	char *a = (char * )malloc (2058*sizeof(char *));
-	char *b = (char * )malloc (sizeof(char *));
-	int k=0;
-
-	for(int i=0; i < 5 ; i++){
-		for(int j=0; j< 5;j++){
-			if(i<3 && j<3) {
-				matriz.m[i][j] = '1';
-				b = &matriz.m[i][j];
-				//printf(" %c ", *b);
-				a[k] = *b;
-				//int* b = &matriz.m[i][j];
-				tabuleiro -> board[i + ini.x][j + ini.y].apont = &a[k];
-
-			}
-			else {
-				matriz.m[i][j] = '0';
-				b = &matriz.m[i][j];
-				//printf(" %c ", *b);
-				a[k] = *b;
-				//int *b = &matriz.m[i][j];
-				tabuleiro -> board[i + ini.x][j + ini.y].apont = &a[k];
-
-			}
-			k++;
-		}
-		//printf("\n");
-	}
-
-	//print_tabuleiro(tabuleiro);
-
-	return matriz;
-}
-*/ 	
