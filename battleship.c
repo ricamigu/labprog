@@ -14,6 +14,9 @@ Coordinate* new_coord(int a, int b) {
 //print da matriz
 void print_tabuleiro(game *tabuleiro){
 
+
+
+
 	for(int i=0; i < tabuleiro->size ; i++){
 		for(int j=0; j< tabuleiro->size;j++){
 			if(tabuleiro -> board[i][j].apont == NULL){
@@ -22,7 +25,7 @@ void print_tabuleiro(game *tabuleiro){
 				printf("\033[0m");
 			}
 			else if((tabuleiro -> board[i][j].field_shot == 2)) printf(" 2 ");
-			else if((tabuleiro -> board[i][j].field_shot == 1)) printf(" X ");
+			else if((tabuleiro -> board[i][j].field_shot == 1)) printf(" 1 ");
 			else 
 			{
 				printf(" 1 ");
@@ -33,8 +36,11 @@ void print_tabuleiro(game *tabuleiro){
 	printf("\n");
 }
 
+void instructions(){
+	printf("ola!");
+   //print_menuB(quad, rect, bT, bU, bL);
 
-
+}
 
 
 //Criar matriz

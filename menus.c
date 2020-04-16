@@ -1,10 +1,23 @@
 #include "battleship.h"
 
-void print_menuB(){
+void print_menuB(bitmap a, bitmap b, bitmap c, bitmap d, bitmap e){
 
 	printf("\n---------------");
  	printf("\n|  1. Square  |");
  	printf("\n---------------");
+	printf("\n");
+	for(int i=0; i<5;i++){
+            for(int j=0;j<5;j++){
+                  if(j==2) printf(" 1 ");
+                  else printf(" 0 ");
+            }
+        printf("\n");
+    }
+
+    printf("\n");
+	printf("\n----------------");
+ 	printf("\n| 2. Rectangle |");
+ 	printf("\n----------------");
 	printf("\n");
 	for(int i=0;i<5;i++){
             for(int j=0;j<5;j++){
@@ -13,20 +26,6 @@ void print_menuB(){
             }
         printf("\n");    
     }
-
-    printf("\n");
-	printf("\n----------------");
- 	printf("\n| 2. Rectangle |");
- 	printf("\n----------------");
-	printf("\n");
-    	for(int i=0; i<5;i++){
-            for(int j=0;j<5;j++){
-                  if(j==2) printf(" 1 ");
-                  else printf(" 0 ");
-            }
-        printf("\n");
-    }
-
 
     printf("\n");
 	printf("\n--------------");

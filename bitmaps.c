@@ -136,7 +136,7 @@ void print_bitmap(bitmap matriz){
       }
       printf("\n");
 }
-
+// print da matriz do bitmap
 void print_bitmapas(bitmap* matriz){
 
       for(int i=0; i<5;i++){
