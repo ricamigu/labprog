@@ -147,3 +147,131 @@ void print_bitmapas(bitmap* matriz){
       }
       printf("\n");
 }
+
+
+bitmap switch_function(int opcao,int orientacao){
+
+      bitmap mapas;
+      switch(opcao){
+            case 1: switch(orientacao){
+                  case 0: mapas = create_quad();
+                          break;
+                  case 90: mapas = rotate_90(create_quad()); 
+                          break;
+                  case 180: mapas = rotate_180(create_quad());
+                          break;
+                  case 270: mapas = rotate_270(create_quad());
+                          break;
+            }
+            break;
+            case 2: switch(orientacao){
+                  case 0: mapas = create_rect();
+                          break;
+                  case 90: mapas = rotate_90(create_rect()); 
+                          break;
+                  case 180: mapas = rotate_180(create_rect());
+                          break;
+                  case 270: mapas = rotate_270(create_rect());
+                          break;
+            }
+            break;
+            case 3: switch(orientacao){
+                  case 0: mapas = create_barcoT();
+                          break;
+                  case 90: mapas = rotate_90(create_barcoT()); 
+                          break;
+                  case 180: mapas = rotate_180(create_barcoT());
+                          break;
+                  case 270: mapas = rotate_270(create_barcoT());
+                          break;
+            }
+            break;
+            case 4: switch(orientacao){
+                  case 0: mapas = create_barcoL();
+                          break;
+                  case 90: mapas = rotate_90(create_barcoL()); 
+                          break;
+                  case 180: mapas = rotate_180(create_barcoL());
+                          break;
+                  case 270: mapas = rotate_270(create_barcoL());
+                          break;
+            }
+            break;
+            case 5: switch(orientacao){
+                  case 0: mapas = create_barcoU();
+                          break;
+                  case 90: mapas = rotate_90(create_barcoU()); 
+                          break;
+                  case 180: mapas = rotate_180(create_barcoU());
+                          break;
+                  case 270: mapas = rotate_270(create_barcoU());
+                          break;
+            }
+            break;
+      }
+      return mapas;
+}
+
+
+bitmap switch_functionRANDOMS(int opcao,int orientacao){
+
+      bitmap mapas;
+      switch(opcao){
+            case 1: switch(orientacao){
+                  case 0: mapas = create_quad();
+                          break;
+                  case 1: mapas = rotate_90(create_quad()); 
+                          break;
+                  case 2: mapas = rotate_180(create_quad());
+                          break;
+                  case 3: mapas = rotate_270(create_quad());
+                          break;
+            }
+            break;
+            case 2: switch(orientacao){
+                  case 0: mapas = create_rect();
+                          break;
+                  case 1: mapas = rotate_90(create_rect()); 
+                          break;
+                  case 2: mapas = rotate_180(create_rect());
+                          break;
+                  case 3: mapas = rotate_270(create_rect());
+                          break;
+            }
+            break;
+            case 3: switch(orientacao){
+                  case 0: mapas = create_barcoT();
+                          break;
+                  case 1: mapas = rotate_90(create_barcoT()); 
+                          break;
+                  case 2: mapas = rotate_180(create_barcoT());
+                          break;
+                  case 3: mapas = rotate_270(create_barcoT());
+                          break;
+            }
+            break;
+            case 4: switch(orientacao){
+                  case 0: mapas = create_barcoL();
+                          break;
+                  case 1: mapas = rotate_90(create_barcoL()); 
+                          break;
+                  case 2: mapas = rotate_180(create_barcoL());
+                          break;
+                  case 3: mapas = rotate_270(create_barcoL());
+                          break;
+            }
+            break;
+            case 5: switch(orientacao){
+                  case 0: mapas = create_barcoU();
+                          break;
+                  case 1: mapas = rotate_90(create_barcoU()); 
+                          break;
+                  case 2: mapas = rotate_180(create_barcoU());
+                          break;
+                  case 3: mapas = rotate_270(create_barcoU());
+                          break;
+            }
+            break;
+      }
+      return mapas;
+}

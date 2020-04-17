@@ -8,12 +8,6 @@
 int main(){
 
 	char p1[20],p2[20];	
-	//bitmap quad,rect,bT,bL,bU;
- 	//quad = create_quad();
- 	//rect = create_rect();
- 	//bT = create_barcoT();
- 	//bU = create_barcoL();
- 	//bL = create_barcoU();
 
 	int n,b;
 	int x1, x2, tam, vh;
@@ -33,8 +27,14 @@ int main(){
 	scanf("%s",p1);
 	printf("\nEnter second player name: ");
 	scanf("%s",p2);
-	printf("\nEnter the size of board (N*N): ");
+	printf("\nEnter the size of board (N*N between 20x20 to 40x40): ");
 	scanf("%d",&n);
+	while(n > 40 || n < 20){
+		printf("\nError! The size of the board must be between 20x20 and 40x40.");
+		printf("\nEnter the size of board (N*N): ");
+		scanf("%d",&n);
+	}
+
 	printf("\n");
 	system("clear");
 
@@ -66,6 +66,8 @@ int main(){
  	int rand;
  	menu_rand();
  	scanf("%d",&rand);
+
+
  	if(rand == 2){
 
  		int minR = 1; 
@@ -85,6 +87,7 @@ int main(){
 
 	 	bitmap mapasR1[randB+1];
 
+	 	//RANDOMS PLAYER 1
 	 	for(int i=1; i<=randB; i++){
 
 	 			int optR = return_randoms(1,5);
@@ -96,174 +99,70 @@ int main(){
 		 		boatsR1[i].o = vhR;
 		 		boatsR1[i].shot_count = 0;
 
-
-			switch(optR){
-				case 1: switch(boatsR1[i].o){
-							case 0: mapasR1[i] = create_quad();
-									boatsR1[i].mb = &mapasR1[i];
-									inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									break;
-							case 1: mapasR1[i] = rotate_90(create_quad());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);		
-									 break;
-							case 2:  mapasR1[i] = rotate_180(create_quad());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 3: 
-									 mapasR1[i] = rotate_270(create_quad());
-									 boatsR1[i].mb = &mapasR1[i];
-									  inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									  break;
-						}
-						break;
-
-				case 2: switch(boatsR1[i].o){
-							case 0: //boats1[i].mb = create_rect();
-									mapasR1[i] = create_rect();
-									boatsR1[i].mb = &mapasR1[i];
-									inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									break;
-							case 1: //boats1[i].mb = rotate_90(create_rect());
-									mapasR1[i] = rotate_90(create_rect());
-									boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 2: //boats1[i].mb = rotate_180(create_rect());
-									 mapasR1[i] = rotate_180(create_rect());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 3: //boats1[i].mb = rotate_270(create_rect());
-									 mapasR1[i] = rotate_270(create_rect());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 3: switch(boatsR1[i].o){
-							case 0: //boats1[i].mb = create_barcoT();
-									mapasR1[i] = create_barcoT();
-									boatsR1[i].mb = &mapasR1[i];
-									inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									break;
-							case 1: //boats1[i].mb = rotate_90(create_barcoT());
-									 mapasR1[i] = rotate_90(create_barcoT());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 2: //boats1[i].mb = rotate_180(create_barcoT());
-									 mapasR1[i] = rotate_180(create_barcoT());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 3: //boats1[i].mb = rotate_270(create_barcoT());
-									 mapasR1[i] = rotate_270(create_barcoT());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 4: switch(boatsR1[i].o){
-							case 0: //boats1[i].mb = create_barcoL();
-									mapasR1[i] = create_barcoL();
-									boatsR1[i].mb = &mapasR1[i];
-									inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									break;
-							case 1: //boats1[i].mb = rotate_90(create_barcoL());
-									 mapasR1[i] = rotate_90(create_barcoL());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 2: //boats1[i].mb = rotate_180(create_barcoL());
-									 mapasR1[i] = rotate_180(create_barcoL());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 3: //boats1[i].mb = rotate_270(create_barcoL());
-									 mapasR1[i] = rotate_270(create_barcoL());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 5: switch(boatsR1[i].o){
-							case 0: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapasR1[i] = create_barcoU();
-									 boatsR1[i].mb = &mapasR1[i];
-									inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									break;
-							case 1: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapasR1[i] = rotate_90(create_barcoU());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 2: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapasR1[i] = rotate_180(create_barcoU());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-							case 3://boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapasR1[i] = rotate_270(create_barcoU());
-									 boatsR1[i].mb = &mapasR1[i];
-									 inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-									 break;
-						}
-						break;
-					default: printf("Invalid boat!\n");
-							 i--;
-							 break;
-				}
-
+				mapasR1[i] = switch_functionRANDOMS(optR,boatsR1[i].o);
+				boatsR1[i].mb = &mapasR1[i];
+				inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
 				print_tabuleiro(p1m);
 			}
 
+	 	bitmap mapasR2[randB+1];
 
+	 	// RANDOMS PLAYER 2
+	 	for(int i=1; i<=randB; i++){
 
+	 			int optR = return_randoms(1,5);
+	 			int xR = return_randoms(2,(n-2));
+	 			int yR = return_randoms(2,(n-2));
+		 		aa = new_coord(xR,yR);
+		 		boatsR2[i].c = *aa;
+		 		int vhR = return_randoms(0,3);
+		 		boatsR2[i].o = vhR;
+		 		boatsR2[i].shot_count = 0;
+
+				mapasR2[i] = switch_functionRANDOMS(optR,boatsR2[i].o);
+				boatsR2[i].mb = &mapasR2[i];
+				inserir_barcoRANDOMS(boatsR2[i].c, &boatsR2[i], p2m);
+				print_tabuleiro(p2m);
+			}
  	}
+
  	else {
 
  		int maxB = (n*n)/(5*5);
- 		printf("%d", maxB);
 	 	int opt;
 	 	printf("Enter the number of boats: ");
 	 	scanf("%d", &b);
 
-	 	if(b <= 0 || b >= maxB){
-		 	while(b <= 0 || b >= maxB){
-		 		printf("Invalid number of boats! Enter the number of boats: ");
+	 	if(b <= 0 || b > maxB){
+		 	while(b <= 0 || b > maxB){
+		 		printf("Invalid number of boats! Max number of boats is %d. Enter the number of boats: ", maxB);
 		 		scanf("%d", &b);
 		 	}
 		}
 
 	 	Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
-	 	//piece boat1, boat2;
 	 	piece boat1[b+1],boat2[b+1];
 
-	 	//piece *boats1 = &boat1;
-	 	//piece *boats2 = &boat2;
 	 	piece *boats1 = (piece *) malloc(sizeof(piece*));
 	 	piece *boats2 = (piece *) malloc(sizeof(piece*));
 
 	 	bitmap mapass[b+1];
-	 	//bitmap* mapas;
 
-	 	//ciclo para criar os barcos
+	 	//ciclo para criar os barcos P1
 	 	for(int i=1; i<=b; i++){
 
-	 			//boats1[i] = boat1[i];
 		 		printf("\nChoose the type of boat\n");
 				print_menuB();	//menu dos barcos em menus.c
 				printf("> ");
 				scanf("%d", &opt);
+				if(opt<=0 || opt >5){
+					while(opt<=0 || opt >5){
+						printf("\nInvalid boat type! Choose a boat between 1 and 5.\n");
+						printf("> ");
+						scanf("%d", &opt);
+					}
+				}
+
 				printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 		 		scanf("%d", &x1);
 		 		scanf("%d", &x2);
@@ -272,149 +171,79 @@ int main(){
 		 		boats1[i].c = *a;
 		 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 		 		scanf("%d", &vh);
+		 		if(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+					while(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+						printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+						printf("> ");
+						scanf("%d", &vh);
+					}
+				}
+
 		 		boats1[i].o = vh;
 		 		boats1[i].shot_count = 0;
 
-
-			switch(opt){
-				case 1: switch(boats1[i].o){
-							case 0: mapass[i] = create_quad();
-									boats1[i].mb = &mapass[i];
-									inserir_barco(boats1[i].c, &boats1[i], p1m);
-									break;
-							case 90: mapass[i] = rotate_90(create_quad());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);		
-									 break;
-							case 180: 
-									 //mapas[i] = rotate_180(create_quad());
-									 //boats1[i].mb = &mapas[i];
-									  mapass[i] = rotate_180(create_quad());
-									  boats1[i].mb = &mapass[i];
-									  inserir_barco(boats1[i].c, &boats1[i], p1m);
-									  break;
-							case 270: 
-									 mapass[i] = rotate_270(create_quad());
-									 boats1[i].mb = &mapass[i];
-									  inserir_barco(boats1[i].c, &boats1[i], p1m);
-									  break;
-						}
-						break;
-
-				case 2: switch(boats1[i].o){
-							case 0: //boats1[i].mb = create_rect();
-									mapass[i] = create_rect();
-									boats1[i].mb = &mapass[i];
-									inserir_barco(boats1[i].c, &boats1[i], p1m);
-									break;
-							case 90: //boats1[i].mb = rotate_90(create_rect());
-									mapass[i] = rotate_90(create_rect());
-									boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 180: //boats1[i].mb = rotate_180(create_rect());
-									 mapass[i] = rotate_180(create_rect());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 270: //boats1[i].mb = rotate_270(create_rect());
-									 mapass[i] = rotate_270(create_rect());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 3: switch(boats1[i].o){
-							case 0: //boats1[i].mb = create_barcoT();
-									mapass[i] = create_barcoT();
-									boats1[i].mb = &mapass[i];
-									inserir_barco(boats1[i].c, &boats1[i], p1m);
-									break;
-							case 90: //boats1[i].mb = rotate_90(create_barcoT());
-									 mapass[i] = rotate_90(create_barcoT());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 180: //boats1[i].mb = rotate_180(create_barcoT());
-									 mapass[i] = rotate_180(create_barcoT());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 270: //boats1[i].mb = rotate_270(create_barcoT());
-									 mapass[i] = rotate_270(create_barcoT());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 4: switch(boats1[i].o){
-							case 0: //boats1[i].mb = create_barcoL();
-									mapass[i] = create_barcoL();
-									boats1[i].mb = &mapass[i];
-									inserir_barco(boats1[i].c, &boats1[i], p1m);
-									break;
-							case 90: //boats1[i].mb = rotate_90(create_barcoL());
-									 mapass[i] = rotate_90(create_barcoL());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 180: //boats1[i].mb = rotate_180(create_barcoL());
-									 mapass[i] = rotate_180(create_barcoL());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 270: //boats1[i].mb = rotate_270(create_barcoL());
-									 mapass[i] = rotate_270(create_barcoL());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-						}
-						break;
-
-				case 5: switch(boats1[i].o){
-							case 0: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapass[i] = create_barcoU();
-									 boats1[i].mb = &mapass[i];
-									inserir_barco(boats1[i].c, &boats1[i], p1m);
-									break;
-							case 90: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapass[i] = rotate_90(create_barcoU());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 180: //boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapass[i] = rotate_180(create_barcoU());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-							case 270://boats1[i].mb = rotate_90(create_quad());
-									 //boats1[i].mbb = &boats1[i].mb;
-									 mapass[i] = rotate_270(create_barcoU());
-									 boats1[i].mb = &mapass[i];
-									 inserir_barco(boats1[i].c, &boats1[i], p1m);
-									 break;
-						}
-						break;
-					default: printf("Invalid boat!\n");
-							 i--;
-							 break;
-				}
-
+		 		mapass[i] = switch_function(opt,boats1[i].o);
+				boats1[i].mb = &mapass[i];
+				inserir_barco(boats1[i].c, &boats1[i], p1m);
 				print_tabuleiro(p1m);
 			}
 
+		bitmap mapas2[b+1];
 
-	
-	//Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
-	//cc = new_coord(20,19);	//  20 19 coordenada de teste ao inserir tipo U em (22,17)
-	//acertou(*cc, p1m);
+		//ciclo para criar os barcos P2
+		for(int i=1; i<=b; i++){
+
+ 			//boats1[i] = boat1[i];
+	 		printf("\nChoose the type of boat\n");
+			print_menuB();	//menu dos barcos em menus.c
+			printf("> ");
+			scanf("%d", &opt);
+			if(opt<=0 || opt >5){
+					while(opt<=0 || opt >5){
+						printf("\nInvalid boat type! Choose a boat between 1 and 5.\n");
+						printf("> ");
+						scanf("%d", &opt);
+					}
+			}
+
+			printf("\n\nPlayer %s coordinate for boat %d: ", p2, i);
+	 		scanf("%d", &x1);
+	 		scanf("%d", &x2);
+	 		a = new_coord(x1,x2);
+
+	 		boats2[i].c = *a;
+	 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
+	 		scanf("%d", &vh);
+	 		if(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+					while(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+						printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+						printf("> ");
+						scanf("%d", &vh);
+					}
+			}
+	 		boats2[i].o = vh;
+	 		boats2[i].shot_count = 0;
+
+			mapas2[i] = switch_function(opt,boats2[i].o);
+			boats2[i].mb = &mapas2[i];
+			inserir_barco(boats2[i].c, &boats2[i], p2m);
+
+			print_tabuleiro(p2m);
+		}
+
+	}
+
+	system("clear");
+	print_tabuleiro(p1m);
+	print_tabuleiro(p2m);
 
 /*
+
+	Coordinate* cc = (Coordinate *) malloc(sizeof(Coordinate*));
+	cc = new_coord(20,19);	//  20 19 coordenada de teste ao inserir tipo U em (22,17)
+	acertou(*cc, p1m);
+
+
 		for(int i=0;i<5;i++){
 			for(int j=0;j<5;j++){
 
@@ -424,176 +253,11 @@ int main(){
 			printf("\n");
 		}
 
+	print_tabuleiro(p1m);
 
-		print_tabuleiro(p1m);
+
 
 */
-
-		bitmap mapas2[b+1];
-
-		for(int i=1; i<=b; i++){
-
- 			//boats1[i] = boat1[i];
-	 		printf("\nChoose the type of boat\n");
-			print_menuB();	//menu dos barcos em menus.c
-			printf("> ");
-			scanf("%d", &opt);
-			printf("\n\nPlayer %s coordinate for boat %d: ", p2, i);
-	 		scanf("%d", &x1);
-	 		scanf("%d", &x2);
-	 		a = new_coord(x1,x2);
-
-	 		boats2[i].c = *a;
-	 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
-	 		scanf("%d", &vh);
-	 		boats2[i].o = vh;
-	 		boats2[i].shot_count = 0;
-
-
-		switch(opt){
-			case 1: switch(boats2[i].o){
-						case 0: mapas2[i] = create_quad();
-								boats2[i].mb = &mapas2[i];
-								inserir_barco(boats2[i].c, &boats2[i], p2m);
-								break;
-						case 90: mapas2[i] = rotate_90(create_quad());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);		
-								 break;
-						case 180: 
-								 //mapas[i] = rotate_180(create_quad());
-								 //boats1[i].mb = &mapas[i];
-								  mapas2[i] = rotate_180(create_quad());
-								  boats2[i].mb = &mapas2[i];
-								  inserir_barco(boats2[i].c, &boats2[i], p2m);
-								  break;
-						case 270: 
-								 mapas2[i] = rotate_270(create_quad());
-								 boats2[i].mb = &mapas2[i];
-								  inserir_barco(boats2[i].c, &boats2[i], p2m);
-								  break;
-					}
-					break;
-
-			case 2: switch(boats2[i].o){
-						case 0: //boats1[i].mb = create_rect();
-								mapas2[i] = create_rect();
-								boats2[i].mb = &mapas2[i];
-								inserir_barco(boats2[i].c, &boats2[i], p2m);
-								break;
-						case 90: //boats1[i].mb = rotate_90(create_rect());
-								mapas2[i] = rotate_90(create_rect());
-								boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 180: //boats1[i].mb = rotate_180(create_rect());
-								 mapas2[i] = rotate_180(create_rect());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 270: //boats1[i].mb = rotate_270(create_rect());
-								 mapas2[i] = rotate_270(create_rect());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-					}
-					break;
-
-			case 3: switch(boats2[i].o){
-						case 0: //boats1[i].mb = create_barcoT();
-								mapas2[i] = create_barcoT();
-								boats2[i].mb = &mapas2[i];
-								inserir_barco(boats2[i].c, &boats2[i], p2m);
-								break;
-						case 90: //boats1[i].mb = rotate_90(create_barcoT());
-								 mapas2[i] = rotate_90(create_barcoT());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 180: //boats1[i].mb = rotate_180(create_barcoT());
-								 mapas2[i] = rotate_180(create_barcoT());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 270: //boats1[i].mb = rotate_270(create_barcoT());
-								 mapas2[i] = rotate_270(create_barcoT());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-					}
-					break;
-
-			case 4: switch(boats2[i].o){
-						case 0: //boats1[i].mb = create_barcoL();
-								mapas2[i] = create_barcoL();
-								boats2[i].mb = &mapas2[i];
-								inserir_barco(boats2[i].c, &boats2[i], p2m);
-								break;
-						case 90: //boats1[i].mb = rotate_90(create_barcoL());
-								 mapas2[i] = rotate_90(create_barcoL());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 180: //boats1[i].mb = rotate_180(create_barcoL());
-								 mapas2[i] = rotate_180(create_barcoL());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 270: //boats1[i].mb = rotate_270(create_barcoL());
-								 mapas2[i] = rotate_270(create_barcoL());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-					}
-					break;
-
-			case 5: switch(boats2[i].o){
-						case 0: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas2[i] = create_barcoU();
-								 boats2[i].mb = &mapas2[i];
-								inserir_barco(boats2[i].c, &boats2[i], p2m);
-								break;
-						case 90: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas2[i] = rotate_90(create_barcoU());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 180: //boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas2[i] = rotate_180(create_barcoU());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-						case 270://boats1[i].mb = rotate_90(create_quad());
-								 //boats1[i].mbb = &boats1[i].mb;
-								 mapas2[i] = rotate_270(create_barcoU());
-								 boats2[i].mb = &mapas2[i];
-								 inserir_barco(boats2[i].c, &boats2[i], p2m);
-								 break;
-					}
-					break;
-			default: printf("Invalid boat!\n");
-					 i--;
-					 break;
-			}
-
-			print_tabuleiro(p2m);
-		}
-	
-	system("clear");
-	print_tabuleiro(p1m);
-	print_tabuleiro(p2m);
-
-	}
-
-
-
-
-
-
-
 
 	return 0;
 

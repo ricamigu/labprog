@@ -90,11 +90,13 @@ bool acertou(Coordinate c, game* tabuleiro);
 
 //tests
 void print_bitmapas(bitmap* matriz);
+bitmap switch_function(int opcao,int orientacao);
 
 //random numbers
 int return_randoms(int lower, int higher);
 bool pode_inserirRANDOMS(Coordinate c, piece boat, game* tabuleiro);
 void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro);
+bitmap switch_functionRANDOMS(int opcao,int orientacao);
 
 
 #endif
