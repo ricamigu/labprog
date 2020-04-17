@@ -73,41 +73,63 @@ void print_menuB(){
 
 void menu_inicial(){
 
-  printf("\n\n");
-  printf("----------------------------------------------------------------------------\n");
-  printf("|                              Battleship Game                             |\n");
-  printf("----------------------------------------------------------------------------\n");
-  printf("| 1) Play Game                                                             |\n");
-  printf("|                                                                          |\n");
-  printf("| 2) Instructions                                                          |\n");
-  printf("|                                                                          |\n");
-  printf("| 3) Quit                                                                  |\n");
-  printf("----------------------------------------------------------------------------\n");
+	system("clear");
+	printf("----------------------------------------------------------------------------\n");
+	printf("|                              Battleship Game                             |\n");
+	printf("----------------------------------------------------------------------------\n");
+	printf("| 1) Play Game                                                             |\n");
+	printf("|                                                                          |\n");
+	printf("| 2) Instructions                                                          |\n");
+	printf("|                                                                          |\n");
+	printf("| 3) Quit                                                                  |\n");
+	printf("----------------------------------------------------------------------------\n");
  
 }
 
 
 void menu_inicial_instructions(){
 
-  printf("----------------------------------------------------------------------------\n");
-  printf("|                              Instructions                                |\n");
-  printf("----------------------------------------------------------------------------\n");
-  // por completar
-  char ch;
-  printf("Press any key to continue...\n");
-  ch = getchar();
-  scanf("%c", &ch);
+	system("clear");
+    printf("----------------------------------------------------------------------------\n");
+    printf("|                              Instructions                                |\n");
+    printf("----------------------------------------------------------------------------\n");
+    printf("Welcome to The Battleship Game!\n");
+    printf("The game's goal is to hit all the opponent's boats and sink them. The game ends when a player sinks all the opponent's boats.\n");
+    printf("\nDuring the game you have an option to play the Classic Game or Random Game.\n");
+    printf("Classic Game: You choose the number of boats, the positions to place them and the rotation.\n");
+    printf("Random Game: The game itself chooses randomly the number of boats, rotation and positions to place them.\n");
+    printf("\nRules:\n");
+    printf("The allowed game size should be between 20x20 to 40x40 (always squares).\n");
+    printf("The maximum number of boats is given by game_size / 5*5, so if you choose a game size of 20*20 = 400, the max number of boats is 400/25 = 16.\n");
+    printf("There are 5 types of boats: Square, Rectangle, T-Shape, L-Shape, U-Shape.\n");
+    printf("\n\nDuring the game:\n");
+    printf("This explanation will be available during the game aswell if you need it.\n");
+    printf("\nDuring the game you will have 5 options:\n");
+    printf("1. Take a shot (To shoot at the opponent's boats);\n");
+    printf("2. See your board (to see your board and your boats;\n");
+    printf("3. See your shots (to see your opponent's board and your shots);\n");
+    printf("4. Help (which will take you to the help menu explaining this part of the instructions);\n");
+    printf("5. Quit (well, as the name says, to quit the game and give the victory to your opponent).\n");
+    printf("\nWhen you are viewing your board (2.) you will see your boats with a 1 and the positions they were hit with"); printf("\033[0;31m"); printf(" X "); printf("\033[0m");
+    printf("\nWhen you are viewing your opponent's board (3.) you will see the shots you made with");printf("\033[0;32m"); printf(" 2 ");printf("\033[0m");printf("if you hit the opponent and");printf("\033[0;31m"); printf(" 1 ");printf("\033[0m");printf("if you miss the shot.\n");
+    
+
+   	char ch;
+    printf("\nPress any key to continue...\n");
+    ch = getchar();
+    scanf("%c", &ch);
 }
 
 
 void menu_rand(){
 
-  printf("----------------------------------------------------------------------------\n");
-  printf("|                              Game Options                                |\n");
-  printf("----------------------------------------------------------------------------\n");
-  printf("| 1) Classic Game                                                          |\n");
-  printf("|                                                                          |\n");
-  printf("| 2) Random Game                                                           |\n");
-  printf("----------------------------------------------------------------------------\n");
-
+	system("clear");
+	printf("----------------------------------------------------------------------------\n");
+	printf("|                              Game Options                                |\n");
+	printf("----------------------------------------------------------------------------\n");
+	printf("| 1) Classic Game                                                          |\n");
+	printf("|                                                                          |\n");
+	printf("| 2) Random Game                                                           |\n");
+	printf("----------------------------------------------------------------------------\n");
+	printf("> ");
 }

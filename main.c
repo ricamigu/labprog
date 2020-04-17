@@ -4,10 +4,11 @@
 #include <time.h> 
 #include "battleship.h"
 
-
 int main(){
 
 	char p1[20],p2[20];	
+	int score1 = 0;
+	int score2 = 0;
 
 	int n,b;
 	int x1, x2, tam, vh;
@@ -78,7 +79,7 @@ int main(){
  		srand(time(0));
 
  		int randB = return_randoms(minR,maxR);
- 		printf("randB = %d\n", randB);
+ 		//printf("randB = %d\n", randB);
  		Coordinate* aa = (Coordinate *) malloc(sizeof(Coordinate*));
 	 	//piece boat1, boat2;
 	 	piece boatR1[randB+1],boatR2[randB+1];
@@ -113,10 +114,10 @@ int main(){
 				inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
 				//printf("  %d : (%d,%d)\n", cont1,boatsR1[i].c.x,boatsR1[i].c.y);
 				//print_tabuleiro(p1m);
-				cont1++;
+				//cont1++;
 		}
 
-		print_tabuleiro(p1m);
+		//print_tabuleiro(p1m);
 
 	 	// RANDOMS PLAYER 2
 	 	for(int j=1; j<=randB; j++){
@@ -135,7 +136,7 @@ int main(){
 				mapasR2[j] = switch_functionRANDOMS(optR2,boatsR2[j].o);
 				boatsR2[j].mb = &mapasR2[j];
 				inserir_barcoRANDOMS(boatsR2[j].c, &boatsR2[j], p2m);
-				cont2++;
+				//cont2++;
 				//print_tabuleiro(p2m);
 			}
 		//print_tabuleiro(p1m);
@@ -201,7 +202,7 @@ int main(){
 		 		mapass[i] = switch_function(opt,boats1[i].o);
 				boats1[i].mb = &mapass[i];
 				inserir_barco(boats1[i].c, &boats1[i], p1m);
-				print_tabuleiro(p1m);
+				//print_tabuleiro(p1m);
 			}
 
 		bitmap mapas2[b+1];
@@ -244,15 +245,65 @@ int main(){
 			boats2[i].mb = &mapas2[i];
 			inserir_barco(boats2[i].c, &boats2[i], p2m);
 
-			print_tabuleiro(p2m);
+			//print_tabuleiro(p2m);
+
+		} // fim do manual
+
+		//começar a jogar
+
+		bool gameOver = false;
+		bool shotp1, shotp2;
+		Coordinate* c1 = (Coordinate *) malloc(sizeof(Coordinate*));
+		Coordinate* c2 = (Coordinate *) malloc(sizeof(Coordinate*));
+		int xp1,yp1,xp2,yp2;
+
+		while(!gameOver){
+
+			print_tabuleiro(p1m);
+			print_tabuleiroAdversario(p1m);
+
+			printf("\nPlayer %s choose a coordinate to fire: ", p1);
+			scanf("%d", &xp1);
+			scanf("%d", &yp1);
+			c1 = new_coord(xp1,yp1);
+			shotp1 =acertou(*c1,p1m);
+
+			if(shotp1){
+				score1+=10;
+				if(afundado(*c1,p1m)) {
+					score1 += 50;
+					//anular(*c1,p1m);
+				}
+			}
+
+			/*
+			printf("\nPlayer %s choose a coordinate to fire: ", p2);
+			scanf("%d", &xp2);
+			scanf("%d", &yp2);
+			c2 = new_coord(xp2,yp2);
+			shotp2 = acertou(*c2,p1m);
+
+			if(shotp2){
+				score2+=10;
+				if(afundado(*c2,p1m)) score2 += 50;
+			}
+			*/
+
+			if(isFinished(p1m)){
+				printf("Player %s wins with %d points!", p2, score1);
+				gameOver=true;
+			}
+
+			if(isFinished(p2m)){
+				printf("Player %s wins with %d points!\n", p1, score1);
+				gameOver=true;
+			}
 		}
-
-
-	} // fim do manual
+	} 
 
 	//system("clear");
 	print_tabuleiro(p1m);
-	print_tabuleiro(p2m);
+	//print_tabuleiro(p2m);
 
 /*
 

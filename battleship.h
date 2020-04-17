@@ -49,13 +49,16 @@ typedef struct {
 //variavel global
 //extern bitmap quad,rect,bT,bL,bU;
 extern char p1[20],p2[20];
+extern int score1,score2;
 
 // Constructures
 Coordinate* new_coord(int a, int b);
 
 //battleship.c
 void print_tabuleiro(game *board);
+void print_tabuleiroAdversario(game *tabuleiro);
 void create_matriz(game *board);
+void anular(Coordinate cord,game* tabuleiro);
 
 //menus
 void menu_inicial();
@@ -97,6 +100,12 @@ int return_randoms(int lower, int higher);
 bool pode_inserirRANDOMS(Coordinate c, piece boat, game* tabuleiro);
 void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro);
 bitmap switch_functionRANDOMS(int opcao,int orientacao);
+
+//verificar se o tabuleiro foi acertado em todas as posicoes de barcos
+bool isFinished(game* tabuleiro);
+
+bool afundado(Coordinate cord, game* tabuleiro);
+
 
 
 #endif
