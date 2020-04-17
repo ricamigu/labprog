@@ -63,6 +63,9 @@ int main(){
  	create_matriz(p1m);
  	create_matriz(p2m);
 
+ 	//print_tabuleiro(p1m);
+ 	//print_tabuleiro(p2m);
+
  	int rand;
  	menu_rand();
  	scanf("%d",&rand);
@@ -75,7 +78,7 @@ int main(){
  		srand(time(0));
 
  		int randB = return_randoms(minR,maxR);
-
+ 		printf("randB = %d\n", randB);
  		Coordinate* aa = (Coordinate *) malloc(sizeof(Coordinate*));
 	 	//piece boat1, boat2;
 	 	piece boatR1[randB+1],boatR2[randB+1];
@@ -86,45 +89,58 @@ int main(){
 	 	piece *boatsR2 = (piece *) malloc(sizeof(piece*));
 
 	 	bitmap mapasR1[randB+1];
+	 	bitmap mapasR2[randB+1];
+
+	 	int cont1=1,cont2=1,conta=1;
 
 	 	//RANDOMS PLAYER 1
 	 	for(int i=1; i<=randB; i++){
 
+	 			printf("cont1: %d\n",cont1);
+
 	 			int optR = return_randoms(1,5);
-	 			int xR = return_randoms(2,(n-2));
-	 			int yR = return_randoms(2,(n-2));
-		 		aa = new_coord(xR,yR);
-		 		boatsR1[i].c = *aa;
-		 		int vhR = return_randoms(0,3);
-		 		boatsR1[i].o = vhR;
-		 		boatsR1[i].shot_count = 0;
+		 		int xR = return_randoms(2,(n-2));
+			 	int yR = return_randoms(2,(n-2));
+			 	//printf("%d: (%d,%d) ", cont1,xR,yR);
+				aa = new_coord(xR,yR);
+				boatsR1[i].c = *aa;
+				int vhR = return_randoms(0,3);
+				boatsR1[i].o = vhR;
+				boatsR1[i].shot_count = 0;
 
 				mapasR1[i] = switch_functionRANDOMS(optR,boatsR1[i].o);
 				boatsR1[i].mb = &mapasR1[i];
 				inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
-				print_tabuleiro(p1m);
-			}
+				printf("  %d : (%d,%d)\n", cont1,boatsR1[i].c.x,boatsR1[i].c.y);
+				//print_tabuleiro(p1m);
+				cont1++;
+		}
 
-	 	bitmap mapasR2[randB+1];
+		print_tabuleiro(p1m);
 
 	 	// RANDOMS PLAYER 2
-	 	for(int i=1; i<=randB; i++){
+	 	for(int j=1; j<=randB; j++){
+	 		//printf("cont2: %d\n", cont2);
+	 		//printf("%d ola \n", i);
+	 			int optR2 = return_randoms(1,5);
+	 			int xR2 = return_randoms(2,(n-2));
+	 			int yR2 = return_randoms(2,(n-2));
+	 			printf("%d : (%d,%d)\n", cont2,xR2,yR2);
+		 		aa = new_coord(xR2,yR2);
+		 		boatsR2[j].c = *aa;
+		 		int vhR2 = return_randoms(0,3);
+		 		boatsR2[j].o = vhR2;
+		 		boatsR2[j].shot_count = 0;
 
-	 			int optR = return_randoms(1,5);
-	 			int xR = return_randoms(2,(n-2));
-	 			int yR = return_randoms(2,(n-2));
-		 		aa = new_coord(xR,yR);
-		 		boatsR2[i].c = *aa;
-		 		int vhR = return_randoms(0,3);
-		 		boatsR2[i].o = vhR;
-		 		boatsR2[i].shot_count = 0;
-
-				mapasR2[i] = switch_functionRANDOMS(optR,boatsR2[i].o);
-				boatsR2[i].mb = &mapasR2[i];
-				inserir_barcoRANDOMS(boatsR2[i].c, &boatsR2[i], p2m);
-				print_tabuleiro(p2m);
+				mapasR2[j] = switch_functionRANDOMS(optR2,boatsR2[j].o);
+				boatsR2[j].mb = &mapasR2[j];
+				inserir_barcoRANDOMS(boatsR2[j].c, &boatsR2[j], p2m);
+				cont2++;
+				//print_tabuleiro(p2m);
 			}
- 	}
+		//print_tabuleiro(p1m);
+		//print_tabuleiro(p2m);
+ 	} // fim do random
 
  	else {
 
@@ -171,8 +187,8 @@ int main(){
 		 		boats1[i].c = *a;
 		 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 		 		scanf("%d", &vh);
-		 		if(vh != 0 || vh != 90 || vh != 180 || vh != 270){
-					while(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+		 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+					while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
 						printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 						printf("> ");
 						scanf("%d", &vh);
@@ -214,8 +230,8 @@ int main(){
 	 		boats2[i].c = *a;
 	 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 	 		scanf("%d", &vh);
-	 		if(vh != 0 || vh != 90 || vh != 180 || vh != 270){
-					while(vh != 0 || vh != 90 || vh != 180 || vh != 270){
+	 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+					while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
 						printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 						printf("> ");
 						scanf("%d", &vh);
@@ -231,7 +247,8 @@ int main(){
 			print_tabuleiro(p2m);
 		}
 
-	}
+
+	} // fim do manual
 
 	system("clear");
 	print_tabuleiro(p1m);
@@ -255,11 +272,8 @@ int main(){
 
 	print_tabuleiro(p1m);
 
-
-
 */
-
-	return 0;
+	return EXIT_SUCCESS;
 
 }
 

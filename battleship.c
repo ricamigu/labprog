@@ -112,11 +112,11 @@ void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro){
 	else {
 
 		int x,y;
-		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
+		Coordinate* ab = (Coordinate *) malloc(sizeof(Coordinate*));
 		x = return_randoms(2,tabuleiro -> size -2);
 		y = return_randoms(2,tabuleiro -> size -2);
-		a = new_coord(x,y);
-		boat -> c = *a;
+		ab = new_coord(x,y);
+		boat -> c = *ab;
 		inserir_barcoRANDOMS(boat -> c, boat, tabuleiro);
 	}
 }
