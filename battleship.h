@@ -8,6 +8,7 @@
 #include <stdbool.h>
 
 
+
 /***** Structures *****/
 typedef struct Coordinate {
 	int x;
@@ -25,7 +26,6 @@ typedef struct {
 	Coordinate c;
 	int o;
 	bitmap* mb;
-	//bitmap* mbb;
 	int shot_count;
 
 } piece;
@@ -48,7 +48,7 @@ typedef struct {
 
 //variavel global
 //extern bitmap quad,rect,bT,bL,bU;
-//extern char p1[20],p2[20];
+extern char p1[20],p2[20];
 
 // Constructures
 Coordinate* new_coord(int a, int b);
@@ -58,7 +58,10 @@ void print_tabuleiro(game *board);
 void create_matriz(game *board);
 
 //menus
-void print_menuB(bitmap a, bitmap b, bitmap c, bitmap d, bitmap e);
+void menu_inicial();
+void print_menuB();
+void menu_inicial_instructions();
+void menu_rand();
 
 //bitmaps.c
 void print_bitmap(bitmap matriz);
@@ -82,8 +85,16 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro);
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro);
 
 
-//test
+//funcao para verificar onde o tiro foi dado
 bool acertou(Coordinate c, game* tabuleiro);
+
+//tests
 void print_bitmapas(bitmap* matriz);
+
+//random numbers
+int return_randoms(int lower, int higher);
+bool pode_inserirRANDOMS(Coordinate c, piece boat, game* tabuleiro);
+void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro);
+
 
 #endif
