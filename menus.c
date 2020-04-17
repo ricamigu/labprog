@@ -93,7 +93,7 @@ void menu_inicial_instructions(){
   printf("|                              Instructions                                |\n");
   printf("----------------------------------------------------------------------------\n");
   // por completar
-  int ch;
+  char ch;
   printf("Press any key to continue...\n");
   ch = getchar();
   scanf("%c", &ch);
