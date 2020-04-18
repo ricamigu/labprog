@@ -14,7 +14,10 @@ Coordinate* new_coord(int a, int b) {
 //print da matriz
 void print_tabuleiro(game *tabuleiro){
 
+	printf("\n");
 	for(int i=0; i < tabuleiro->size ; i++){
+		if(i<10) printf(" %d",i);
+		if(i>=10) printf("%d",i);
 		for(int j=0; j< tabuleiro->size;j++){
 			if(tabuleiro -> board[i][j].apont == NULL){
 				printf("\033[1;34m");
@@ -26,12 +29,19 @@ void print_tabuleiro(game *tabuleiro){
 		}
 		printf("\n");
 	}
+	printf("##");
+	for(int j=0;j<tabuleiro->size;j++){
+		if(j<10) printf(" %d ", j);
+		if(j>=10) printf(" %d",j);
+	}
 	printf("\n");
 }
 
 void print_tabuleiroAdversario(game *tabuleiro){
 
 	for(int i=0; i < tabuleiro->size ; i++){
+		if(i<10) printf(" %d",i);
+		if(i>=10) printf("%d",i);
 		for(int j=0; j< tabuleiro->size;j++){
 			if(tabuleiro -> board[i][j].field_shot == 0){ printf("\033[1;34m"); printf(" 0 "); printf("\033[0m");
 			}
@@ -39,6 +49,11 @@ void print_tabuleiroAdversario(game *tabuleiro){
 			else if((tabuleiro -> board[i][j].field_shot == 1)) {printf("\033[0;31m"); printf(" 1 "); printf("\033[0m");}
 		}
 		printf("\n");
+	}
+	printf("##");
+	for(int j=0;j<tabuleiro->size;j++){
+		if(j<10) printf(" %d ", j);
+		if(j>=10) printf(" %d",j);
 	}
 	printf("\n");
 }
@@ -166,11 +181,12 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
 bool acertou(Coordinate cord, game* tabuleiro){
 
+/*
 	if((cord.x > tabuleiro -> size) || (cord.y > tabuleiro -> size) || (cord.x < 0) || (cord.y < 0)){
 		printf("\nShot out of bounds!");
 		return false;
 	}
-
+*/
 
 	if(tabuleiro -> board[cord.x][cord.y].apont == NULL){
 		printf("\nMissed shot!\n");
@@ -178,9 +194,17 @@ bool acertou(Coordinate cord, game* tabuleiro){
 		return false;
 	}
 
+
+	if(((tabuleiro -> board[cord.x][cord.y].field_shot) == 2) || ((tabuleiro -> board[cord.x][cord.y].field_shot) == 1) ) {
+		printf("Shot already taken!\n");
+		return false;
+	}
+
 	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
- 
+ 	//(((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '2') || (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '3'))
+
+
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
 			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1')){
@@ -196,15 +220,20 @@ bool acertou(Coordinate cord, game* tabuleiro){
 				printf("Missed shot, but you're close!\n");
 				return false;
 			}
-			if(((i+xa-2 == cord.x) && (j+ya-2 ==cord.y)) && (((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '2') || (tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '3')){
-				printf("Shot already taken!\n");
-				return false;
-			}
 		}
-		printf("\n");
+		//printf("%d\n",i);
 	}
 
-	return false;
+	tabuleiro -> board[cord.x][cord.y].field_shot = 2;
+	printf("Shot hit!\n");
+
+	for(int i=0;i<5;i++){
+		for(int j=0;j<5;j++){
+			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y))
+				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '2';
+		}
+	}
+	return true;
 }
 
 bool isFinished(game* tabuleiro){

@@ -127,6 +127,10 @@ void menu_inicial_instructions(){
     printf("|                                                                                                                                                   |\n");
     printf("| When you are viewing your board (2.) you will see your boats with a 1 and the positions they were hit with"); printf("\033[0;31m"); printf(" X "); printf("\033[0m");printf("                                     |\n");
     printf("| When you are viewing your shots (3.) you will see the shots you made with");printf("\033[0;32m"); printf(" 2 ");printf("\033[0m");printf("if you hit the opponent's boat and");printf("\033[0;31m"); printf(" 1 ");printf("\033[0m");printf("if you miss the shot.            |\n");
+    printf("|                                                                                                                                                   |\n");
+    printf("| Score System:                                                                                                                                     |\n");
+    printf("|                                                                                                                                                   |\n");
+    printf("| Each player gets 10 points for every hit and 50 points for boat sunk.                                                                             |\n");
     printf("*---------------------------------------------------------------------------------------------------------------------------------------------------*\n");
 	
 	press_any_key();
@@ -135,7 +139,7 @@ void menu_inicial_instructions(){
 
 void menu_rand(){
 
-	system("clear");
+	//system("clear");
 	printf("*--------------------------------------------------------------------------*\n");
 	printf("|                              Game Options                                |\n");
 	printf("*--------------------------------------------------------------------------*\n");
@@ -180,8 +184,11 @@ void menu_help(){
     printf("|                                                                                                                                                   |\n");
     printf("| When you are viewing your board (2.) you will see your boats with a 1 and the positions they were hit with"); printf("\033[0;31m"); printf(" X "); printf("\033[0m");printf("                                     |\n");
     printf("| When you are viewing your shots (3.) you will see the shots you made with");printf("\033[0;32m"); printf(" 2 ");printf("\033[0m");printf("if you hit the opponent's boat and");printf("\033[0;31m"); printf(" 1 ");printf("\033[0m");printf("if you miss the shot.            |\n");
+	printf("|                                                                                                                                                   |\n");
+    printf("| Score System:                                                                                                                                     |\n");
+    printf("|                                                                                                                                                   |\n");
+    printf("| Each player gets 10 points for every hit and 50 points for boat sunk.                                                                             |\n");
     printf("*---------------------------------------------------------------------------------------------------------------------------------------------------*\n");
-	
 	press_any_key();
 
 
