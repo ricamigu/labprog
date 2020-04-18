@@ -166,6 +166,12 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
 bool acertou(Coordinate cord, game* tabuleiro){
 
+	if((cord.x > tabuleiro -> size) || (cord.y > tabuleiro -> size) || (cord.x < 0) || (cord.y < 0)){
+		printf("\nShot out of bounds!");
+		return false;
+	}
+
+
 	if(tabuleiro -> board[cord.x][cord.y].apont == NULL){
 		printf("\nMissed shot!\n");
 		tabuleiro -> board[cord.x][cord.y].field_shot = 1;
@@ -231,19 +237,17 @@ bool afundado(Coordinate cord, game* tabuleiro){
 	}
 
 
-	printf("\nBarco Afundado!\n");
+	printf("\nThe boat has sunk!\n");
 	return true;
 }
 
 
-void anular(Coordinate cord,game* tabuleiro){
+void anular(game* tabuleiro){
 
-	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
-	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
-
-	for(int i=xa-2; i < xa-2+5 ; i++){
-		for(int j=ya-2; j< ya-2+5;j++){
+	for(int i=0; i < tabuleiro->size ; i++){
+		for(int j=0; j< tabuleiro->size;j++){
 			tabuleiro -> board[i][j].apont = NULL;
+			tabuleiro -> board[i][j].field_shot = 0;
 		}
 	}
 }

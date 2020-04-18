@@ -215,7 +215,8 @@ bitmap switch_function(int opcao,int orientacao){
 
 bitmap switch_functionRANDOMS(int opcao,int orientacao){
 
-      bitmap mapas;
+	  bitmap mapas;
+	  
       switch(opcao){
             case 1: switch(orientacao){
                   case 0: mapas = create_quad();
@@ -273,5 +274,6 @@ bitmap switch_functionRANDOMS(int opcao,int orientacao){
             }
             break;
       }
+
       return mapas;
 }

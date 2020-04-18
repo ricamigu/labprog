@@ -58,13 +58,16 @@ Coordinate* new_coord(int a, int b);
 void print_tabuleiro(game *board);
 void print_tabuleiroAdversario(game *tabuleiro);
 void create_matriz(game *board);
-void anular(Coordinate cord,game* tabuleiro);
+void anular(game* tabuleiro);
 
 //menus
 void menu_inicial();
 void print_menuB();
 void menu_inicial_instructions();
 void menu_rand();
+void menu_game();
+void menu_help();
+void press_any_key();
 
 //bitmaps.c
 void print_bitmap(bitmap matriz);
@@ -105,6 +108,7 @@ bitmap switch_functionRANDOMS(int opcao,int orientacao);
 bool isFinished(game* tabuleiro);
 
 bool afundado(Coordinate cord, game* tabuleiro);
+
 
 
 
