@@ -1,5 +1,6 @@
 #include "battleship.h"
 
+//menu de apresentacao dos barcos
 void print_menuB(){
 
 	printf("\n*-------------*");
@@ -130,7 +131,7 @@ void menu_inicial_instructions(){
     printf("|                                                                                                                                                   |\n");
     printf("| Score System:                                                                                                                                     |\n");
     printf("|                                                                                                                                                   |\n");
-    printf("| Each player gets 10 points for every hit and 50 points for boat sunk.                                                                             |\n");
+    printf("| Each player gets 10 points for every hit.                                                                                                         |\n");
     printf("*---------------------------------------------------------------------------------------------------------------------------------------------------*\n");
 	
 	press_any_key();
@@ -187,7 +188,7 @@ void menu_help(){
 	printf("|                                                                                                                                                   |\n");
     printf("| Score System:                                                                                                                                     |\n");
     printf("|                                                                                                                                                   |\n");
-    printf("| Each player gets 10 points for every hit and 50 points for boat sunk.                                                                             |\n");
+    printf("| Each player gets 10 points for every hit.                                                                                                         |\n");
     printf("*---------------------------------------------------------------------------------------------------------------------------------------------------*\n");
 	press_any_key();
 

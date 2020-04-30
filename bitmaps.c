@@ -148,7 +148,7 @@ void print_bitmapas(bitmap* matriz){
       printf("\n");
 }
 
-
+//funcao switch para selecionar a opcao do jogador quanto ao barco e à rotação do mesmo
 bitmap switch_function(int opcao,int orientacao){
 
       bitmap mapas;
@@ -212,7 +212,7 @@ bitmap switch_function(int opcao,int orientacao){
       return mapas;
 }
 
-
+// funcao para escolher um barco e orientaçao random
 bitmap switch_functionRANDOMS(int opcao,int orientacao){
 
 	  bitmap mapas;

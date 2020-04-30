@@ -107,7 +107,7 @@ bitmap switch_functionRANDOMS(int opcao,int orientacao);
 //verificar se o tabuleiro foi acertado em todas as posicoes de barcos
 bool isFinished(game* tabuleiro);
 
-bool afundado(Coordinate cord, game* tabuleiro);
+//bool afundado(Coordinate cord, game* tabuleiro);
 
 
 

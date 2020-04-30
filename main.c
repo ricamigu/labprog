@@ -15,6 +15,7 @@ int main(){
 	Coordinate p;
 	int minicial;
 
+	//menu inicial
 	while(minicial != 1){
 		menu_inicial();
 		printf("> ");
@@ -60,7 +61,6 @@ int main(){
  		p2m -> board[i] = (Cell *) malloc(sizeof(Cell)* p2m -> size);
  	}
 
-
  	create_matriz(p1m);
  	create_matriz(p2m);
 
@@ -73,6 +73,7 @@ int main(){
 
  	system("clear");
 
+ 	// opcao random
  	if(rand == 2){
 
  		int minR = 5; 
@@ -81,70 +82,49 @@ int main(){
 
  		int randB = return_randoms(minR,maxR);
 
- 		//printf("randB = %d\n", randB);
  		Coordinate* aa = (Coordinate *) malloc(sizeof(Coordinate*));
-	 	//piece boat1, boat2;
 	 	piece boatR1[randB+1],boatR2[randB+1];
-
-	 	//piece *boats1 = &boat1;
-	 	//piece *boats2 = &boat2;
 	 	piece *boatsR1 = (piece *) malloc(sizeof(piece*));
 	 	piece *boatsR2 = (piece *) malloc(sizeof(piece*));
-
 	 	bitmap mapasR1[randB+1];
 	 	bitmap mapasR2[randB+1];
 
-	 	//int cont1=1,cont2=1,conta=1;
-
-	 	//RANDOMS PLAYER 1
+	 	//RANDOM PLAYER 1
 	 	for(int i=1; i<=randB; i++){
 
-	 			//printf("cont1: %d\n",cont1);
-
-	 			int optR = return_randoms(1,5);
+	 			int optR = return_randoms(1,5);				// criar numeros random para todos os parametros de inserir o barco
 		 		int xR = return_randoms(3,(n-3));
 			 	int yR = return_randoms(3,(n-3));
-			 	//printf("%d: (%d,%d) ", cont1,xR,yR);
 				aa = new_coord(xR,yR);
 				boatsR1[i].c = *aa;
 				int vhR = return_randoms(0,3);
 				boatsR1[i].o = vhR;
 				boatsR1[i].shot_count = 0;
 
-				if(i<=5) optR = i;
+				if(i<=5) optR = i;						   // usado para garantir que tem pelo menos 1 barco de cada tipo
 
 				mapasR1[i] = switch_functionRANDOMS(optR,boatsR1[i].o);
 				boatsR1[i].mb = &mapasR1[i];
 				inserir_barcoRANDOMS(boatsR1[i].c, &boatsR1[i], p1m);
 
-				//printf("  %d : (%d,%d)\n", cont1,boatsR1[i].c.x,boatsR1[i].c.y);
-				//print_tabuleiro(p1m);
-				//cont1++;
 		}
-
-		//print_tabuleiro(p1m);
 
 	 	// RANDOMS PLAYER 2
 	 	for(int j=1; j<=randB; j++){
-	 		//printf("cont2: %d\n", cont2);
-	 		//printf("%d ola \n", i);
-	 			int optR2 = return_randoms(1,5);
+	 			int optR2 = return_randoms(1,5);			// criar numeros random para todos os parametros de inserir o barco
 	 			int xR2 = return_randoms(3,(n-3));
 	 			int yR2 = return_randoms(3,(n-3));
-	 			//printf("%d : (%d,%d)\n", cont2,xR2,yR2);
 		 		aa = new_coord(xR2,yR2);
 		 		boatsR2[j].c = *aa;
 		 		int vhR2 = return_randoms(0,3);
 		 		boatsR2[j].o = vhR2;
 		 		boatsR2[j].shot_count = 0;
 
-		 		if(j<=5) optR2 = j;
+		 		if(j<=5) optR2 = j;						  // usado para garantir que tem pelo menos 1 barco de cada tipo
 
 				mapasR2[j] = switch_functionRANDOMS(optR2,boatsR2[j].o);
 				boatsR2[j].mb = &mapasR2[j];
 				inserir_barcoRANDOMS(boatsR2[j].c, &boatsR2[j], p2m);
-				//cont2++;
-				//print_tabuleiro(p2m);
 		}
 
 
@@ -155,7 +135,7 @@ int main(){
 		int xp1R,yp1R,xp2R,yp2R;
 		int optmR1=0, optmR2=0;
 
-		while(!gameOverR){
+		while(!gameOverR){	// ciclo que so acaba quando o jogo está terminado
 
 			while(optmR1!=1){
 
@@ -174,7 +154,7 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			scanf("%d", &xp1R);
 			scanf("%d", &yp1R);
-			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){
+			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){	//testar se a coordenada está dentro do tabuleiro
 				printf("Invalid Coordinate!\n");
 				printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 				scanf("%d", &xp1R);
@@ -182,17 +162,11 @@ int main(){
 			}
 
 			c1R = new_coord(xp1R,yp1R);
-			shotp1R =acertou(*c1R,p2m);
+			shotp1R =acertou(*c1R,p2m);	// testar se acertou
 
-			if(shotp1R){
-				score1+=10;
-				if(afundado(*c1R,p2m)) {
-					score1 += 50;
-					//anular(*c1,p1m);
-				}
-			}
+			if(shotp1R) score1+=10;		// +10 pontos por cada tiro acertado
 
-			if(isFinished(p2m)){
+			if(isFinished(p2m)){		// testar se o jogo acabou e p1 ganhou
 				printf("Player %s wins with %d points!\n", p1, score1);
 				gameOverR=true;
 			}
@@ -210,15 +184,13 @@ int main(){
 					if(optmR2==4) { menu_help(); system("clear");}
 					if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
 					if(optmR2<1 || optmR2 > 5) printf("Invalid option!\n");
-
 	 			}
 	 			optmR2=0;
-
 				
 				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
 				scanf("%d", &xp2R);
 				scanf("%d", &yp2R);
-				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){
+				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){	//testar se a coordenada está dentro do tabuleiro
 					printf("Invalid Coordinate!\n");
 					printf("\nPlayer %s choose a coordinate to shoot: ", p2);
 					scanf("%d", &xp2R);
@@ -226,22 +198,16 @@ int main(){
 				}
 
 				c2R = new_coord(xp2R,yp2R);
-				shotp2R = acertou(*c2R,p1m);
+				shotp2R = acertou(*c2R,p1m);	// testar se acertou
 
-				if(shotp2R){
-					score2+=10;
-					if(afundado(*c2R,p1m)) score2 += 50;
-				}
-				
+				if(shotp2R) score2+=10;			// +10 pontos por cada tiro acertado
 
-				if(isFinished(p1m)){
-					printf("Player %s wins with %d points!", p2, score2);
+				if(isFinished(p1m)){			// verificar se o jogo acabou e p1 ganhou
+					printf("Player %s wins with %d points!\n", p2, score2);
 					gameOverR=true;
 				}
 			}
 		}
-		//print_tabuleiro(p1m);
-		//print_tabuleiro(p2m);
  	} // fim do random
 
  	else {
@@ -261,10 +227,8 @@ int main(){
 
 	 	Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
 	 	piece boat1[b+1],boat2[b+1];
-
 	 	piece *boats1 = (piece *) malloc(sizeof(piece*));
 	 	piece *boats2 = (piece *) malloc(sizeof(piece*));
-
 	 	bitmap mapass[b+1];
 
 	 	//ciclo para criar os barcos P1
@@ -289,7 +253,7 @@ int main(){
 						}
 					}
 
-					if(opt==1) s1 = 1; if(opt==2) s2 = 1; if(opt==3) s3 = 1; if(opt==4) s4 = 1; if(opt==5) s5 = 1;
+					if(opt==1) s1 = 1; if(opt==2) s2 = 1; if(opt==3) s3 = 1; if(opt==4) s4 = 1; if(opt==5) s5 = 1;	//testar se o tabuleiro tem 5 barcos diferentes
 
 					printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 			 		scanf("%d", &x1);
@@ -310,15 +274,13 @@ int main(){
 			 		boats1[i].o = vh;
 			 		boats1[i].shot_count = 0;
 			 		mapass[i] = switch_function(opt,boats1[i].o);
-
 					boats1[i].mb = &mapass[i];
 					inserir_barco(boats1[i].c, &boats1[i], p1m);
-					//print_tabuleiro(p1m);
 				}
 				soma1 = s1+s2+s3+s4+s5;
-				if(soma1 < 5) {
-					printf("\nYou must choose one boat from each type!\n");
-					anular(p1m);
+				if(soma1 < 5) {													
+					printf("\nYou must choose one boat from each type!\n");	 	// se nao tiver os 5 tipos de barcos diferentes,
+					anular(p1m);												// repor o tabuleiro de jogo e voltar ao inicio
 				}
 		}
 
@@ -333,7 +295,6 @@ int main(){
 			//ciclo para criar os barcos P2
 			for(int i=1; i<=b; i++){
 
-	 			//boats1[i] = boat1[i];
 		 		printf("\nChoose the type of boat\n");
 				print_menuB();	//menu dos barcos em menus.c
 				printf("> ");
@@ -369,9 +330,6 @@ int main(){
 				mapas2[i] = switch_function(opt,boats2[i].o);
 				boats2[i].mb = &mapas2[i];
 				inserir_barco(boats2[i].c, &boats2[i], p2m);
-
-				//print_tabuleiro(p2m);
-
 			}
 			soma2 = ss1+ss2+ss3+ss4+ss5;
 			if(soma2 < 5) {
@@ -382,7 +340,6 @@ int main(){
 		} // fim do manual
 
 		//começar a jogar
-
 		bool gameOver = false;
 		bool shotp1, shotp2;
 		Coordinate* c1 = (Coordinate *) malloc(sizeof(Coordinate*));
@@ -393,9 +350,6 @@ int main(){
 		system("clear");
 
 		while(!gameOver){
-
-			//print_tabuleiro(p1m);
-			//print_tabuleiroAdversario(p1m);
 
 			while(optm1!=1){
 
@@ -424,13 +378,7 @@ int main(){
 			c1 = new_coord(xp1,yp1);
 			shotp1 =acertou(*c1,p2m);
 
-			if(shotp1){
-				score1+=10;
-				if(afundado(*c1,p2m)) {
-					score1 += 50;
-					//anular(*c1,p1m);
-				}
-			}
+			if(shotp1)	score1+=10;
 
 			if(isFinished(p2m)){
 				printf("Player %s wins with %d points!\n", p1, score1);
@@ -444,8 +392,8 @@ int main(){
 					menu_game(p2);
 					scanf("%d",&optm2);
 
-					if(optm2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); }
-					if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); }
+					if(optm2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); system("clear");}
+					if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key();system("clear"); }
 					if(optm2==4) { menu_help(); }
 					if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
 					if(optm2<1 || optm2 > 5) printf("Invalid option!\n");
@@ -465,25 +413,19 @@ int main(){
 				c2 = new_coord(xp2,yp2);
 				shotp2 = acertou(*c2,p1m);
 
-				if(shotp2){
-					score2+=10;
-					if(afundado(*c2,p1m)) {
-						score2 += 50;
-					}
-				}
+				if(shotp2)	score2+=10;
 
 				if(isFinished(p1m)){
-					printf("Player %s wins with %d points!", p2, score2);
+					printf("Player %s wins with %d points!\n", p2, score2);
 					gameOver=true;
 				}
 			}
 		}
 	} 
 
-
 	//system("clear");
-	print_tabuleiro(p1m);
-	print_tabuleiro(p2m);
+	//print_tabuleiro(p1m);
+	//print_tabuleiro(p2m);
 
 	return EXIT_SUCCESS;
 
