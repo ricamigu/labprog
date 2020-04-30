@@ -11,8 +11,7 @@ int main(){
 	int score2 = 0;
 
 	int n,b;
-	int x1, x2, tam, vh;
-	Coordinate p;
+	int x1, x2, vh;
 	int minicial;
 
 	//menu inicial
@@ -253,7 +252,12 @@ int main(){
 						}
 					}
 
-					if(opt==1) s1 = 1; if(opt==2) s2 = 1; if(opt==3) s3 = 1; if(opt==4) s4 = 1; if(opt==5) s5 = 1;	//testar se o tabuleiro tem 5 barcos diferentes
+					//testar se o tabuleiro tem 5 barcos diferentes
+					if(opt==1) s1 = 1; 
+					if(opt==2) s2 = 1; 
+					if(opt==3) s3 = 1; 
+					if(opt==4) s4 = 1; 
+					if(opt==5) s5 = 1;
 
 					printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 			 		scanf("%d", &x1);
@@ -307,7 +311,11 @@ int main(){
 						}
 				}
 
-				if(opt==1) ss1 = 1; if(opt==2) ss2 = 1; if(opt==3) ss3 = 1; if(opt==4) ss4 = 1; if(opt==5) ss5 = 1;
+				if(opt==1) ss1 = 1; 
+				if(opt==2) ss2 = 1; 
+				if(opt==3) ss3 = 1; 
+				if(opt==4) ss4 = 1; 
+				if(opt==5) ss5 = 1;
 
 				printf("\n\nPlayer %s coordinate for boat %d: ", p2, i);
 		 		scanf("%d", &x1);
