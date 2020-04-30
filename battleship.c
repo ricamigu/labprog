@@ -11,7 +11,7 @@ Coordinate* new_coord(int a, int b) {
 }
 
 
-//print da matriz
+//print da matriz com os barcos do jogador
 void print_tabuleiro(game *tabuleiro){
 
 	printf("\n");
@@ -19,17 +19,17 @@ void print_tabuleiro(game *tabuleiro){
 		if(i<10) printf(" %d",i);
 		if(i>=10) printf("%d",i);
 		for(int j=0; j< tabuleiro->size;j++){
-			if(tabuleiro -> board[i][j].apont == NULL){
+			if(tabuleiro -> board[i][j].apont == NULL){																		//se a posição é NULL, dá print de um 0 azul 
 				printf("\033[1;34m");
 				printf(" 0 ");
 				printf("\033[0m");
 			}
-			else if((tabuleiro -> board[i][j].field_shot == 2)) {printf("\033[0;31m"); printf(" X "); printf("\033[0m");}
-			else {printf(" 1 ");}
+			else if((tabuleiro -> board[i][j].field_shot == 2)) {printf("\033[0;31m"); printf(" X "); printf("\033[0m");}	// se a coord foi acertada, dá print de um X vermelho
+			else {printf(" 1 ");}																							// posicao dos barcos
 		}
 		printf("\n");
 	}
-	printf("##");
+	printf("##");																											// numeração das coordenadas
 	for(int j=0;j<tabuleiro->size;j++){
 		if(j<10) printf(" %d ", j);
 		if(j>=10) printf(" %d",j);
@@ -37,6 +37,7 @@ void print_tabuleiro(game *tabuleiro){
 	printf("\n");
 }
 
+//print da matriz com os shots feitos no tabuleiro do adversario
 void print_tabuleiroAdversario(game *tabuleiro){
 
 	for(int i=0; i < tabuleiro->size ; i++){
@@ -186,7 +187,14 @@ bool acertou(Coordinate cord, game* tabuleiro){
 		printf("\nShot out of bounds!");
 		return false;
 	}
+
 */
+	if(((tabuleiro -> board[cord.x][cord.y].field_shot) == 2) || ((tabuleiro -> board[cord.x][cord.y].field_shot) == 1) ) {
+		printf("Shot already taken!\n");
+		return false;
+	}
+
+
 
 	if(tabuleiro -> board[cord.x][cord.y].apont == NULL){
 		printf("\nMissed shot!\n");
@@ -194,11 +202,6 @@ bool acertou(Coordinate cord, game* tabuleiro){
 		return false;
 	}
 
-
-	if(((tabuleiro -> board[cord.x][cord.y].field_shot) == 2) || ((tabuleiro -> board[cord.x][cord.y].field_shot) == 1) ) {
-		printf("Shot already taken!\n");
-		return false;
-	}
 
 	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
@@ -213,13 +216,13 @@ bool acertou(Coordinate cord, game* tabuleiro){
 				(tabuleiro -> board[cord.x][cord.y].field_shot) = 2;
 				printf("Shot hit!\n");
 				return true;
-			}
+			}/*
 			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '0')){
 				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '3';
 				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
 				printf("Missed shot, but you're close!\n");
 				return false;
-			}
+			}*/
 		}
 		//printf("%d\n",i);
 	}
@@ -259,10 +262,15 @@ bool isFinished(game* tabuleiro){
 
 bool afundado(Coordinate cord, game* tabuleiro){
 
+	//printf("(x,y) = (%d,%d)\n", cord.x,cord.y);
+
+	
 	for(int i=0; i<5; i++){
 		for(int j=0;j<5;j++){
+			//printf(" %c ",(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
 			if((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1') return false;
 		}
+		printf("\n");
 	}
 
 

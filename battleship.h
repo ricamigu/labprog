@@ -111,5 +111,4 @@ bool afundado(Coordinate cord, game* tabuleiro);
 
 
 
-
 #endif

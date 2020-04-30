@@ -166,6 +166,7 @@ int main(){
 				if(optmR1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear");}
 				if(optmR1==4) { menu_help(); system("clear"); }
 				if(optmR1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
+				if(optmR1<1 || optmR1 > 5) printf("Invalid option!\n");
 
  			}
  			optmR1=0;
@@ -173,6 +174,13 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			scanf("%d", &xp1R);
 			scanf("%d", &yp1R);
+			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){
+				printf("Invalid Coordinate!\n");
+				printf("\nPlayer %s choose a coordinate to shoot: ", p1);
+				scanf("%d", &xp1R);
+				scanf("%d", &yp1R);
+			}
+
 			c1R = new_coord(xp1R,yp1R);
 			shotp1R =acertou(*c1R,p2m);
 
@@ -184,41 +192,52 @@ int main(){
 				}
 			}
 
-
-			while(optmR2!=1){
-
-				menu_game(p2);
-				scanf("%d",&optmR2);
-
-				if(optmR2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); system("clear");}
-				if(optmR2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); system("clear"); }
-				if(optmR2==4) { menu_help(); system("clear");}
-				if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-
- 			}
- 			optmR2=0;
-
-			
-			printf("\nPlayer %s choose a coordinate to shoot: ", p2);
-			scanf("%d", &xp2R);
-			scanf("%d", &yp2R);
-			c2R = new_coord(xp2R,yp2R);
-			shotp2R = acertou(*c2R,p1m);
-
-			if(shotp2R){
-				score2+=10;
-				if(afundado(*c2R,p1m)) score2 += 50;
-			}
-			
-
-			if(isFinished(p1m)){
-				printf("Player %s wins with %d points!", p2, score2);
-				gameOverR=true;
-			}
-
 			if(isFinished(p2m)){
 				printf("Player %s wins with %d points!\n", p1, score1);
 				gameOverR=true;
+			}
+
+			if(!gameOverR){
+
+
+				while(optmR2!=1){
+
+					menu_game(p2);
+					scanf("%d",&optmR2);
+
+					if(optmR2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); system("clear");}
+					if(optmR2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); system("clear"); }
+					if(optmR2==4) { menu_help(); system("clear");}
+					if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
+					if(optmR2<1 || optmR2 > 5) printf("Invalid option!\n");
+
+	 			}
+	 			optmR2=0;
+
+				
+				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+				scanf("%d", &xp2R);
+				scanf("%d", &yp2R);
+				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){
+					printf("Invalid Coordinate!\n");
+					printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+					scanf("%d", &xp2R);
+					scanf("%d", &yp2R);
+				}
+
+				c2R = new_coord(xp2R,yp2R);
+				shotp2R = acertou(*c2R,p1m);
+
+				if(shotp2R){
+					score2+=10;
+					if(afundado(*c2R,p1m)) score2 += 50;
+				}
+				
+
+				if(isFinished(p1m)){
+					printf("Player %s wins with %d points!", p2, score2);
+					gameOverR=true;
+				}
 			}
 		}
 		//print_tabuleiro(p1m);
@@ -387,6 +406,7 @@ int main(){
 				if(optm1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear"); }
 				if(optm1==4) { menu_help(); system("clear");}
 				if(optm1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
+				if(optm1<1 || optm1 > 5) printf("Invalid option!\n");
 
  			}
  			optm1=0;
@@ -394,6 +414,13 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			scanf("%d", &xp1);
 			scanf("%d", &yp1);
+			while(xp1 < 0 || xp1 > p1m -> size-1 || yp1 < 0 || yp1 > p1m -> size-1){
+				printf("Invalid Coordinate!\n");
+				printf("\nPlayer %s choose a coordinate to shoot: ", p1);
+				scanf("%d", &xp1);
+				scanf("%d", &yp1);
+			}
+
 			c1 = new_coord(xp1,yp1);
 			shotp1 =acertou(*c1,p2m);
 
@@ -405,47 +432,58 @@ int main(){
 				}
 			}
 
-			while(optm2!=1){
-
-				menu_game(p2);
-				scanf("%d",&optm2);
-
-				if(optm2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); }
-				if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); }
-				if(optm2==4) { menu_help(); }
-				if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-
- 			}
- 			optm2=0;
-
-			printf("\nPlayer %s choose a coordinate to shoot: ", p2);
-			scanf("%d", &xp2);
-			scanf("%d", &yp2);
-			c2 = new_coord(xp2,yp2);
-			shotp2 = acertou(*c2,p1m);
-
-			if(shotp2){
-				score2+=10;
-				if(afundado(*c2,p1m)) score2 += 50;
-			}
-
-			if(isFinished(p1m)){
-				printf("Player %s wins with %d points!", p2, score2);
-				gameOver=true;
-			}
-
 			if(isFinished(p2m)){
 				printf("Player %s wins with %d points!\n", p1, score1);
 				gameOver=true;
+			}
+
+			if(!gameOver){
+
+				while(optm2!=1){
+
+					menu_game(p2);
+					scanf("%d",&optm2);
+
+					if(optm2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); }
+					if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); }
+					if(optm2==4) { menu_help(); }
+					if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
+					if(optm2<1 || optm2 > 5) printf("Invalid option!\n");
+
+	 			}
+	 			optm2=0;
+
+				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+				scanf("%d", &xp2);
+				scanf("%d", &yp2);
+				while(xp2 < 0 || xp2 > p2m -> size-1 || yp2 < 0 || yp2 > p2m -> size-1){
+					printf("Invalid Coordinate!\n");
+					printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+					scanf("%d", &xp2);
+					scanf("%d", &yp2);
+				}
+				c2 = new_coord(xp2,yp2);
+				shotp2 = acertou(*c2,p1m);
+
+				if(shotp2){
+					score2+=10;
+					if(afundado(*c2,p1m)) {
+						score2 += 50;
+					}
+				}
+
+				if(isFinished(p1m)){
+					printf("Player %s wins with %d points!", p2, score2);
+					gameOver=true;
+				}
 			}
 		}
 	} 
 
 
-	system("clear");
+	//system("clear");
 	print_tabuleiro(p1m);
 	print_tabuleiro(p2m);
-	//print_tabuleiro(p2m);
 
 	return EXIT_SUCCESS;
 
