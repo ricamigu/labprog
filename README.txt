@@ -1,41 +1,116 @@
+_________________________________________________________________________________________
 
-BEM VINDO AO BATTLESHIP GAME!
+	READ ME 				
+_________________________________________________________________________________________
 
-Neste documento de texto vou-lhe explicar como jogar o jogo da batalha naval criado por nós e para que fique esclarecido em relação a tudo.
+Este trabalho foi feito pelo grupo TP1_F composto por:
 
-A primeira coisa que vai ter de fazer para tere acesso ao jogo é compilá-lo através de gcc -Wall -o battleship battleship.c battleship.h menus.c bitmpas.c main.c e ja está (eu sei que é muita coisa mas vai valer a pena)!
-Depois o que vai ter de fazer é correr o programa e para isso basta fazer: ./battleship 
-Posteriormente a isto tudo vai deparar-se com um menu onde te são apresentadas 3 alternativas: 1) Iniciares o jogo, 2) Ires para o menu das instruçoes e por fim 3) Saires do jogo. 
+• Ricardo Miguel Anjo Noronha Ribeiro, 201705837 
+• Sara Raquel Gonçalves de Sá, 201804838
 
-Clique em 1 para começar o jogo. 
-Insira o nome do primeiro jogador. 
-Insira o nome do segundo jogador.
-Insira o tamanho do tabuleiro (N*N) em que pretende jogar (este tem de ser entre 20*20 e 40*40).
-Escolha 1 para jogar o jogo tradicional o 2 para jogar o jogo aleatoriamente. 
-Se escolher 1:
-Insira o número de barcos entre 5 e 16. 
-É apresentado um nenu de todos os tipos de barcos, neste caso, barco quadrado, barco retangulo, barco em forma de T, barco em forma de de L e barco em forma de U e obrigatoriamente tem que escolher um barco de cada tipo. 
-Escolha um tipo e depois as respetivas coordenadas para esse barco, a sua rotação tem se ser entre 0 e 270 e assim sucessivamente para todos os barcos que escolheu.
-De seguida, será a vez do jogador 2 fazer exatamente a mesma coisa para os seus barcos.
-Posteriormente vai ser apresentado outro menu para os dois jogadores começarem a jogar ao mesmo tempo, um contra o outro.
-Vai ter de escolher entre 4 opções:
-1) tente acertar no barco do adversario , ou seja, dá um tiro e tenta a tua sorte 
-2) ver o seu tabuleiro
-3) ver os seus tiros anteriores
-4) sair do jogo 
-Chegados a esta fase, é a altura perfeita para dar asas à sua imaginação e tentar vencer o jogo.
-À medida que vai jogando, vai sendo informado quando erra ou acerta um tiro, quando afunda um barco do adversário, quando coloca uma coordenada inválida ou quando acerta no mesmo lugar mais que uma vez.
-Quando acerta o barco do adversário passa cada posição no tabuleiro de 0 para 2 e quando erra fica com o número 1.
-Vence o jogador que conseguir acertar em todos os barcos do adversário, sendo o objetivo principal do jogo afundar todos os barcos do adversário.
+_________________________________________________________________________________________
 
-Se escolher 2, a única coisa diferente do jogo tradicional é que neste os tabuleiros de cada jogador são escolhidos aleatoriamente, sendo a forma de jogar igual.
+	TOPICOS
+_________________________________________________________________________________________
 
-Aproveite e divirta-se!
+	1) COMPILAÇÃO
+
+	2) ESTRUTURA
+
+	3) MENUS
+
+_________________________________________________________________________________________
+
+ 1) COMPILAÇÃO
+_________________________________________________________________________________________
 
 
-//Em primeiro lugar vais ter de escolher entre// 
-//1) Iniciares o jogo//
-//2) Ires para o menu das instruçoes// 
-//3) Saires do jogo//
+Para compilar o jogo:
+
+-> gcc -o game battleship.h battleship.c bitmaps.c menus.c main.c
+
+-> utilizar a makefile
+
+_________________________________________________________________________________________
+
+2) ESTRUTURA
+_________________________________________________________________________________________
+
+O battleship é composto por um zip com 7 ficheiros:
+
+• battleship.h -> header que contém as funções dos restantes ficheiros
+• battleship.c -> funções relativas ao tabuleiro de jogo
+• bitmaps.c    -> funções ligadas aos bitmaps
+• menus.c      -> menus utilizados ao longo do jogo
+• main.c       -> main do jogo
+• makefile     -> makefile para compilar o jogo
+• README.txt   -> ficheiro de instruções
+
+_________________________________________________________________________________________
+
+3) MENUS & UTILIZAÇÃO DO JOGO
+_________________________________________________________________________________________
+
+O primeiro menu no jogo é o menu_inicial() com 3 instruções:
+
+1) Play game
+2) Instructions
+3) Quit
+
+O ponto 1) leva-nos para o jogo, o 3) termina o jogo e o 2) leva-nos para 
+o menu_inicial_instructions() que contém instruções do jogo e algumas regras 
+fundamentais para os inputs corretos.
+
+Ao prosseguir o ponto 1), vai aparecer opções para escolher o nome dos jogadores
+e o tamanho do tabuleiro (entre 20 e 40).
+
+De seguida irá aparecer o menu menu_rand() com duas opções:
+
+1) Classic Game
+2) Random Game
+
+o ponto 1) leva-nos para o jogo "normal" em que introduzimos todos os valores para
+a posição e orientação dos barcos, enquanto que o 2) insere tudo isso aleatoriamente.
+
+O ponto 1) leva-nos então para um input para escolher o número de barcos para o jogo
+e, em seguida, o menu print_menuB(), que apresenta os 5 tipos de barcos que temos:
+
+• Quadrado
+• Retângulo
+• Em forma de T
+• Em forma de L
+• Em forma de U
+
+Depois de escolher o tipo de barco (note-se que é necessário escolher um barco de cada
+tipo) e em seguida pedido as coordenadas do ponto central do bitmap do barco e a sua
+orientação (0, 90, 270, 360). Depois de escolher todos os barcos e posições para o
+jogador 1, repete-se o mesmo processo para o jogador 2.
+
+Após completar toda a configuração dos barcos, o jogo está pronto a começar e aparece
+o menu menu_game(char p[]) que recebe o nome do jogador para apresentá-lo no menu.
+O menu é composto por:
+
+1) Take a shot
+2) See your board
+3) See your shots
+4) Help
+5) Quit
+
+o ponto 1) leva para a opção de escolher as coordenadas para disparar no tabuleiro de 
+jogo do adversário. Vai receber uma mensagem quanto ao resultado do tiro (Missed shot,
+Shot already taken, Shot hit).
+
+o ponto 2) serve para ver o próprio tabuleiro e ver onde já foi atingido. No caso de já
+ter sido atingido, aparece um X vermelho na posição.
+
+o ponto 3) serve para ver os tiros que já foram dados no adversário. São representados
+com um 2 em verde caso tenha acertado e um 1 vermelho caso tenha falhado.
+
+o ponto 4) serve para apresentar um menu de ajuda com as regras e a utilização do jogo.
+
+o ponto 5) serve para desistir do jogo e dar a vitória ao adversário.
 
 
+
+FIM
+_________________________________________________________________________________________
