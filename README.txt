@@ -31,6 +31,7 @@ Para compilar o jogo:
 
 -> utilizar a makefile
 
+e depois executar com ./game
 _________________________________________________________________________________________
 
 2) ESTRUTURA
