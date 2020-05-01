@@ -154,13 +154,13 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			printf("\nx: ");
 			scanf("%d", &xp1R);
-			printf("\ny: ");
+			printf("y: ");
 			scanf("%d", &yp1R);
 			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){	//testar se a coordenada está dentro do tabuleiro
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
 				scanf("%d", &xp1R);
-				printf("\ny: ");
+				printf("y: ");
 				scanf("%d", &yp1R);
 			}
 
@@ -193,13 +193,13 @@ int main(){
 				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
 				printf("\nx: ");
 				scanf("%d", &xp2R);
-				printf("\ny: ");
+				printf("y: ");
 				scanf("%d", &yp2R);
 				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){	//testar se a coordenada está dentro do tabuleiro
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
 					scanf("%d", &xp2R);
-					printf("\ny: ");
+					printf("y: ");
 					scanf("%d", &yp2R);
 				}
 
@@ -262,7 +262,9 @@ int main(){
 					if(opt==1) s1 = 1; if(opt==2) s2 = 1; if(opt==3) s3 = 1; if(opt==4) s4 = 1; if(opt==5) s5 = 1;	//testar se o tabuleiro tem 5 barcos diferentes
 
 					printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
+					printf("\nx: ");
 			 		scanf("%d", &x1);
+			 		printf("y: ");
 			 		scanf("%d", &x2);
 			 		a = new_coord(x1,x2);
 
@@ -316,7 +318,9 @@ int main(){
 				if(opt==1) ss1 = 1; if(opt==2) ss2 = 1; if(opt==3) ss3 = 1; if(opt==4) ss4 = 1; if(opt==5) ss5 = 1;
 
 				printf("\n\nPlayer %s coordinate for boat %d: ", p2, i);
+				printf("\nx: ");
 		 		scanf("%d", &x1);
+		 		printf("y: ");
 		 		scanf("%d", &x2);
 		 		a = new_coord(x1,x2);
 
@@ -374,13 +378,13 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			printf("\nx: ");
 			scanf("%d", &xp1);
-			printf("\ny: ");
+			printf("y: ");
 			scanf("%d", &yp1);
 			while(xp1 < 0 || xp1 > p1m -> size-1 || yp1 < 0 || yp1 > p1m -> size-1){
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
 				scanf("%d", &xp1);
-				printf("\ny: ");
+				printf("y: ");
 				scanf("%d", &yp1);
 			}
 
@@ -413,13 +417,13 @@ int main(){
 				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
 				printf("\nx: ");
 				scanf("%d", &xp2);
-				printf("\ny: ");
+				printf("y: ");
 				scanf("%d", &yp2);
 				while(xp2 < 0 || xp2 > p2m -> size-1 || yp2 < 0 || yp2 > p2m -> size-1){
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
 					scanf("%d", &xp2);
-					printf("\ny: ");
+					printf("y: ");
 					scanf("%d", &yp2);
 				}
 				c2 = new_coord(xp2,yp2);

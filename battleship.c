@@ -87,11 +87,11 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 		for(int j=0;j<5;j++){
 
 			if(((boat.mb -> m[i][j] == '1') && (((i+xx) < 0 || (i+xx) > tabuleiro->size) || ((j+yy)<0 || (j+yy > tabuleiro->size))))){
-				printf("\nFora do tabuleiro\n");
+				printf("\nInvalid coordinate, out of bounds!");
 				return false;
 			}
 			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i+xx][j+yy].apont != NULL))){
-				printf("\nInvalid coordinate.\n");
+				printf("\nInvalid coordinate, boat already there!");
 				return false;
 			}
 		}
@@ -169,7 +169,9 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 		int x,y;
 		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));		// caso nao possa inserir, volta a pedir coordenadas ao jogador
 		printf("\n\nCoordinate for the boat again: ");
+		printf("\nx: ");
 		scanf("%d", &x);
+		printf("y: ");
 		scanf("%d", &y);
 		a = new_coord(x,y);
 		boat -> c = *a;
