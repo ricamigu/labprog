@@ -3,7 +3,7 @@ ________________________________________________________________________________
 	READ ME 				
 _________________________________________________________________________________________
 
-Este trabalho foi feito pelo grupo TP1_F composto por:
+Este trabalho foi feito pelo grupo TP1_F, composto por:
 
 • Ricardo Miguel Anjo Noronha Ribeiro, 201705837 
 • Sara Raquel Gonçalves de Sá, 201804838
