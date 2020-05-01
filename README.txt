@@ -110,7 +110,7 @@ o ponto 4) serve para apresentar um menu de ajuda com as regras e a utilização
 
 o ponto 5) serve para desistir do jogo e dar a vitória ao adversário.
 
-
+O jogo termina quando um dos jogadores tiver sido acertado em todas as posições do barco.
 
 FIM
 _________________________________________________________________________________________
