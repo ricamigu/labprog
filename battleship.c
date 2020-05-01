@@ -87,11 +87,11 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 		for(int j=0;j<5;j++){
 
 			if(((boat.mb -> m[i][j] == '1') && (((i+xx) < 0 || (i+xx) > tabuleiro->size) || ((j+yy)<0 || (j+yy > tabuleiro->size))))){
-				printf("\nInvalid coordinate, out of bounds!");
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, out of bounds!");
 				return false;
 			}
 			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i+xx][j+yy].apont != NULL))){
-				printf("\nInvalid coordinate, boat already there!");
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid coordinate, boat already there!");
 				return false;
 			}
 		}
@@ -206,15 +206,8 @@ bool acertou(Coordinate cord, game* tabuleiro){
 				(tabuleiro -> board[cord.x][cord.y].field_shot) = 2;
 				printf("Shot hit!\n");
 				return true;
-			}/*
-			if((i+xa-2 == cord.x) && (j+ya-2 ==cord.y) && ((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '0')){
-				(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] = '3';
-				(tabuleiro -> board[cord.x][cord.y].field_shot) = 1;
-				printf("Missed shot, but you're close!\n");
-				return false;
-			}*/
+			}
 		}
-		//printf("%d\n",i);
 	}
 
 	tabuleiro -> board[cord.x][cord.y].field_shot = 2;																			// acertou num barco
@@ -242,22 +235,6 @@ bool isFinished(game* tabuleiro){
 	return true;
 }
 
-/*
-//funcao para testar se um barco foi afundado
-bool afundado(Coordinate cord, game* tabuleiro){
-
-	for(int i=0; i<5; i++){
-		for(int j=0;j<5;j++){
-			//printf(" %c ",(tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j]);
-			if((tabuleiro -> board[cord.x][cord.y].apont) -> mb->m[i][j] == '1') return false;
-		}
-		printf("\n");
-	}
-
-	printf("\nThe boat has sunk!\n");
-	return true;
-}
-*/
 
 // funcao para colocar o tabuleiro todo a null 
 void anular(game* tabuleiro){
@@ -269,7 +246,6 @@ void anular(game* tabuleiro){
 		}
 	}
 }
-
 
 
 // funcao que gera os numeros random

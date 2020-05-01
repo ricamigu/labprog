@@ -32,7 +32,8 @@ int main(){
 	printf("\nEnter the size of board (N*N between 20x20 to 40x40): ");
 	scanf("%d",&n);
 	while(n > 40 || n < 20){
-		printf("\nError! The size of the board must be between 20x20 and 40x40.");
+		printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+		printf("The size of the board must be between 20x20 and 40x40.");
 		printf("\nEnter the size of board (N*N): ");
 		scanf("%d",&n);
 	}
@@ -146,7 +147,7 @@ int main(){
 				if(optmR1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear");}
 				if(optmR1==4) { menu_help(); system("clear"); }
 				if(optmR1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
-				if(optmR1<1 || optmR1 > 5) printf("Invalid option!\n");
+				if(optmR1<1 || optmR1 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 
  			}
  			optmR1=0;
@@ -157,6 +158,7 @@ int main(){
 			printf("y: ");
 			scanf("%d", &yp1R);
 			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){	//testar se a coordenada está dentro do tabuleiro
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
 				scanf("%d", &xp1R);
@@ -186,7 +188,7 @@ int main(){
 					if(optmR2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); system("clear"); }
 					if(optmR2==4) { menu_help(); system("clear");}
 					if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-					if(optmR2<1 || optmR2 > 5) printf("Invalid option!\n");
+					if(optmR2<1 || optmR2 > 5) { printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 	 			}
 	 			optmR2=0;
 				
@@ -196,6 +198,7 @@ int main(){
 				printf("y: ");
 				scanf("%d", &yp2R);
 				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){	//testar se a coordenada está dentro do tabuleiro
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
 					scanf("%d", &xp2R);
@@ -226,7 +229,8 @@ int main(){
 
 	 	if(b <= 4 || b > maxB){
 		 	while(b <= 4 || b > maxB){
-		 		printf("Invalid number of boats! The number of boats should be between 5 and %d. Enter the number of boats: ", maxB);
+		 		printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+		 		printf("Invalid number of boats! The number of boats should be between 5 and %d.\nEnter the number of boats: ", maxB);
 		 		scanf("%d", &b);
 		 	}
 		}
@@ -253,7 +257,8 @@ int main(){
 					scanf("%d", &opt);
 					if(opt<=0 || opt >5){
 						while(opt<=0 || opt >5){
-							printf("\nInvalid boat type! Choose a boat between 1 and 5.\n");
+							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+							printf("Invalid boat type! Choose a boat between 1 and 5.\n");
 							printf("> ");
 							scanf("%d", &opt);
 						}
@@ -273,7 +278,8 @@ int main(){
 			 		scanf("%d", &vh);
 			 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
 						while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-							printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+							printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 							printf("> ");
 							scanf("%d", &vh);
 						}
@@ -286,8 +292,9 @@ int main(){
 					inserir_barco(boats1[i].c, &boats1[i], p1m);
 				}
 				soma1 = s1+s2+s3+s4+s5;
-				if(soma1 < 5) {													
-					printf("\nYou must choose one boat from each type!\n");	 	// se nao tiver os 5 tipos de barcos diferentes,
+				if(soma1 < 5) {
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");													
+					printf("You must choose one boat from each type!\n");	 	// se nao tiver os 5 tipos de barcos diferentes,
 					anular(p1m);												// repor o tabuleiro de jogo e voltar ao inicio
 				}
 		}
@@ -309,7 +316,8 @@ int main(){
 				scanf("%d", &opt);
 				if(opt<=0 || opt >5){
 						while(opt<=0 || opt >5){
-							printf("\nInvalid boat type! Choose a boat between 1 and 5.\n");
+							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+							printf("Invalid boat type! Choose a boat between 1 and 5.\n");
 							printf("> ");
 							scanf("%d", &opt);
 						}
@@ -329,7 +337,8 @@ int main(){
 		 		scanf("%d", &vh);
 		 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
 						while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-							printf("\nInvalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+							printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 							printf("> ");
 							scanf("%d", &vh);
 						}
@@ -343,8 +352,9 @@ int main(){
 			}
 			soma2 = ss1+ss2+ss3+ss4+ss5;
 			if(soma2 < 5) {
-					printf("\nYou must choose one boat from each type!\n");
-					anular(p2m);
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+				printf("You must choose one boat from each type!\n");
+				anular(p2m);
 			}
 
 		} // fim do manual
@@ -370,7 +380,7 @@ int main(){
 				if(optm1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear"); }
 				if(optm1==4) { menu_help(); system("clear");}
 				if(optm1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
-				if(optm1<1 || optm1 > 5) printf("Invalid option!\n");
+				if(optm1<1 || optm1 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 
  			}
  			optm1=0;
@@ -381,6 +391,7 @@ int main(){
 			printf("y: ");
 			scanf("%d", &yp1);
 			while(xp1 < 0 || xp1 > p1m -> size-1 || yp1 < 0 || yp1 > p1m -> size-1){
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
 				scanf("%d", &xp1);
@@ -409,7 +420,7 @@ int main(){
 					if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key();system("clear"); }
 					if(optm2==4) { menu_help(); }
 					if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-					if(optm2<1 || optm2 > 5) printf("Invalid option!\n");
+					if(optm2<1 || optm2 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 
 	 			}
 	 			optm2=0;
@@ -420,6 +431,7 @@ int main(){
 				printf("y: ");
 				scanf("%d", &yp2);
 				while(xp2 < 0 || xp2 > p2m -> size-1 || yp2 < 0 || yp2 > p2m -> size-1){
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
 					scanf("%d", &xp2);
