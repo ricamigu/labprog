@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-/***** Estruturas *****/
+/***** Structures *****/
 //Coordenadas
 typedef struct Coordinate {
 	int x;
@@ -47,7 +47,7 @@ typedef struct {
 
 } game;
 
-//variável global
+//variavel global
 extern char p1[20],p2[20];
 extern int score1,score2;
 
@@ -89,7 +89,7 @@ bitmap create_barcoT();
 bitmap create_barcoL();
 bitmap create_barcoU();
 
-//funções que rodam o bitmap
+//funcoes que rodam o bitmap
 bitmap rotate_90(bitmap matriz);
 bitmap rotate_180(bitmap matriz);
 bitmap rotate_270(bitmap matriz);

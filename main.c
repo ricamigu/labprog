@@ -4,6 +4,18 @@
 #include <time.h> 
 #include "battleship.h"
 
+// funcao que verifica se o input foi um int
+void verificar_int(){
+	for(int c; (c = getchar()) != '\n' && c != EOF ;);
+}
+
+// funcao que gera os numeros random
+int return_randoms(int lower, int upper){
+	int num = (rand() % (upper + 1 - lower)) + lower;
+	return num;
+}
+
+
 int main(){
 
 	char p1[20],p2[20];	
@@ -30,11 +42,13 @@ int main(){
 	scanf("%s",p2);
 	printf("\nEnter the size of board (N*N between 20x20 to 40x40): ");
 	scanf("%d",&n);
+	verificar_int();
+
 	while(n > 40 || n < 20){
-		printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-		printf("The size of the board must be between 20x20 and 40x40.");
+		printf("\nThe size of the board must be between 20x20 and 40x40.");
 		printf("\nEnter the size of board (N*N): ");
 		scanf("%d",&n);
+		verificar_int();
 	}
 
 	printf("\n");
@@ -70,10 +84,16 @@ int main(){
  	int rand;
  	menu_rand();
  	scanf("%d",&rand);
+ 	verificar_int();
+ 	while(rand!=1 && rand != 2){
+ 		printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n> ");
+ 		scanf("%d",&rand);
+ 		verificar_int();
+ 	}
 
  	system("clear");
 
- 	// opção random
+ 	// opcao random
  	if(rand == 2){
 
  		int minR = 5; 
@@ -141,13 +161,12 @@ int main(){
 
 				menu_game(p1);
 				scanf("%d",&optmR1);
-
+				verificar_int();
+				if(optmR1<1 || optmR1>5){ optmR1=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n"); }
 				if(optmR1==2) { system("clear"); print_tabuleiro(p1m); press_any_key(); system("clear"); }
 				if(optmR1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear");}
 				if(optmR1==4) { menu_help(); system("clear"); }
 				if(optmR1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
-				if(optmR1<1 || optmR1 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
-
  			}
  			optmR1=0;
 
@@ -157,6 +176,7 @@ int main(){
 			printf("y: ");
 			scanf("%d", &yp1R);
 			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){	//testar se a coordenada está dentro do tabuleiro
+				verificar_int();
 				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
@@ -177,17 +197,16 @@ int main(){
 
 			if(!gameOverR){
 
-
 				while(optmR2!=1){
 
 					menu_game(p2);
 					scanf("%d",&optmR2);
-
+					verificar_int();
+					if(optmR2<1 || optmR2>5){ optmR2=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n"); }
 					if(optmR2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); system("clear");}
 					if(optmR2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key(); system("clear"); }
 					if(optmR2==4) { menu_help(); system("clear");}
 					if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-					if(optmR2<1 || optmR2 > 5) { printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 	 			}
 	 			optmR2=0;
 				
@@ -197,6 +216,7 @@ int main(){
 				printf("y: ");
 				scanf("%d", &yp2R);
 				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){	//testar se a coordenada está dentro do tabuleiro
+					verificar_int();
 					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
@@ -227,6 +247,7 @@ int main(){
 	 	scanf("%d", &b);
 
 		 while(b <= 4 || b > maxB){
+		 	verificar_int();
 		 	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 		 	printf("Invalid number of boats! The number of boats should be between 5 and %d.\nEnter the number of boats: ", maxB);
 		 	scanf("%d", &b);
@@ -254,6 +275,7 @@ int main(){
 					scanf("%d", &opt);
 
 					while(opt<=0 || opt >5){
+						verificar_int();
 						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 						printf("Invalid boat type! Choose a boat between 1 and 5.\n");
 						printf("> ");
@@ -272,17 +294,27 @@ int main(){
 			 		scanf("%d", &x1);
 			 		printf("y: ");
 			 		scanf("%d", &x2);
+			 		while(x1<0 || x1>39 || x2<0 || x2>39){
+			 			verificar_int();
+						printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");
+						printf("\nx: ");
+			 			scanf("%d", &x1);
+			 			printf("y: ");
+			 			scanf("%d", &x2);
+			 		}
 			 		a = new_coord(x1,x2);
 
 			 		boats1[i].c = *a;
 			 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 			 		scanf("%d", &vh);
+			 		verificar_int();
 
-					while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+					while(vh != 0 && vh != 90 && vh != 180 && vh != 270 && vh<0 && vh>270){
 						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 						printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 						printf("> ");
 						scanf("%d", &vh);
+						verificar_int();
 					}
 
 			 		boats1[i].o = vh;
@@ -316,10 +348,11 @@ int main(){
 				scanf("%d", &opt);
 				
 				while(opt<=0 || opt >5){
-						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-						printf("Invalid boat type! Choose a boat between 1 and 5.\n");
-						printf("> ");
-						scanf("%d", &opt);
+					verificar_int();
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+					printf("Invalid boat type! Choose a boat between 1 and 5.\n");
+					printf("> ");
+					scanf("%d", &opt);
 				}
 
 				if(opt==1) ss1 = 1; 
@@ -333,13 +366,22 @@ int main(){
 		 		scanf("%d", &x1);
 		 		printf("y: ");
 		 		scanf("%d", &x2);
+		 		while(x1<0 || x1>39 || x2<0 || x2>39){
+			 			verificar_int();
+						printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");
+						printf("\nx: ");
+			 			scanf("%d", &x1);
+			 			printf("y: ");
+			 			scanf("%d", &x2);
+			 		}
 		 		a = new_coord(x1,x2);
 
 		 		boats2[i].c = *a;
 		 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 		 		scanf("%d", &vh);
 				
-				while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+				while(vh != 0 && vh != 90 && vh != 180 && vh != 270 && vh<0 && vh>270){
+						verificar_int();
 						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 						printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
 						printf("> ");
@@ -378,12 +420,13 @@ int main(){
 
 				menu_game(p1);
 				scanf("%d",&optm1);
+				verificar_int();
 
+				if(optm1<1 || optm1 > 5) { optm1=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 				if(optm1==2) { system("clear"); print_tabuleiro(p1m); press_any_key(); system("clear");}
 				if(optm1==3) { system("clear"); print_tabuleiroAdversario(p2m); press_any_key(); system("clear"); }
 				if(optm1==4) { menu_help(); system("clear");}
 				if(optm1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
-				if(optm1<1 || optm1 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 
  			}
  			optm1=0;
@@ -394,6 +437,7 @@ int main(){
 			printf("y: ");
 			scanf("%d", &yp1);
 			while(xp1 < 0 || xp1 > p1m -> size-1 || yp1 < 0 || yp1 > p1m -> size-1){
+				verificar_int();
 				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
@@ -418,12 +462,12 @@ int main(){
 
 					menu_game(p2);
 					scanf("%d",&optm2);
-
+					verificar_int();
+					if(optm2<1 || optm2 > 5) { optm2=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 					if(optm2==2) { system("clear"); print_tabuleiro(p2m); press_any_key(); system("clear");}
 					if(optm2==3) { system("clear"); print_tabuleiroAdversario(p1m); press_any_key();system("clear"); }
 					if(optm2==4) { menu_help(); }
 					if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
-					if(optm2<1 || optm2 > 5) {printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
 
 	 			}
 	 			optm2=0;
@@ -434,6 +478,7 @@ int main(){
 				printf("y: ");
 				scanf("%d", &yp2);
 				while(xp2 < 0 || xp2 > p2m -> size-1 || yp2 < 0 || yp2 > p2m -> size-1){
+					verificar_int();
 					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
