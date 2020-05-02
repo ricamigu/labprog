@@ -10,16 +10,15 @@ Coordinate* new_coord(int a, int b) {
 	return c;
 }
 
-
 //print da matriz com os barcos do jogador
 void print_tabuleiro(game *tabuleiro){
 
 	printf("\n");
 	for(int i=0; i < tabuleiro->size ; i++){
-		if(i<10) printf(" %d",i);
+		if(i<10) printf(" %d",i);																						//
 		if(i>=10) printf("%d",i);
 		for(int j=0; j< tabuleiro->size;j++){
-			if(tabuleiro -> board[i][j].apont == NULL){																		//se a posição é NULL, dá print de um 0 azul 
+			if(tabuleiro -> board[i][j].apont == NULL){																	//se a posição é NULL, dá print de um 0 azul 
 				printf("\033[1;34m");
 				printf(" 0 ");
 				printf("\033[0m");
@@ -60,9 +59,6 @@ void print_tabuleiroAdversario(game *tabuleiro){
 }
 
 
-
-
-
 //Criar matriz de jogo
 void create_matriz(game *tabuleiro) {
 
@@ -72,9 +68,6 @@ void create_matriz(game *tabuleiro) {
 			tabuleiro -> board[i][j].field_shot = 0;
 		}
 	}
-
-	//print_tabuleiro(tabuleiro);
-
 }
 
 // funcao para verificar se pode inserir um barco
@@ -85,11 +78,12 @@ bool pode_inserir(Coordinate c, piece boat, game* tabuleiro){
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){
-
+			// a posicao que encontrou está fora do tabuleiro
 			if(((boat.mb -> m[i][j] == '1') && (((i+xx) < 0 || (i+xx) > tabuleiro->size) || ((j+yy)<0 || (j+yy > tabuleiro->size))))){
 				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, out of bounds!");
 				return false;
 			}
+			//a posicao que encontrou já tem um barco
 			if((boat.mb -> m[i][j] == '1' && (tabuleiro -> board[i+xx][j+yy].apont != NULL))){
 				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid coordinate, boat already there!");
 				return false;
@@ -124,6 +118,7 @@ bool pode_inserirRANDOMS(Coordinate c, piece boat, game* tabuleiro){
 //funcao para inserir barcos para a versao random (sem prints e sem scanfs, em vez disso tem o uso dos random numbers)
 void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro){
 
+	//utiliza a funcao para verificar se pode inserir
 	if(pode_inserirRANDOMS(c, *boat, tabuleiro)){
 
 		for(int i=0;i<5;i++){
@@ -136,7 +131,6 @@ void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro){
 	}
 
 	else {
-
 		int x,y;
 		Coordinate* ab = (Coordinate *) malloc(sizeof(Coordinate*));	// caso nao possa inserir, escolhe x e y random
 		x = return_randoms(3,tabuleiro -> size -4);
@@ -152,9 +146,8 @@ void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro){
 //funcao para inserir barcos no tabuleiro
 void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 
-
+	//utiliza a funcao para verificar se pode inserir
 	if(pode_inserir(c, *boat, tabuleiro)){
-
 		for(int i=0;i<5;i++){
 			for(int j=0;j<5;j++){
 				if( boat -> mb -> m[i][j] == '1' ){
@@ -163,9 +156,7 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 			}
 		}
 	}
-
 	else {
-
 		int x,y;
 		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));		// caso nao possa inserir, volta a pedir coordenadas ao jogador
 		printf("\n\nCoordinate for the boat again: ");
@@ -182,21 +173,20 @@ void inserir_barco(Coordinate c, piece* boat, game* tabuleiro){
 // funcao para testar se acertou num barco
 bool acertou(Coordinate cord, game* tabuleiro){
 
+	//já disparou nesta posição
 	if(((tabuleiro -> board[cord.x][cord.y].field_shot) == 2) || ((tabuleiro -> board[cord.x][cord.y].field_shot) == 1) ) {		
-		printf("Shot already taken!\n");																						// ja disparou nessa posicao
+		printf("Shot already taken!\n");																						
 		return false;
 	}
-
+	// falhou o tiro
 	if(tabuleiro -> board[cord.x][cord.y].apont == NULL){
-		printf("\nMissed shot!\n");																								// falhou o tiro
+		printf("\nMissed shot!\n");																								
 		tabuleiro -> board[cord.x][cord.y].field_shot = 1;
 		return false;
 	}
 
-
 	int xa = (tabuleiro -> board[cord.x][cord.y].apont) -> c.x;
 	int ya = (tabuleiro -> board[cord.x][cord.y].apont) -> c.y;
-
 
 	for(int i=0;i<5;i++){
 		for(int j=0;j<5;j++){																									
@@ -235,7 +225,6 @@ bool isFinished(game* tabuleiro){
 	return true;
 }
 
-
 // funcao para colocar o tabuleiro todo a null 
 void anular(game* tabuleiro){
 
@@ -246,7 +235,6 @@ void anular(game* tabuleiro){
 		}
 	}
 }
-
 
 // funcao que gera os numeros random
 int return_randoms(int lower, int upper){

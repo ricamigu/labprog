@@ -11,8 +11,7 @@ int main(){
 	int score2 = 0;
 
 	int n,b;
-	int x1, x2, tam, vh;
-	Coordinate p;
+	int x1, x2, vh;
 	int minicial;
 
 	//menu inicial
@@ -227,13 +226,11 @@ int main(){
 	 	printf("Enter the number of boats: ");
 	 	scanf("%d", &b);
 
-	 	if(b <= 4 || b > maxB){
-		 	while(b <= 4 || b > maxB){
-		 		printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-		 		printf("Invalid number of boats! The number of boats should be between 5 and %d.\nEnter the number of boats: ", maxB);
-		 		scanf("%d", &b);
-		 	}
-		}
+		 while(b <= 4 || b > maxB){
+		 	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+		 	printf("Invalid number of boats! The number of boats should be between 5 and %d.\nEnter the number of boats: ", maxB);
+		 	scanf("%d", &b);
+		 }
 
 	 	Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
 	 	piece boat1[b+1],boat2[b+1];
@@ -255,16 +252,20 @@ int main(){
 					print_menuB();	//menu dos barcos em menus.c
 					printf("> ");
 					scanf("%d", &opt);
-					if(opt<=0 || opt >5){
-						while(opt<=0 || opt >5){
-							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-							printf("Invalid boat type! Choose a boat between 1 and 5.\n");
-							printf("> ");
-							scanf("%d", &opt);
-						}
+
+					while(opt<=0 || opt >5){
+						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+						printf("Invalid boat type! Choose a boat between 1 and 5.\n");
+						printf("> ");
+						scanf("%d", &opt);
 					}
 
-					if(opt==1) s1 = 1; if(opt==2) s2 = 1; if(opt==3) s3 = 1; if(opt==4) s4 = 1; if(opt==5) s5 = 1;	//testar se o tabuleiro tem 5 barcos diferentes
+					//testar se o tabuleiro tem 5 barcos diferentes
+					if(opt==1) s1 = 1; 
+					if(opt==2) s2 = 1; 
+					if(opt==3) s3 = 1; 
+					if(opt==4) s4 = 1; 
+					if(opt==5) s5 = 1;
 
 					printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 					printf("\nx: ");
@@ -276,13 +277,12 @@ int main(){
 			 		boats1[i].c = *a;
 			 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 			 		scanf("%d", &vh);
-			 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-						while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-							printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
-							printf("> ");
-							scanf("%d", &vh);
-						}
+
+					while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+						printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+						printf("> ");
+						scanf("%d", &vh);
 					}
 
 			 		boats1[i].o = vh;
@@ -314,16 +314,19 @@ int main(){
 				print_menuB();	//menu dos barcos em menus.c
 				printf("> ");
 				scanf("%d", &opt);
-				if(opt<=0 || opt >5){
-						while(opt<=0 || opt >5){
-							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-							printf("Invalid boat type! Choose a boat between 1 and 5.\n");
-							printf("> ");
-							scanf("%d", &opt);
-						}
+				
+				while(opt<=0 || opt >5){
+						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+						printf("Invalid boat type! Choose a boat between 1 and 5.\n");
+						printf("> ");
+						scanf("%d", &opt);
 				}
 
-				if(opt==1) ss1 = 1; if(opt==2) ss2 = 1; if(opt==3) ss3 = 1; if(opt==4) ss4 = 1; if(opt==5) ss5 = 1;
+				if(opt==1) ss1 = 1; 
+				if(opt==2) ss2 = 1; 
+				if(opt==3) ss3 = 1; 
+				if(opt==4) ss4 = 1; 
+				if(opt==5) ss5 = 1;
 
 				printf("\n\nPlayer %s coordinate for boat %d: ", p2, i);
 				printf("\nx: ");
@@ -335,14 +338,14 @@ int main(){
 		 		boats2[i].c = *a;
 		 		printf("\nChoose boat rotation (0, 90, 180, 270): ");
 		 		scanf("%d", &vh);
-		 		if(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-						while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
-							printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-							printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
-							printf("> ");
-							scanf("%d", &vh);
-						}
+				
+				while(vh != 0 && vh != 90 && vh != 180 && vh != 270){
+						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+						printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+						printf("> ");
+						scanf("%d", &vh);
 				}
+
 		 		boats2[i].o = vh;
 		 		boats2[i].shot_count = 0;
 
@@ -450,10 +453,6 @@ int main(){
 			}
 		}
 	} 
-
-	//system("clear");
-	//print_tabuleiro(p1m);
-	//print_tabuleiro(p2m);
 
 	return EXIT_SUCCESS;
 
