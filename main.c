@@ -31,6 +31,7 @@ int main(){
 		menu_inicial();
 		printf("> ");
 		scanf("%d",&minicial);
+		verificar_int();
 		if(minicial == 2) menu_inicial_instructions();
 		else if(minicial == 3) { printf("Goodbye!\n"); return EXIT_SUCCESS;}
 	}
@@ -77,9 +78,6 @@ int main(){
 
  	create_matriz(p1m);
  	create_matriz(p2m);
-
- 	//print_tabuleiro(p1m);
- 	//print_tabuleiro(p2m);
 
  	int rand;
  	menu_rand();
@@ -173,16 +171,19 @@ int main(){
 			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
 			printf("\nx: ");
 			scanf("%d", &xp1R);
+			verificar_int();
 			printf("y: ");
 			scanf("%d", &yp1R);
+			verificar_int();
 			while(xp1R < 0 || xp1R > p1m -> size-1 || yp1R < 0 || yp1R > p1m -> size-1){	//testar se a coordenada está dentro do tabuleiro
-				verificar_int();
 				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 				printf("Invalid Coordinate!\n");
 				printf("\nx: ");
 				scanf("%d", &xp1R);
+				verificar_int();
 				printf("y: ");
 				scanf("%d", &yp1R);
+				verificar_int();
 			}
 
 			c1R = new_coord(xp1R,yp1R);
@@ -213,16 +214,19 @@ int main(){
 				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
 				printf("\nx: ");
 				scanf("%d", &xp2R);
+				verificar_int();
 				printf("y: ");
 				scanf("%d", &yp2R);
+				verificar_int();
 				while(xp2R < 0 || xp2R > p2m -> size-1 || yp2R < 0 || yp2R > p2m -> size-1){	//testar se a coordenada está dentro do tabuleiro
-					verificar_int();
 					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 					printf("Invalid Coordinate!\n");
 					printf("\nx: ");
 					scanf("%d", &xp2R);
+					verificar_int();
 					printf("y: ");
 					scanf("%d", &yp2R);
+					verificar_int();
 				}
 
 				c2R = new_coord(xp2R,yp2R);
@@ -273,13 +277,14 @@ int main(){
 					print_menuB();	//menu dos barcos em menus.c
 					printf("> ");
 					scanf("%d", &opt);
+					verificar_int();
 
 					while(opt<=0 || opt >5){
-						verificar_int();
 						printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
 						printf("Invalid boat type! Choose a boat between 1 and 5.\n");
 						printf("> ");
 						scanf("%d", &opt);
+						verificar_int();
 					}
 
 					//testar se o tabuleiro tem 5 barcos diferentes
@@ -292,15 +297,18 @@ int main(){
 					printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 					printf("\nx: ");
 			 		scanf("%d", &x1);
+			 		verificar_int();
 			 		printf("y: ");
 			 		scanf("%d", &x2);
+			 		verificar_int();
 			 		while(x1<0 || x1>39 || x2<0 || x2>39){
-			 			verificar_int();
 						printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");
 						printf("\nx: ");
 			 			scanf("%d", &x1);
+			 			verificar_int();
 			 			printf("y: ");
 			 			scanf("%d", &x2);
+			 			verificar_int();
 			 		}
 			 		a = new_coord(x1,x2);
 
