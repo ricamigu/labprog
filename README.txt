@@ -3,7 +3,7 @@ ________________________________________________________________________________
 	READ ME 				
 _________________________________________________________________________________________
 
-Este trabalho foi feito pelo grupo TP1_F, composto por:
+Este trabalho foi elaborado pelo grupo TP1_F, composto por:
 
 • Ricardo Miguel Anjo Noronha Ribeiro, 201705837 
 • Sara Raquel Gonçalves de Sá, 201804838
@@ -88,27 +88,27 @@ jogador 1, repete-se o mesmo processo para o jogador 2.
 
 Após completar toda a configuração dos barcos, o jogo está pronto a começar e aparece
 o menu menu_game(char p[]) que recebe o nome do jogador para apresentá-lo no menu.
-O menu é composto por:
 
+O menu é composto por:
 1) Take a shot
 2) See your board
 3) See your shots
 4) Help
 5) Quit
 
-o ponto 1) leva para a opção de escolher as coordenadas para disparar no tabuleiro de 
+O ponto 1) leva para a opção de escolher as coordenadas para disparar no tabuleiro de 
 jogo do adversário. Vai receber uma mensagem quanto ao resultado do tiro (Missed shot,
 Shot already taken, Shot hit).
 
-o ponto 2) serve para ver o próprio tabuleiro e ver onde já foi atingido. No caso de já
+O ponto 2) serve para ver o próprio tabuleiro e ver onde já foi atingido. No caso de já
 ter sido atingido, aparece um X vermelho na posição.
 
-o ponto 3) serve para ver os tiros que já foram dados no adversário. São representados
+O ponto 3) serve para ver os tiros que já foram dados no adversário. São representados
 com um 2 em verde caso tenha acertado e um 1 vermelho caso tenha falhado.
 
-o ponto 4) serve para apresentar um menu de ajuda com as regras e a utilização do jogo.
+O ponto 4) serve para apresentar um menu de ajuda com as regras e a utilização do jogo.
 
-o ponto 5) serve para desistir do jogo e dar a vitória ao adversário.
+O ponto 5) serve para desistir do jogo e dar a vitória ao adversário.
 
 O jogo termina quando um dos jogadores tiver sido acertado em todas as posições do barco.
 
