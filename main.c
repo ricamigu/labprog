@@ -73,7 +73,7 @@ int main(){
 
  	system("clear");
 
- 	// opcao random
+ 	// opção random
  	if(rand == 2){
 
  		int minR = 5; 
