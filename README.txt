@@ -118,7 +118,7 @@ __________________________________
 3.1) EXPLICAÇÃO SUCINTA DO CÓDIGO
 __________________________________
 
-Grande parte das explicações foi colocada aqui para não colocar demasiados comentários no código do jogo.
+Grande parte das explicações foi colocada aqui para não serem demasiados comentários no código do jogo.
 Os comentários nos ficheiros são mais diretos, enquanto que aqui aprofundamos um pouco mais o que cada
 função faz.
 
@@ -135,7 +135,7 @@ diversas outras funções de inserir barcos;
 - bitmap, que contém apenas uma matriz do tipo char 5x5 para representar o bitmap dos barcos.
 
 - piece, que representa os barcos. Cada piece tem uma Coordinate c, que é a posição central
-do barco, um int o que representa a orientação/rotação do barco, um bitmap* mb que é um
+do barco, um int que representa a orientação/rotação do barco, um bitmap* mb que é um
 apontador para um bitmap que vai armazenar o bitmap desse barco/peça. Por último, tem um shot
 count que armazena o número de vezes que foi acertado.
 
@@ -146,7 +146,7 @@ acertou em nenhum barco e houve tiro e acertou num barco do adversário, respeti
 - game, que corresponde ao tabuleiro de jogo. É composta por um int size, que é o tamanho
 do jogo NxN (entre 20 e 40) e um Cell** board que corresponde a uma matriz do tipo Cell.
 
-O resto do battleship.h contem as declarações das funções do jogo que vão ser explicadas
+O resto do battleship.h contém as declarações das funções do jogo que vão ser explicadas
 nos ficheiros.
 
  ____________
@@ -158,7 +158,7 @@ As funções do battleship são:
 
 Coordinate* new_coord(int a, int b) -> cria coordenadas novas
 
-void print_tabuleiro(game *tabuleiro)
+void print_tabuleiro (game *tabuleiro)
 - Esta função apresenta o tabuleiro para o jogador específico, ou seja, mostra a posição dos barcos
 e as posições onde foi acertado.
 
@@ -167,12 +167,12 @@ void print_tabuleiroAdversario(game *tabuleiro)
 Isto significa que mostra ao jogador os tiros feitos e se acertou com 2 (a verde) e se falhou com
 1 (a vermelho).
 
-void create_matriz(game *tabuleiro)
+void create_matriz (game *tabuleiro)
 - Cria a matriz de jogo, coloca o apontador de todas as posições a NULL e o field_shot a 0.
 
 bool pode_inserir(Coordinate c, piece boat, game* tabuleiro)
 - Esta função verifica se pode inserir um barco na posição escolhida. Caso o barco esteja fora
-do tabuleiro ou esteja numa posição já ocupada por outro barco, retorna falso. caso contrario,
+do tabuleiro ou esteja numa posição já ocupada por outro barco, retorna falso. Caso contrário, retorna 
 true.
 
 void inserir_barco(Coordinate c, piece* boat, game* tabuleiro)
@@ -209,7 +209,7 @@ int return_randoms(int lower, int upper)
 
 bitmap create_rect(), bitmap create_quad(), bitmap create_barcoT(), bitmap create_barcoL(),
 bitmap create_barcoU()
-- Estas funções criam os bitmaps dos barcos, quando o utilizador escolhe-os na main.c
+- Estas funções criam os bitmaps dos barcos, quando o utilizador os escolhe na main.c
 
 bitmap rotate_90(bitmap matriz), bitmap rotate_180(bitmap matriz), bitmap rotate_270(bitmap matriz)
 - Estas funções tratam das rotações dos barcos, também de acordo com o que o utilizador escolher.
@@ -218,7 +218,7 @@ void print_bitmap(bitmap matriz), void print_bitmapas(bitmap* matriz)
 -Estas funções foram usadas para testar ao longo do jogo se o bitmap estava a ser criado e alterado
 de forma correta.
 
-bitmap switch_function(int opcao,int orientacao), bitmap switch_functionRANDOMS(int opcao,int orientacao)
+bitmap switch_function(int opcao,int orientação), bitmap switch_functionRANDOMS(int opção,int orientação)
 - O conteúdo destas funções estava inicialmente na main.c mas decidimos criar as funções para ter
 um código mais simples na main. A primeira função recebe os valores que o utilizador recebeu como
 input e escolhe qual o bitmap correto a retornar. No caso da segunda função, foi necessário alterar
@@ -233,7 +233,7 @@ que nos utilizadores corresponde a 0, 90, 180 e 270 e nos randoms corresponde a 
 Este ficheiro não necessita de muita explicação, tem apenas os menus que acontecem ao longo do jogo.
 A única função a explicar será a void press_any_key() que é utilizada ao longo dos menus.c e da main.c
 para o jogador clicar numa tecla para continuar a ação, dando assim tempo para ver o que está no ecrã
-antes de efetuar um system("clear").
+antes de efetuar um system ("clear").
 
 FIM
 _________________________________________________________________________________________
