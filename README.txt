@@ -10,7 +10,7 @@ Este trabalho foi feito pelo grupo TP1_F, composto por:
 
 _________________________________________________________________________________________
 
-	TOPICOS
+	TÓPICOS
 _________________________________________________________________________________________
 
 	1) COMPILAÇÃO
@@ -83,7 +83,7 @@ e, em seguida, o menu print_menuB(), que apresenta os 5 tipos de barcos que temo
 
 Depois de escolher o tipo de barco (note-se que é necessário escolher um barco de cada
 tipo) e em seguida pedido as coordenadas do ponto central do bitmap do barco e a sua
-orientação (0, 90, 270, 360). Depois de escolher todos os barcos e posições para o
+orientação (0, 90, 180, 270). Depois de escolher todos os barcos e posições para o
 jogador 1, repete-se o mesmo processo para o jogador 2.
 
 Após completar toda a configuração dos barcos, o jogo está pronto a começar e aparece
