@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-/***** Structures *****/
+/***** Estruturas *****/
 //Coordenadas
 typedef struct Coordinate {
 	int x;
