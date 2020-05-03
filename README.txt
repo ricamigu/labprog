@@ -68,7 +68,7 @@ e, em seguida, o menu print_menuB(), que apresenta os 5 tipos de barcos que temo
 • Em forma de U
 
 Depois de escolher o tipo de barco (note-se que é necessário escolher um barco de cada
-tipo) e em seguida pedido as coordenadas do ponto central do bitmap do barco e a sua
+tipo) é pedido as coordenadas do ponto central do bitmap do barco e a sua
 orientação (0, 90, 180, 270). Depois de escolher todos os barcos e posições para o
 jogador 1, repete-se o mesmo processo para o jogador 2.
 
@@ -82,7 +82,7 @@ O menu é composto por:
 4) Help
 5) Quit
 
-O ponto 1) leva para a opção de escolher as coordenadas para disparar no tabuleiro de 
+O ponto 1) leva-nos para a opção de escolher as coordenadas para disparar no tabuleiro de 
 jogo do adversário. Vai receber uma mensagem quanto ao resultado do tiro (Missed shot,
 Shot already taken, Shot hit).
 
@@ -96,7 +96,7 @@ O ponto 4) serve para apresentar um menu de ajuda com as regras e a utilização
 
 O ponto 5) serve para desistir do jogo e dar a vitória ao adversário.
 
-O jogo termina quando um dos jogadores tiver sido acertado em todas as posições do barco.
+O jogo termina quando um dos jogadores acertar em todas as posições dos barcos do adversário.
 
 _________________________________________________________________________________________
 
