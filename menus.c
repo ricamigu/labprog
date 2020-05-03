@@ -1,6 +1,6 @@
 #include "battleship.h"
 
-//menu de apresentacao dos barcos
+//menu de apresentação dos barcos
 void print_menuB(){
 
 	printf("\n*-------------*");
