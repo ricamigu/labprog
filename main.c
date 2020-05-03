@@ -4,12 +4,12 @@
 #include <time.h> 
 #include "battleship.h"
 
-// funcao que verifica se o input foi um int
+// função que verifica se o input foi um int
 void verificar_int(){
 	for(int c; (c = getchar()) != '\n' && c != EOF ;);
 }
 
-// funcao que gera os numeros random
+// função que gera os números random
 int return_randoms(int lower, int upper){
 	int num = (rand() % (upper + 1 - lower)) + lower;
 	return num;
