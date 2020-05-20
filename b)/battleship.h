@@ -120,6 +120,8 @@ struct node* new_node();
 struct node* new_leaf(Coordinate *coord);
 
 struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool contains2(struct node *root, struct node *coord);
 
 void inorder(struct node *root);
 int number_nodes(struct node* root);
