@@ -77,7 +77,6 @@ extern int score1,score2;
 
 /***** Construtores *****/
 
-
 //menus.c
 void menu_inicial();
 void print_menuB();
@@ -87,7 +86,6 @@ void menu_game();
 void menu_help();
 void press_any_key();
 
-/*
 //bitmaps.c
 void print_bitmap(bitmap matriz);
 // funções que criam bitmaps
@@ -96,36 +94,30 @@ bitmap create_quad();
 bitmap create_barcoT();
 bitmap create_barcoL();
 bitmap create_barcoU();
-
 //funções que rodam o bitmap
 bitmap rotate_90(bitmap matriz);
 bitmap rotate_180(bitmap matriz);
 bitmap rotate_270(bitmap matriz);
 bitmap switch_function(int opcao,int orientacao);
-
 //tests
 void print_bitmapas(bitmap* matriz);
 
 //random numbers
 int return_randoms(int lower, int higher);
-*/
 
 
 //quadtree
 Coordinate* new_coord(int a, int b);
 CoordinateD new_coordD(double a, double b);
 struct node* new_node();
-
-//struct node* new_leaf(Coordinate *coord, piece *barco);
 struct node* new_leaf(Coordinate *coord);
-
 struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool contains2(struct node *root, struct node *coord);
-
 void inorder(struct node *root);
 int number_nodes(struct node* root);
-
 void print_tree(struct node* root);
+bool pode_inserir(struct node* root, piece boat, int size);
 
 #endif

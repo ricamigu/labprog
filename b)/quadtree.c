@@ -102,9 +102,7 @@ struct node* insert(struct node *root, struct node *coord, CoordinateD particao,
 	return root;
 }
 
-
-
-
+//teste
 bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys){
 
 	double xx = coord->c->x;
@@ -148,7 +146,6 @@ bool contains(struct node *root, struct node *coord, CoordinateD particao, doubl
 			return contains(root->SE, coord, particao, limxi, limxs, limyi, limys);
 		}
 	}
-
 	
 	if(root->tag == isLeaf) {
 		if(root->c->x == coord->c->x && root->c->y == coord->c->y)
@@ -159,7 +156,90 @@ bool contains(struct node *root, struct node *coord, CoordinateD particao, doubl
 
 }
 
-//ineficiente, percorre a arvore toda (para testar apenas)
+
+bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys){
+
+	double xx = x1;
+	double yy = y1;
+
+	if(root==NULL) return false;
+
+	if(root -> tag == isInternal){
+		//NW
+		if( (xx <= particao.x) && (yy <= particao.y)){
+			//printf("NW\n");
+			CoordinateD temp = particao;
+			particao.x = (limxi+particao.x)/2;
+			particao.y = (limyi+particao.y)/2;
+			limxs = temp.x; limys = temp.y;
+			return containsC(root->NW, x1, y1, particao, limxi, limxs, limyi, limys);
+		}
+
+		//NE
+		else if(( xx <= particao.x) && (yy > particao.y)){
+			CoordinateD temp = particao;
+			particao.x = (limxi+particao.x)/2; 
+			particao.y = (particao.y+limys)/2;
+			limxs = temp.x; limyi = temp.y;
+			return containsC(root->NE, x1, y1, particao, limxi, limxs, limyi, limys);
+		}
+		//SW
+		else if(( xx > particao.x) && (yy <= particao.y)){
+			CoordinateD temp = particao;
+			particao.x = (particao.x+limxs)/2; 
+			particao.y = (limyi+particao.y)/2;
+			limxi = temp.x; limys = temp.y;
+			return containsC(root->SW, x1, y1, particao, limxi, limxs, limyi, limys);
+		}
+		//SE
+		else if( (xx > particao.x) && (yy > particao.y) ){
+			CoordinateD temp = particao;
+			particao.x = (particao.x+limxs)/2;
+			particao.y = (particao.y+limys)/2;
+			limxi = temp.x; limyi = temp.y;
+			return containsC(root->SE, x1, y1, particao, limxi, limxs, limyi, limys);
+		}
+	}
+	
+	if(root->tag == isLeaf) {
+		if(root->c->x == x1 && root->c->y == y1)
+			return true;
+	}
+
+	return false;
+
+}
+
+
+bool pode_inserir(struct node* root, piece boat, int size){
+
+  int xx = boat.c.x-2;
+  int yy = boat.c.y-2;
+
+  CoordinateD meio = new_coordD(size/2,size/2);
+
+
+  for(int i=0; i<5; i++){
+    for(int j=0; j<5; j++){
+        if(boat.mb -> m[i][j] == '1'){
+          if (!containsC(root, xx+i, yy+j, meio, 0, size, 0, size))
+          	return false;
+        }
+    }
+  }
+
+  return true;
+}
+
+
+
+
+
+
+
+
+
+//ineficiente, percorre a arvore toda (para teste apenas)
 bool contains2(struct node *root, struct node *coord){
 
 	if(root==NULL) return false;
