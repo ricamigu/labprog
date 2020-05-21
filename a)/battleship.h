@@ -2,7 +2,6 @@
 #define _battleship_h_
 #define _bitmaps_c_
 #define _menus_c_
-#define _QDTree_c_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,11 +55,9 @@ extern int score1,score2;
 
 //battleship.c
 Coordinate* new_coord(int a, int b);
-void create_matriz(game *board);	//matrizes que depois irão ser usadas para representar a árvore
-
-/*
 void print_tabuleiro(game *board);
 void print_tabuleiroAdversario(game *tabuleiro);
+void create_matriz(game *board);
 void anular(game* tabuleiro);
 //função que insere barco
 void inserir_barco(Coordinate c, piece* boat, game* tabuleiro);
@@ -73,7 +70,6 @@ void inserir_barcoRANDOMS(Coordinate c, piece* boat, game* tabuleiro);
 bitmap switch_functionRANDOMS(int opcao,int orientacao);
 //verificar se o tabuleiro foi acertado em todas as posições de barcos
 bool isFinished(game* tabuleiro);
-*/
 
 //menus.c
 void menu_inicial();
