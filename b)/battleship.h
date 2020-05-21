@@ -1,5 +1,6 @@
 #ifndef _battleship_h_
 #define _battleship_h_
+#define _battleship_c_
 #define _bitmaps_c_
 #define _menus_c_
 #define _QDtree_c_
@@ -32,7 +33,7 @@ typedef struct {
 	Coordinate c;
 	int o;
 	bitmap* mb;
-	int field_shot;
+	//int field_shot;
 
 } piece;
 
@@ -63,6 +64,7 @@ struct node {
 	//leaf
 	Coordinate *c;
 	piece *peca;
+	//int field_shot;
 
 	//internal
 	struct node *NW;
@@ -101,6 +103,7 @@ bitmap rotate_90(bitmap matriz);
 bitmap rotate_180(bitmap matriz);
 bitmap rotate_270(bitmap matriz);
 bitmap switch_function(int opcao,int orientacao);
+bitmap switch_functionRANDOMS(int opcao,int orientacao);
 //tests
 void print_bitmapas(bitmap* matriz);
 
@@ -110,18 +113,24 @@ int return_randoms(int lower, int higher);
 
 //quadtree
 Coordinate* new_coord(int a, int b);
-CoordinateD new_coordD(double a, double b);
+CoordinateD new_coordD(long double a, long double b);
 struct node* new_node();
 struct node* new_leaf(Coordinate *coord, piece *boat);
-struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool contains2(struct node *root, struct node *coord);
+struct node* insert(struct node *root, struct node *coord, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+bool contains(struct node *root, struct node *coord, CoordinateD particao, long double limxi, long double limxs, long double limyi, double limys);
+bool containsC(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+bool contains2(struct node *root, int x1, int y1);
 void inorder(struct node *root);
-int number_nodes(struct node* root);
+int number_leaves(struct node* root);
 void print_tree(struct node* root);
 bool pode_inserir(struct node* root, piece boat, int size);
 void inserir_barco(struct node* root, piece *boat, int size);
+bool pode_inserirRANDOMS(struct node* root, piece boat, int size);
+void inserir_barcoRANDOMS(struct node* root, piece *boat, int size);
 struct node* clear_tree(struct node *root);
-
+void delete_tree(struct node *root);
+void matriz_jogador(struct node *root, int size);
+struct node* find(struct node *root, int x, int y, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+int return_field_shot(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+bool shoot(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
 #endif
