@@ -32,7 +32,7 @@ typedef struct {
 	Coordinate c;
 	int o;
 	bitmap* mb;
-	int shot_count;
+	int field_shot;
 
 } piece;
 
@@ -110,7 +110,7 @@ int return_randoms(int lower, int higher);
 Coordinate* new_coord(int a, int b);
 CoordinateD new_coordD(double a, double b);
 struct node* new_node();
-struct node* new_leaf(Coordinate *coord);
+struct node* new_leaf(Coordinate *coord, piece *boat);
 struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
@@ -119,5 +119,7 @@ void inorder(struct node *root);
 int number_nodes(struct node* root);
 void print_tree(struct node* root);
 bool pode_inserir(struct node* root, piece boat, int size);
+void inserir_barco(struct node* root, piece *boat, int size);
+struct node* clear_tree(struct node *root);
 
 #endif

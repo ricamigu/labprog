@@ -51,6 +51,9 @@ int main(){
 		verificar_int();
 	}
 
+	struct node *root;
+	root = new_node();
+
 	printf("\n");
 	system("clear");
 
@@ -108,67 +111,70 @@ int main(){
 
 		for(int i=1; i<=b; i++){
 
-		printf("\nChoose the type of boat\n");
-		print_menuB();	//menu dos barcos em menus.c
-		printf("> ");
-		scanf("%d", &opt);
-		verificar_int();
-
-		while(opt<=0 || opt >5){
-			printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-			printf("Invalid boat type! Choose a boat between 1 and 5.\n");
+			printf("\nChoose the type of boat\n");
+			print_menuB();	//menu dos barcos em menus.c
 			printf("> ");
 			scanf("%d", &opt);
 			verificar_int();
-		}
 
-		//testar se o tabuleiro tem 5 barcos diferentes
-		if(opt==1) s1 = 1; 
-		if(opt==2) s2 = 1; 
-		if(opt==3) s3 = 1; 
-		if(opt==4) s4 = 1; 
-		if(opt==5) s5 = 1;
+			while(opt<=0 || opt >5){
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+				printf("Invalid boat type! Choose a boat between 1 and 5.\n");
+				printf("> ");
+				scanf("%d", &opt);
+				verificar_int();
+			}
 
-		printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
-		printf("\nx: ");
-		scanf("%d", &x1);
-		verificar_int();
-		printf("y: ");
-		scanf("%d", &x2);
-		verificar_int();
-		while(x1<0 || x1>39 || x2<0 || x2>39){
-			printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");
+			//testar se o tabuleiro tem 5 barcos diferentes
+			if(opt==1) s1 = 1; 
+			if(opt==2) s2 = 1; 
+			if(opt==3) s3 = 1; 
+			if(opt==4) s4 = 1; 
+			if(opt==5) s5 = 1;
+
+			printf("\n\nPlayer %s coordinate for boat %d: ", p1, i);
 			printf("\nx: ");
 			scanf("%d", &x1);
 			verificar_int();
 			printf("y: ");
 			scanf("%d", &x2);
 			verificar_int();
-		}
-		
-		a = new_coord(x1,x2);
-		boats1[i].c = *a;
-		printf("\nChoose boat rotation (0, 90, 180, 270): ");
-		scanf("%d", &vh);
-		verificar_int();
-
-		while(vh != 0 && vh != 90 && vh != 180 && vh != 270 && vh<0 && vh>270){
-			printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
-			printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
-			printf("> ");
+			while(x1<0 || x1>39 || x2<0 || x2>39){
+				printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");
+				printf("\nx: ");
+				scanf("%d", &x1);
+				verificar_int();
+				printf("y: ");
+				scanf("%d", &x2);
+				verificar_int();
+			}
+			
+			a = new_coord(x1,x2);
+			boats1[i].c = *a;
+			printf("\nChoose boat rotation (0, 90, 180, 270): ");
 			scanf("%d", &vh);
 			verificar_int();
+
+			while(vh != 0 && vh != 90 && vh != 180 && vh != 270 && vh<0 && vh>270){
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+				printf("Invalid rotation type! Rotation values must be 0, 90, 180 or 270.\n");
+				printf("> ");
+				scanf("%d", &vh);
+				verificar_int();
+			}
+
+			boats1[i].o = vh;
+			boats1[i].field_shot = 0;
+			mapass[i] = switch_function(opt,boats1[i].o);
+			boats1[i].mb = &mapass[i];
+			inserir_barco(root, &boats1[i], n);
 		}
-
-		boats1[i].o = vh;
-		boats1[i].shot_count = 0;
-
-
-
-
-
+		soma1 = s1+s2+s3+s4+s5;
+			if(soma1 < 5) {
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");													
+				printf("You must choose one boat from each type!\n");	 	// se nao tiver os 5 tipos de barcos diferentes,
+				clear_tree(root);											// repor a tree
 		}
-
 	}
 
 	return EXIT_SUCCESS;

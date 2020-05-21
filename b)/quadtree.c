@@ -31,13 +31,13 @@ struct node* new_node(){
 	return new;
 }
 
-struct node* new_leaf(Coordinate *coord){
+struct node* new_leaf(Coordinate *coord, piece *boat){
 
 	struct node *new = malloc(sizeof(struct node));
 
 	new -> tag = isLeaf;
 	new -> c = coord;
-	//new -> peca = barco;
+	new -> peca = boat;
 
 	return new;
 
@@ -93,7 +93,7 @@ struct node* insert(struct node *root, struct node *coord, CoordinateD particao,
 	
 	if(root->tag == isLeaf){
 			struct node *new; new = new_node();
-			struct node *temp; temp = new_leaf(root->c);
+			struct node *temp; temp = new_leaf(root->c,root->peca);
 			root = new;
 			insert(root, temp, particao, limxi, limxs, limyi, limys);
 			insert(root, coord, particao, limxi, limxs, limyi, limys);
@@ -216,14 +216,21 @@ bool pode_inserir(struct node* root, piece boat, int size){
   int xx = boat.c.x-2;
   int yy = boat.c.y-2;
 
-  CoordinateD meio = new_coordD(size/2,size/2);
+  if(xx < 0 || yy < 0 || xx>=size || yy>=size){
+  	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, out of bounds!");
+  	return false;
+  }
 
+  CoordinateD meio = new_coordD(size/2,size/2);
 
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
         if(boat.mb -> m[i][j] == '1'){
-          if (!containsC(root, xx+i, yy+j, meio, 0, size, 0, size))
+          if (containsC(root, xx+i, yy+j, meio, 0, size, 0, size)){
+          	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, boat already there!");
           	return false;
+          }
+          //printf("point (%d,%d) ", xx+i,yy+j);
         }
     }
   }
@@ -231,6 +238,40 @@ bool pode_inserir(struct node* root, piece boat, int size){
   return true;
 }
 
+void inserir_barco(struct node* root, piece *boat, int size){
+
+	if(pode_inserir(root, *boat, size)){
+
+		for(int i=0; i<5; i++){
+	    	for(int j=0; j<5; j++){
+	       		if(boat-> mb -> m[i][j] == '1'){
+
+	       			Coordinate *a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
+	       			CoordinateD meio = new_coordD(size/2,size/2);
+	       			struct node* leaf = new_leaf(a,boat);
+	        		insert(root, leaf, meio, 0, size, 0, size);
+
+	          		//printf("point (%d,%d) ", xx+i,yy+j);
+	        	}
+	    	}
+	  	}
+	}
+
+	else {
+		// caso nao possa inserir, volta a pedir coordenadas ao jogador
+		int x1,y1;
+		printf("\n\nCoordinate for the boat again: ");
+		printf("\nx: ");
+		scanf("%d", &x1);
+		printf("y: ");
+		scanf("%d", &y1);
+		Coordinate* a  = new_coord(x1,y1);
+		boat->c = *a;
+		inserir_barco(root, boat, size);
+	}
+}
+
+//insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys)
 
 
 
@@ -297,5 +338,13 @@ void print_tree(struct node* root){
 	printf("NE: "); print_tree(root->NE);
 	printf("SW: "); print_tree(root->SW);
 	printf("SE: "); print_tree(root->SE);
+
+}
+
+
+
+struct node* clear_tree(struct node *root){
+
+	return root = new_node();
 
 }
