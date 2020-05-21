@@ -36,6 +36,8 @@ typedef struct {
 
 } piece;
 
+
+/*
 //Cell
 typedef struct {
 
@@ -51,7 +53,7 @@ typedef struct {
 	Cell** board;
 
 } game;
-
+*/
 
 enum treetag { isLeaf, isInternal} tag;
 
