@@ -17,7 +17,7 @@ bool pode_inserir(struct node* root, piece boat, int size){
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
         if(boat.mb -> m[i][j] == '1'){
-          if (containsC(root, xx+i, yy+j, meio, 0, size, 0, size)){
+          if (contains22(root, xx+i, yy+j, size/2,size/2)){
           	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, boat already there!");
           	return false;
           }
@@ -40,7 +40,7 @@ void inserir_barco(struct node* root, piece *boat, int size){
 	       			Coordinate *a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
 	       			CoordinateD meio = new_coordD(size/2,size/2);
 	       			struct node* leaf = new_leaf(a,boat);
-	        		insert(root, leaf, meio, 0, size, 0, size);
+	        		insert2(root, leaf, size/2,size/2);
 
 	          		//printf("point (%d,%d) ", xx+i,yy+j);
 	        	}
@@ -77,7 +77,7 @@ bool pode_inserirRANDOMS(struct node* root, piece boat, int size){
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
         if(boat.mb -> m[i][j] == '1'){
-          if (containsC(root, xx+i, yy+j, meio, 0, size, 0, size)){
+          if (contains22(root, xx+i, yy+j,size/2,size/2)){
           	return false;
           }
         }
@@ -98,7 +98,7 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 	       			Coordinate *a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
 	       			CoordinateD meio = new_coordD(size/2,size/2);
 	       			struct node* leaf = new_leaf(a,boat);
-	        		insert(root, leaf, meio, 0, size, 0, size);
+	        		insert2(root, leaf, size/2,size/2);
 	        	}
 	    	}
 	  	}
@@ -107,8 +107,8 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 	else {
 		// caso nao possa inserir, volta a pedir coordenadas ao jogador
 		int x1,y1;
-		x1 = return_randoms(3,size-4);
-		y1 = return_randoms(3,size-4);
+		x1 = return_randoms(5,size-5);
+		y1 = return_randoms(5,size-5);
 		Coordinate* a  = new_coord(x1,y1);
 		boat->c = *a;
 		inserir_barcoRANDOMS(root, boat, size);
@@ -119,15 +119,17 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 //funcao que "transforma" a árvore numa matriz para representar
 void matriz_jogador(struct node *root, int size){
 
-	inorder(root);
-
 	CoordinateD meio = new_coordD(size/2,size/2);
+
+
+	//inorder(root);
+
 
 	for(int i=0; i < size; i++){
 		if(i<10) printf(" %d",i);																						//
 		if(i>=10) printf("%d",i);
 		for(int j=0; j<size; j++){
-			if(!containsC(root, i, j, meio, 0, size, 0, size)){
+			if(!contains22(root, i, j, size/2,size/2)){
 				printf("\033[1;34m");
 				printf(" 0 ");
 				printf("\033[0m");
@@ -138,11 +140,14 @@ void matriz_jogador(struct node *root, int size){
 	}
 
 
+
 	printf("##");
 	for(int j=0;j<size;j++){
 		if(j<10) printf(" %d ", j);
 		if(j>=10) printf(" %d",j);
 	}
 	printf("\n");
+
+
 
 }

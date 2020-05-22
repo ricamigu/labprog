@@ -113,12 +113,12 @@ int return_randoms(int lower, int higher);
 
 //quadtree
 Coordinate* new_coord(int a, int b);
-CoordinateD new_coordD(long double a, long double b);
+CoordinateD new_coordD(double a, double b);
 struct node* new_node();
 struct node* new_leaf(Coordinate *coord, piece *boat);
-struct node* insert(struct node *root, struct node *coord, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
-bool contains(struct node *root, struct node *coord, CoordinateD particao, long double limxi, long double limxs, long double limyi, double limys);
-bool containsC(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool contains2(struct node *root, int x1, int y1);
 void inorder(struct node *root);
 int number_leaves(struct node* root);
@@ -130,7 +130,10 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size);
 struct node* clear_tree(struct node *root);
 void delete_tree(struct node *root);
 void matriz_jogador(struct node *root, int size);
-struct node* find(struct node *root, int x, int y, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
-int return_field_shot(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
-bool shoot(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys);
+struct node* find(struct node *root, int x, int y, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+int return_field_shot(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool shoot(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+struct node* insert2(struct node* root, struct node* coord, double l1, double l2);
+bool contains22(struct node* root, int x1, int y1, double l1,double l2);
+
 #endif

@@ -84,7 +84,7 @@ int main(){
  	if(rand==2){
 
  		int minR = 5; 
- 		int maxR = (n*n)/(5*5);
+ 		int maxR = (n*n)/(5*5)-5;
  		srand(time(0));
 
  		int randB = return_randoms(minR,maxR);
@@ -100,8 +100,8 @@ int main(){
 	 	for(int i=1; i<=randB; i++){
 
 	 			int optR = return_randoms(1,5);				// criar numeros random para todos os parametros de inserir o barco
-		 		int xR = return_randoms(4,(n-4));
-			 	int yR = return_randoms(4,(n-4));
+		 		int xR = return_randoms(5,(n-5));
+			 	int yR = return_randoms(5,(n-5));
 				aa = new_coord(xR,yR);
 				boatsR1[i].c = *aa;
 				int vhR = return_randoms(0,3);
@@ -118,8 +118,8 @@ int main(){
 	 	// RANDOMS PLAYER 2
 	 	for(int j=1; j<=randB; j++){
 	 			int optR2 = return_randoms(1,5);			// criar numeros random para todos os parametros de inserir o barco
-	 			int xR2 = return_randoms(3,(n-4));
-	 			int yR2 = return_randoms(3,(n-4));
+	 			int xR2 = return_randoms(5,(n-5));
+	 			int yR2 = return_randoms(5,(n-5));
 		 		aa = new_coord(xR2,yR2);
 		 		boatsR2[j].c = *aa;
 		 		int vhR2 = return_randoms(0,3);
@@ -133,6 +133,8 @@ int main(){
 		}
 
 		matriz_jogador(rootp1, n);
+		//inorder(rootp1);
+
 
 
  	}

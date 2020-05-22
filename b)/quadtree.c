@@ -10,7 +10,7 @@ Coordinate* new_coord(int a, int b) {
 	return c;
 }
 
-CoordinateD new_coordD(long double a, long double b) {
+CoordinateD new_coordD(double a, double b) {
 	CoordinateD c;
 	c.x = a;
 	c.y = b;
@@ -44,15 +44,58 @@ struct node* new_leaf(Coordinate *coord, piece *boat){
 
 }
 
-struct node* insert(struct node *root, struct node *coord, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys){
+
+struct node* insert2(struct node* root, struct node* coord, double l1,double l2){
+
+	if(root==NULL){
+		root = coord;
+		return root;
+	}
+
+	double xx = coord->c->x;
+	double yy = coord->c->y;
+
+
+	if(root->tag == isInternal){
+
+		if( coord->c->x < l1 && coord->c->y < l2)
+			root->NW = insert2(root->NW,coord,l1/2,l2/2);
+
+		if( coord->c->x < l1 && coord->c->y  >= l2)
+			root->NE = insert2(root->NE,coord,l1/2,l2+l2/2);
+
+		if( coord->c->x >= l1 && coord->c->y  < l2)
+			root->SW = insert2(root->SW,coord,l1+l1/2,l2/2);
+
+		if( coord->c->x >= l1 && coord->c->y  >= l2)
+			root->SE = insert2(root->SE,coord,l1+l1/2,l2+l2/2);
+	}
+
+
+	if(root->tag == isLeaf){
+
+		struct node *new; new = new_node();
+		struct node *temp; temp = new_leaf(root->c,root->peca);
+		root = new;
+		insert2(root,temp,l1,l2);
+		insert2(root,coord,l1,l2);
+
+	}
+	return root;
+
+}
+
+
+struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys){
+
 
 	if(root==NULL) {
 		root = coord;
 		return root;
 	}
 
-	long double xx = coord->c->x;
-	long double yy = coord->c->y;
+	double xx = coord->c->x;
+	double yy = coord->c->y;
 
 	if(root -> tag == isInternal){
 		//NW
@@ -104,11 +147,43 @@ struct node* insert(struct node *root, struct node *coord, CoordinateD particao,
 }
 
 
+bool contains22(struct node* root, int x1, int y1, double l1,double l2){
 
-bool containsC(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys){
+	if(root==NULL) return false;
 
-	long double xx = x1;
-	long double yy = y1;
+	double xx = x1;
+	double yy = y1;
+
+
+	if(root->tag == isInternal){
+
+		if( x1 < l1 && y1 < l2)
+			return contains22(root->NW,x1,y1,l1/2,l2/2);
+
+		if( x1 < l1 && y1 >= l2)
+			return contains22(root->NE,x1,y1,l1/2,l2+l2/2);
+
+		if( x1 >= l1 && y1 < l2)
+			return contains22(root->SW,x1,y1,l1+l1/2,l2/2);
+
+		if( x1 >= l1 && y1 >= l2)
+			return contains22(root->SE,x1,y1,l1+l1/2,l2+l2/2);
+	}
+
+	if(root->tag == isLeaf){
+		if(root->c->x == x1 && root->c->y == y1)
+			return true;
+	}
+	return false;
+}
+
+
+
+
+bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys){
+
+	double xx = x1;
+	double yy = y1;
 
 	if(root==NULL) return false;
 
@@ -192,14 +267,16 @@ int number_leaves(struct node* root){
 
 }
 
+int contador=1;
 
 void inorder(struct node *root)
 {
     if(root!=NULL) // checking if the root is not null
-    {
+    {		
+    		//if(root->tag==isLeaf) {printf(" %d : (%d,%d) \n", contador, root->c->x,root->c->y); contador++;}
 	        inorder(root->NW);
 	        inorder(root->NE);
-	        if(root->tag==isLeaf) printf(" (%d,%d) \n", root->c->x,root->c->y);
+	        if(root->tag==isLeaf) {printf(" %d : (%d,%d) \n", contador, root->c->x,root->c->y); contador++;}
 	        inorder(root->SW);
 	        inorder(root->SE);
     }
@@ -241,10 +318,10 @@ void delete_tree(struct node *root){
 }
 
 
-struct node* find(struct node *root, int x1, int y1, CoordinateD particao, long double limxi, long double limxs, long double limyi, long double limys){
+struct node* find(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys){
 
-	long double xx = x1;
-	long double yy = y1;
+	double xx = x1;
+	double yy = y1;
 
 	if(root -> tag == isInternal){
 		//NW
