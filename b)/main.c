@@ -4,6 +4,7 @@
 #include <time.h> 
 #include "battleship.h"
 
+int n;
 // função que verifica se o input foi um int
 void verificar_int(){
 	for(int c; (c = getchar()) != '\n' && c != EOF ;);
@@ -16,12 +17,46 @@ int return_randoms(int lower, int upper){
 }
 
 
+void print_shots(char m[n][n]){
+
+	for(int i=0;i<n;i++){
+		if(i<10) printf(" %d",i);																						//
+		if(i>=10) printf("%d",i);
+		for(int j=0;j<n;j++){
+			if(m[i][j] == '0'){
+				printf("\033[1;34m");
+				printf(" %c ", m[i][j]);
+				printf("\033[0m");
+			}
+			else if(m[i][j]=='1'){
+				printf("\033[0;31m"); 
+				printf(" %c ", m[i][j]); 
+				printf("\033[0m");
+
+		}
+		else { printf("\033[0;32m"); 
+				printf(" %c ", m[i][j]); 
+				printf("\033[0m");
+			}
+		}
+		printf("\n");
+	}
+
+	printf("##");																											
+	for(int j=0;j<n;j++){
+		if(j<10) printf(" %d ", j);
+		if(j>=10) printf(" %d",j);
+	}
+	printf("\n");
+}
+
+
 int main(){
 
 	char p1[20], p2[20];
 	int score1=0, score2=0;
 
-	int n,b;
+	int b;
 	int x1, x2, vh;
 	int minicial;
 
@@ -51,20 +86,26 @@ int main(){
 		verificar_int();
 	}
 
-	struct node *rootp1;
+	struct node *rootp1 = malloc(sizeof(struct node)*64);
 	rootp1 = new_node();
 
-	struct node *rootp2;
+	struct node *rootp2 = malloc(sizeof(struct node)*64);
 	rootp2 = new_node();
 
 
 	printf("\n");
 	system("clear");
 
-
-	//matrizes de representação do jogo
 	char player1[n][n];
 	char player2[n][n];
+
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			player1[i][j] = '0';
+			player2[i][j] = '0';
+		}
+	}
+
 
 	int rand;
  	menu_rand();
@@ -89,10 +130,10 @@ int main(){
 
  		int randB = return_randoms(minR,maxR);
 
- 		Coordinate* aa = (Coordinate *) malloc(sizeof(Coordinate*));
+ 		Coordinate* aa = (Coordinate *) malloc(sizeof(Coordinate*)*64);
 	 	piece boatR1[randB+1],boatR2[randB+1];
-	 	piece *boatsR1 = (piece *) malloc(sizeof(piece*));
-	 	piece *boatsR2 = (piece *) malloc(sizeof(piece*));
+	 	piece *boatsR1 = (piece *) malloc(sizeof(piece*)*64);
+	 	piece *boatsR2 = (piece *) malloc(sizeof(piece*)*64);
 	 	bitmap mapasR1[randB+1];
 	 	bitmap mapasR2[randB+1];
 
@@ -132,12 +173,59 @@ int main(){
 				inserir_barcoRANDOMS(rootp2, &boatsR2[j], n);
 		}
 
-		matriz_jogador(rootp1, n);
-		//inorder(rootp1);
+		bool gameOverR = false;
+		bool shotp1R, shotp2R;
+		Coordinate* c1R = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		Coordinate* c2R = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		int xp1R,yp1R,xp2R,yp2R;
+		int optmR1=0, optmR2=0;
 
+		
 
+		while(!gameOverR){	// ciclo que so acaba quando o jogo está terminado
+
+			while(optmR1!=1){
+
+				menu_game(p1);
+				scanf("%d",&optmR1);
+				verificar_int();
+				if(optmR1<1 || optmR1>5){ optmR1=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n"); }
+				if(optmR1==2) { system("clear"); matriz_jogador(rootp1,n); press_any_key(); system("clear"); }
+				if(optmR1==3) { system("clear"); print_shots(player1); press_any_key(); system("clear");}
+				if(optmR1==4) { menu_help(); system("clear"); }
+				if(optmR1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
+ 			}
+ 			optmR1=0;
+
+			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
+			printf("\nx: ");
+			scanf("%d", &xp1R);
+			verificar_int();
+			printf("y: ");
+			scanf("%d", &yp1R);
+			verificar_int();
+			while(xp1R < 0 || xp1R > n-1 || yp1R < 0 || yp1R > n-1){	//testar se a coordenada está dentro do tabuleiro
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+				printf("Invalid Coordinate!\n");
+				printf("\nx: ");
+				scanf("%d", &xp1R);
+				verificar_int();
+				printf("y: ");
+				scanf("%d", &yp1R);
+				verificar_int();
+			}
+
+			c1R = new_coord(xp1R,yp1R);
+			shotp1R = shoot(rootp1,c1R,n/2,n/2);
+
+			if(shotp1R) {
+				score1+=10;
+				player1[c1R->x][c1R->y] = '2';
+			}
+			else { player1[c1R->x][c1R->y] = '1'; }
 
  	}
+ }
 
  	else {
 
@@ -158,10 +246,10 @@ int main(){
 			scanf("%d", &b);
 		}
 
-		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*));
+		Coordinate* a = (Coordinate *) malloc(sizeof(Coordinate*)*64);
 		piece boat1[b+1],boat2[b+1];
-		piece *boats1 = (piece *) malloc(sizeof(piece*));
-		piece *boats2 = (piece *) malloc(sizeof(piece*));
+		piece *boats1 = (piece *) malloc(sizeof(piece*)*64);
+		piece *boats2 = (piece *) malloc(sizeof(piece*)*64);
 		bitmap mapass[b+1];
 
 		//ciclo para criar os barcos P1
@@ -242,7 +330,14 @@ int main(){
 			}
 		}
 
-		matriz_jogador(rootp1, n);
+		//bool acertou = false;
+		//acertou = shoot(rootp1, 5,5,n/2,n/2);
+		//if(acertou) {printf("ACERTOU!\n");}
+		//else {printf("nope\n");}
+		//printf("\n\n");
+		//print_m(p1m, rootp1);
+
+		//matriz_jogador(rootp1, n);
 	
 
 		//p2
@@ -319,6 +414,14 @@ int main(){
 			}
 		}
 	}
+
+	/*
+	printf("\n\n");
+	matriz_jogador(rootp1,n);
+	printf("\n\n");
+	matriz_jogador(rootp2, n);
+	*/
+
 
 	return EXIT_SUCCESS;
 }

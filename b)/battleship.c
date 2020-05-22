@@ -12,7 +12,7 @@ bool pode_inserir(struct node* root, piece boat, int size){
   	return false;
   }
 
-  CoordinateD meio = new_coordD(size/2,size/2);
+  //CoordinateD meio = new_coordD(size/2,size/2);
 
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
@@ -37,12 +37,14 @@ void inserir_barco(struct node* root, piece *boat, int size){
 	    	for(int j=0; j<5; j++){
 	       		if(boat-> mb -> m[i][j] == '1'){
 
-	       			Coordinate *a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
-	       			CoordinateD meio = new_coordD(size/2,size/2);
-	       			struct node* leaf = new_leaf(a,boat);
+	       			Coordinate *a = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+	       			a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
+	       			//CoordinateD meio = new_coordD(size/2,size/2);
+	       			struct node* leaf = malloc(sizeof(struct node)*64);
+	       			leaf = new_leaf(a,boat);
 	        		insert2(root, leaf, size/2,size/2);
 
-	          		//printf("point (%d,%d) ", xx+i,yy+j);
+	          		//printf("point (%d,%d) ", boat->c.x-2+i,boat->c.y-2+j);
 	        	}
 	    	}
 	  	}
@@ -56,10 +58,14 @@ void inserir_barco(struct node* root, piece *boat, int size){
 		scanf("%d", &x1);
 		printf("y: ");
 		scanf("%d", &y1);
-		Coordinate* a  = new_coord(x1,y1);
+		Coordinate* a  = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		a = new_coord(x1,y1);
 		boat->c = *a;
 		inserir_barco(root, boat, size);
 	}
+
+	inorder(root);
+	printf("\n");
 }
 
 
@@ -72,7 +78,7 @@ bool pode_inserirRANDOMS(struct node* root, piece boat, int size){
   	return false;
   }
 
-  CoordinateD meio = new_coordD(size/2,size/2);
+  //CoordinateD meio = new_coordD(size/2,size/2);
 
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
@@ -95,9 +101,11 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 	    	for(int j=0; j<5; j++){
 	       		if(boat-> mb -> m[i][j] == '1'){
 
-	       			Coordinate *a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
-	       			CoordinateD meio = new_coordD(size/2,size/2);
-	       			struct node* leaf = new_leaf(a,boat);
+	       			Coordinate *a = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+	       			a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
+	       			//CoordinateD meio = new_coordD(size/2,size/2);
+	       			struct node* leaf = malloc(sizeof(struct node)*64);
+	       			leaf = new_leaf(a,boat);
 	        		insert2(root, leaf, size/2,size/2);
 	        	}
 	    	}
@@ -109,21 +117,34 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 		int x1,y1;
 		x1 = return_randoms(5,size-5);
 		y1 = return_randoms(5,size-5);
-		Coordinate* a  = new_coord(x1,y1);
+		Coordinate* a  = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		a = new_coord(x1,y1);
 		boat->c = *a;
 		inserir_barcoRANDOMS(root, boat, size);
 	}
 }
 
+/*
+
+char[][] matriz(struct node *root, int size){
+
+	char m[size][size];
+
+	for(int i=0; i<size,i++){
+		for(int j=0; j<size; j++){
+			if(!contains22(root, i, j, size/2,size/2)){
+				m[i][j] = 0;
+			}
+			else { m[i][j] = 1; }
+		}
+	}
+
+	return m;
+
+}*/
 
 //funcao que "transforma" a árvore numa matriz para representar
 void matriz_jogador(struct node *root, int size){
-
-	CoordinateD meio = new_coordD(size/2,size/2);
-
-
-	//inorder(root);
-
 
 	for(int i=0; i < size; i++){
 		if(i<10) printf(" %d",i);																						//
@@ -134,12 +155,11 @@ void matriz_jogador(struct node *root, int size){
 				printf(" 0 ");
 				printf("\033[0m");
 			}
-			else { printf(" 1 "); }
+			else if( return_fieldShot(root,i,j,size/2,size/2) == 2) {printf("\033[0;31m"); printf(" X "); printf("\033[0m");}
+			else { printf(" 1 ");}
 		}
 		printf("\n");
 	}
-
-
 
 	printf("##");
 	for(int j=0;j<size;j++){
@@ -148,6 +168,30 @@ void matriz_jogador(struct node *root, int size){
 	}
 	printf("\n");
 
+}
 
+void print_m(game *tabuleiro, struct node *root){
 
+	printf("\n");
+	for(int i=0; i < tabuleiro->size ; i++){
+		if(i<10) printf(" %d",i);																						//
+		if(i>=10) printf("%d",i);
+		for(int j=0; j< tabuleiro->size;j++){
+
+			if(contains22(root, i, j, tabuleiro->size/2,tabuleiro->size/2)){
+				if((tabuleiro -> board[i][j].field_shot == 2)) {printf("\033[0;31m"); printf(" X "); printf("\033[0m");}
+				else { printf(" 1 "); }
+			}
+			else {printf("\033[1;34m");
+				printf(" 0 ");
+				printf("\033[0m");}																							// posicao dos barcos
+		}
+		printf("\n");
+	}
+	printf("##");																											
+	for(int j=0;j<tabuleiro->size;j++){
+		if(j<10) printf(" %d ", j);
+		if(j>=10) printf(" %d",j);
+	}
+	printf("\n");
 }

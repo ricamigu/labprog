@@ -38,6 +38,21 @@ typedef struct {
 } piece;
 
 
+typedef struct {
+
+	char pos;
+	int field_shot;
+
+} Cell;
+
+typedef struct {
+
+	int size;
+	Cell** board;
+
+} game;
+
+
 /*
 //Cell
 typedef struct {
@@ -64,7 +79,7 @@ struct node {
 	//leaf
 	Coordinate *c;
 	piece *peca;
-	//int field_shot;
+	int field_shot;
 
 	//internal
 	struct node *NW;
@@ -131,9 +146,11 @@ struct node* clear_tree(struct node *root);
 void delete_tree(struct node *root);
 void matriz_jogador(struct node *root, int size);
 struct node* find(struct node *root, int x, int y, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-int return_field_shot(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool shoot(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
+bool shoot(struct node* root, Coordinate *coord, double l1,double l2);
 struct node* insert2(struct node* root, struct node* coord, double l1, double l2);
 bool contains22(struct node* root, int x1, int y1, double l1,double l2);
+void create_matriz(game *tabuleiro);
+void print_m(game *tabuleiro, struct node *root);
+int return_fieldShot(struct node* root, int x1, int y1, double l1,double l2);
 
 #endif

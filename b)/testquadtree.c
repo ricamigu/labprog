@@ -72,9 +72,9 @@ int main(){
 	insert2(root, leaf2, 20,20);
 	insert2(root, leaf3, 20,20);
 	insert2(root, leaf4, 20,20);
-	insert2(root, leaf5, 20,20);
-	insert2(root, leaf6, 20,20);
-	insert2(root, leafcentro, 20,20);
+	//insert2(root, leaf5, 20,20);
+	//insert2(root, leaf6, 20,20);
+	//insert2(root, leafcentro, 20,20);
 	insert2(root, leafum, 20,20);
 
 
@@ -85,7 +85,7 @@ int main(){
 
 	//inorder(root);
 
-	//print_tree(root); printf("\n");
+	print_tree(root); printf("\n");
 
 	//printf("\nnos: %d\n", number_nodes(root));
 	
