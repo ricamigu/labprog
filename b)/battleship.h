@@ -145,7 +145,7 @@ void delete_tree(struct node *root);
 struct node* clear_tree(struct node *root);
 struct node* insert(struct node* root, struct node* coord, double l1, double l2);
 
-
+//battleship.c
 bool pode_inserir(struct node* root, piece boat, int size);
 void inserir_barco(struct node* root, piece *boat, int size);
 bool pode_inserirRANDOMS(struct node* root, piece boat, int size);
