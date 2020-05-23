@@ -267,8 +267,11 @@ void print_tree(struct node* root){
 
 
 struct node* clear_tree(struct node *root){
-	return root = new_node();
+	struct node *new_root = malloc(sizeof(struct node)*64);
+	new_root = new_node();
+	return new_root;
 }
+
 
 
 void delete_tree(struct node *root){
