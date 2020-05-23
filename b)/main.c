@@ -620,6 +620,8 @@ int main(){
 	printf("\n\n");
 	matriz_jogador(rootp2, n);
 	*/
+	delete_tree(rootp1);
+	delete_tree(rootp2);
 
 	return EXIT_SUCCESS;
 }
