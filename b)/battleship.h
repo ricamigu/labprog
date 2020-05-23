@@ -123,6 +123,7 @@ bitmap switch_functionRANDOMS(int opcao,int orientacao);
 void alterar_bitmap(struct node* leaf, int x1, int y1);
 //tests
 void print_bitmapas(bitmap* matriz);
+bool afundado(bitmap* matriz);
 
 //random numbers
 int return_randoms(int lower, int higher);

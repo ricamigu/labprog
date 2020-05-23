@@ -168,6 +168,19 @@ void alterar_bitmap(struct node* leaf, int x1, int y1){
 
 }
 
+bool afundado(bitmap* matriz){
+
+  for(int i=0; i<5; i++){
+    for(int j=0; j<5; j++){
+        if(matriz->m[i][j] == '1')
+          return false;
+    }
+  }
+
+  return true;
+
+}
+
 
 
 //função switch para selecionar a opção do jogador quanto ao barco e à rotação do mesmo
