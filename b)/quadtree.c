@@ -157,6 +157,9 @@ bool contains2(struct node* root, int x1, int y1, double l1,double l2){
 			else {
 				root->field_shot = 2;
 				printf("Shot hit!\n");
+				alterar_bitmap(root, x1, y1);
+				//print_bitmapas(root->peca->mb);
+				printf("\n");
 				return true;
 			}
 		}
@@ -216,24 +219,6 @@ bool contains_inef(struct node *root, int x1, int y1){
 
 }
 
-
-bool shoot(struct node* root, Coordinate *coord, double l1,double l2){
-
-	if(contains2(root,coord->x,coord->y,l1,l2)) return true;
-
-	printf("Missed shot!\n");
-	return false;
-}
-
-
-bool isFinished(struct node *root, int shots_hit){
-
-	if(number_leaves(root) == shots_hit)
-		return true;
-
-	return false;
-
-}
 
 
 int number_leaves(struct node* root){

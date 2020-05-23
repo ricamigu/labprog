@@ -124,24 +124,15 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 	}
 }
 
-/*
+bool shoot(struct node* root, Coordinate *coord, double l1,double l2){
 
-char[][] matriz(struct node *root, int size){
+	if(contains2(root,coord->x,coord->y,l1,l2)) return true;
 
-	char m[size][size];
+	printf("Missed shot!\n");
+	return false;
+}
 
-	for(int i=0; i<size,i++){
-		for(int j=0; j<size; j++){
-			if(!contains22(root, i, j, size/2,size/2)){
-				m[i][j] = 0;
-			}
-			else { m[i][j] = 1; }
-		}
-	}
 
-	return m;
-
-}*/
 
 //funcao que "transforma" a árvore numa matriz para representar
 void matriz_jogador(struct node *root, int size){
@@ -170,29 +161,11 @@ void matriz_jogador(struct node *root, int size){
 
 }
 
-/*
-void print_m(game *tabuleiro, struct node *root){
+bool isFinished(struct node *root, int shots_hit){
 
-	printf("\n");
-	for(int i=0; i < tabuleiro->size ; i++){
-		if(i<10) printf(" %d",i);																						//
-		if(i>=10) printf("%d",i);
-		for(int j=0; j< tabuleiro->size;j++){
+	if(number_leaves(root) == shots_hit)
+		return true;
 
-			if(contains22(root, i, j, tabuleiro->size/2,tabuleiro->size/2)){
-				if((tabuleiro -> board[i][j].field_shot == 2)) {printf("\033[0;31m"); printf(" X "); printf("\033[0m");}
-				else { printf(" 1 "); }
-			}
-			else {printf("\033[1;34m");
-				printf(" 0 ");
-				printf("\033[0m");}																							// posicao dos barcos
-		}
-		printf("\n");
-	}
-	printf("##");																											
-	for(int j=0;j<tabuleiro->size;j++){
-		if(j<10) printf(" %d ", j);
-		if(j>=10) printf(" %d",j);
-	}
-	printf("\n");
-}*/
+	return false;
+
+}

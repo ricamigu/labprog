@@ -152,6 +152,24 @@ void print_bitmapas(bitmap* matriz){
       printf("\n");
 }
 
+void alterar_bitmap(struct node* leaf, int x1, int y1){
+
+  int xx = leaf->peca->c.x-2;
+  int yy = leaf->peca->c.y-2;
+
+
+  for(int i=0; i<5; i++){
+    for(int j=0; j<5; j++){
+      if(xx+i == x1 && yy+j == y1){
+        if(leaf->peca->mb->m[i][j] == '1') leaf->peca->mb->m[i][j] = '2';
+      }
+    }
+  }
+
+}
+
+
+
 //função switch para selecionar a opção do jogador quanto ao barco e à rotação do mesmo
 bitmap switch_function(int opcao,int orientacao){
 
