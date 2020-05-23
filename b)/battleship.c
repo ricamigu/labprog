@@ -115,8 +115,8 @@ void inserir_barcoRANDOMS(struct node* root, piece *boat, int size){
 	else {
 		// caso nao possa inserir, volta a pedir coordenadas ao jogador
 		int x1,y1;
-		x1 = return_randoms(5,size-5);
-		y1 = return_randoms(5,size-5);
+		x1 = return_randoms(2,size-3);
+		y1 = return_randoms(2,size-3);
 		Coordinate* a  = (Coordinate *) malloc(sizeof(Coordinate*)*64);
 		a = new_coord(x1,y1);
 		boat->c = *a;
