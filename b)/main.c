@@ -161,8 +161,8 @@ int main(){
 	 	// RANDOMS PLAYER 2
 	 	for(int j=1; j<=randB; j++){
 	 			int optR2 = return_randoms(1,5);			// criar numeros random para todos os parametros de inserir o barco
-	 			int xR2 = return_randoms(3,(n-3));
-	 			int yR2 = return_randoms(3,(n-3));
+	 			int xR2 = return_randoms(2,(n-3));
+	 			int yR2 = return_randoms(2,(n-3));
 		 		aa = new_coord(xR2,yR2);
 		 		boatsR2[j].c = *aa;
 		 		int vhR2 = return_randoms(0,3);
