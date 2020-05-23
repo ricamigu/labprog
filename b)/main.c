@@ -98,6 +98,8 @@ int main(){
 
 	char player1[n][n];
 	char player2[n][n];
+	int shots_hit1=0;
+	int shots_hit2=0;
 
 	for(int i=0;i<n;i++){
 		for(int j=0;j<n;j++){
@@ -215,17 +217,89 @@ int main(){
 				verificar_int();
 			}
 
+			while( player1[xp1R][yp1R] != '0'){
+					printf("Shot already taken!\n");
+					printf("\nx: ");
+					scanf("%d", &xp1R);
+					verificar_int();
+					printf("y: ");
+					scanf("%d", &yp1R);
+					verificar_int();
+				}
+
 			c1R = new_coord(xp1R,yp1R);
-			shotp1R = shoot(rootp1,c1R,n/2,n/2);
+			shotp1R = shoot(rootp2,c1R,n/2,n/2);
 
 			if(shotp1R) {
 				score1+=10;
 				player1[c1R->x][c1R->y] = '2';
+				shots_hit1++;
 			}
-			else { player1[c1R->x][c1R->y] = '1'; }
+			else { if(player1[c1R->x][c1R->y] == '0') player1[c1R->x][c1R->y] = '1'; }
 
+			if(isFinished(rootp2,shots_hit1)){		// testar se o jogo acabou e p1 ganhou
+				printf("Player %s wins with %d points!\n", p1, score1);
+				gameOverR=true;
+			}
+
+			if(!gameOverR){
+
+				while(optmR2!=1){
+
+					menu_game(p2);
+					scanf("%d",&optmR2);
+					verificar_int();
+					if(optmR2<1 || optmR2 > 5) { optmR2=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
+					if(optmR2==2) { system("clear"); matriz_jogador(rootp2,n); press_any_key(); system("clear");}
+					if(optmR2==3) { system("clear"); print_shots(player2); press_any_key();system("clear"); }
+					if(optmR2==4) { menu_help(); }
+					if(optmR2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
+
+	 			}
+	 			optmR2=0;
+
+				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+				printf("\nx: ");
+				scanf("%d", &xp2R);
+				printf("y: ");
+				scanf("%d", &yp2R);
+				while(xp2R < 0 || xp2R > n-1 || yp2R < 0 || yp2R > n-1){
+					verificar_int();
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+					printf("Invalid Coordinate!\n");
+					printf("\nx: ");
+					scanf("%d", &xp2R);
+					printf("y: ");
+					scanf("%d", &yp2R);
+				}
+
+				while( player2[xp2R][yp2R] != '0'){
+					printf("Shot already taken!\n");
+					printf("\nx: ");
+					scanf("%d", &xp2R);
+					verificar_int();
+					printf("y: ");
+					scanf("%d", &yp2R);
+					verificar_int();
+				}
+
+				c2R = new_coord(xp2R,yp2R);
+				shotp2R = shoot(rootp1,c2R,n/2,n/2);
+
+				if(shotp2R) {
+					score1+=10;
+					player2[c2R->x][c2R->y] = '2';
+					shots_hit2++;
+				}
+				else { if(player2[c2R->x][c2R->y] == '0') player2[c2R->x][c2R->y] = '1'; }
+
+				if(isFinished(rootp1,shots_hit2)){		// testar se o jogo acabou e p1 ganhou
+					printf("Player %s wins with %d points!\n", p2, score2);
+					gameOverR=true;
+				}
+			}
  	}
- }
+ }// fim do random
 
  	else {
 
@@ -413,6 +487,131 @@ int main(){
 				clear_tree(rootp2);	
 			}
 		}
+
+		bool gameOver = false;
+		bool shotp1, shotp2;
+		Coordinate* c1 = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		Coordinate* c2 = (Coordinate *) malloc(sizeof(Coordinate*)*64);
+		int xp1,yp1,xp2,yp2;
+		int optm1=0, optm2=0;
+
+		
+
+		while(!gameOver){	// ciclo que so acaba quando o jogo está terminado
+
+			while(optm1!=1){
+
+				menu_game(p1);
+				scanf("%d",&optm1);
+				verificar_int();
+				if(optm1<1 || optm1>5){ optm1=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n"); }
+				if(optm1==2) { system("clear"); matriz_jogador(rootp1,n); press_any_key(); system("clear"); }
+				if(optm1==3) { system("clear"); print_shots(player1); press_any_key(); system("clear");}
+				if(optm1==4) { menu_help(); system("clear"); }
+				if(optm1==5) { printf("\nPlayer %s wins!\n", p2); return EXIT_SUCCESS;}
+ 			}
+ 			optm1=0;
+
+			printf("\nPlayer %s choose a coordinate to shoot: ", p1);
+			printf("\nx: ");
+			scanf("%d", &xp1);
+			verificar_int();
+			printf("y: ");
+			scanf("%d", &yp1);
+			verificar_int();
+			while(xp1 < 0 || xp1 > n-1 || yp1 < 0 || yp1 > n-1){	//testar se a coordenada está dentro do tabuleiro
+				printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+				printf("Invalid Coordinate!\n");
+				printf("\nx: ");
+				scanf("%d", &xp1);
+				verificar_int();
+				printf("y: ");
+				scanf("%d", &yp1);
+				verificar_int();
+			}	
+
+			while( player1[xp1][yp1] != '0'){
+				printf("Shot already taken!\n");
+				printf("\nx: ");
+				scanf("%d", &xp1);
+				verificar_int();
+				printf("y: ");
+				scanf("%d", &yp1);
+				verificar_int();
+			}
+
+			c1 = new_coord(xp1,yp1);
+			shotp1 = shoot(rootp2,c1,n/2,n/2);
+
+			if(shotp1) {
+				score1+=10;
+				player1[c1->x][c1->y] = '2';
+				shots_hit1++;
+			}
+			else { if(player1[c1->x][c1->y] == '0') player1[c1->x][c1->y] = '1'; }
+
+			if(isFinished(rootp2,shots_hit1)){		// testar se o jogo acabou e p1 ganhou
+				printf("Player %s wins with %d points!\n", p1, score1);
+				gameOver=true;
+			}
+
+			if(!gameOver){
+
+				while(optm2!=1){
+
+					menu_game(p2);
+					scanf("%d",&optm2);
+					verificar_int();
+					if(optm2<1 || optm2 > 5) { optm2=0; printf("\033[0;31m"); printf("\nError: "); printf("\033[0m"); printf("Invalid option!\n");}
+					if(optm2==2) { system("clear"); matriz_jogador(rootp2,n); press_any_key(); system("clear");}
+					if(optm2==3) { system("clear"); print_shots(player2); press_any_key();system("clear"); }
+					if(optm2==4) { menu_help(); }
+					if(optm2==5) { printf("\nPlayer %s wins!\n", p1); return EXIT_SUCCESS;}
+
+	 			}
+	 			optm2=0;
+
+				printf("\nPlayer %s choose a coordinate to shoot: ", p2);
+				printf("\nx: ");
+				scanf("%d", &xp2);
+				printf("y: ");
+				scanf("%d", &yp2);
+				while(xp2 < 0 || xp2 > n-1 || yp2 < 0 || yp2 > n-1){
+					verificar_int();
+					printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");
+					printf("Invalid Coordinate!\n");
+					printf("\nx: ");
+					scanf("%d", &xp2);
+					printf("y: ");
+					scanf("%d", &yp2);
+				}
+
+				while( player2[xp2][yp2] != '0'){
+					printf("Shot already taken!\n");
+					printf("\nx: ");
+					scanf("%d", &xp2);
+					verificar_int();
+					printf("y: ");
+					scanf("%d", &yp2);
+					verificar_int();
+				}
+
+				c2 = new_coord(xp2,yp2);
+				shotp2 = shoot(rootp1,c2,n/2,n/2);
+
+				if(shotp2) {
+					score1+=10;
+					player2[c2->x][c2->y] = '2';
+					shots_hit2++;
+				}
+				else { if(player2[c2->x][c2->y] == '0') player2[c2->x][c2->y] = '1'; }
+
+				if(isFinished(rootp1,shots_hit2)){		// testar se o jogo acabou e p1 ganhou
+					printf("Player %s wins with %d points!\n", p2, score2);
+					gameOver=true;
+				}
+			}
+ 		}
 	}
 
 	/*
@@ -421,7 +620,6 @@ int main(){
 	printf("\n\n");
 	matriz_jogador(rootp2, n);
 	*/
-
 
 	return EXIT_SUCCESS;
 }

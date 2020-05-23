@@ -131,10 +131,7 @@ Coordinate* new_coord(int a, int b);
 CoordinateD new_coordD(double a, double b);
 struct node* new_node();
 struct node* new_leaf(Coordinate *coord, piece *boat);
-struct node* insert(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool contains(struct node *root, struct node *coord, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool containsC(struct node *root, int x1, int y1, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
-bool contains2(struct node *root, int x1, int y1);
+
 void inorder(struct node *root);
 int number_leaves(struct node* root);
 void print_tree(struct node* root);
@@ -147,10 +144,13 @@ void delete_tree(struct node *root);
 void matriz_jogador(struct node *root, int size);
 struct node* find(struct node *root, int x, int y, CoordinateD particao, double limxi, double limxs, double limyi, double limys);
 bool shoot(struct node* root, Coordinate *coord, double l1,double l2);
-struct node* insert2(struct node* root, struct node* coord, double l1, double l2);
-bool contains22(struct node* root, int x1, int y1, double l1,double l2);
+struct node* insert(struct node* root, struct node* coord, double l1, double l2);
+bool contains(struct node* root, int x1, int y1, double l1,double l2);
+bool contains2(struct node* root, int x1, int y1, double l1,double l2);
+bool contains_inef(struct node *root, int x1, int y1);
 void create_matriz(game *tabuleiro);
 void print_m(game *tabuleiro, struct node *root);
 int return_fieldShot(struct node* root, int x1, int y1, double l1,double l2);
+bool isFinished(struct node *root, int shots_hit);
 
 #endif

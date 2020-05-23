@@ -53,7 +53,7 @@ struct node* new_leaf(Coordinate *coord, piece *boat){
 }
 
 
-struct node* insert2(struct node* root, struct node* coord, double l1,double l2){
+struct node* insert(struct node* root, struct node* coord, double l1,double l2){
 
 	if(root==NULL){
 		root = coord;
@@ -63,16 +63,16 @@ struct node* insert2(struct node* root, struct node* coord, double l1,double l2)
 	if(root->tag == isInternal){
 
 		if( coord->c->x < l1 && coord->c->y < l2)
-			root->NW = insert2(root->NW,coord,l1/2,l2/2);
+			root->NW = insert(root->NW,coord,l1/2,l2/2);
 
 		if( coord->c->x < l1 && coord->c->y  >= l2)
-			root->NE = insert2(root->NE,coord,l1/2,l2+l2/2);
+			root->NE = insert(root->NE,coord,l1/2,l2+l2/2);
 
 		if( coord->c->x >= l1 && coord->c->y  < l2)
-			root->SW = insert2(root->SW,coord,l1+l1/2,l2/2);
+			root->SW = insert(root->SW,coord,l1+l1/2,l2/2);
 
 		if( coord->c->x >= l1 && coord->c->y  >= l2)
-			root->SE = insert2(root->SE,coord,l1+l1/2,l2+l2/2);
+			root->SE = insert(root->SE,coord,l1+l1/2,l2+l2/2);
 	}
 
 
@@ -83,8 +83,8 @@ struct node* insert2(struct node* root, struct node* coord, double l1,double l2)
 		struct node *temp = malloc(sizeof(struct node)*64);
 		temp = new_leaf(root->c,root->peca);
 		root = new;
-		insert2(root,temp,l1,l2);
-		insert2(root,coord,l1,l2);
+		insert(root,temp,l1,l2);
+		insert(root,coord,l1,l2);
 
 	}
 	return root;
@@ -93,7 +93,7 @@ struct node* insert2(struct node* root, struct node* coord, double l1,double l2)
 
 
 
-bool contains22(struct node* root, int x1, int y1, double l1,double l2){
+bool contains(struct node* root, int x1, int y1, double l1,double l2){
 
 	if(root==NULL) return false;
 
@@ -104,16 +104,16 @@ bool contains22(struct node* root, int x1, int y1, double l1,double l2){
 	if(root->tag == isInternal){
 
 		if( x1 < l1 && y1 < l2)
-			return contains22(root->NW,x1,y1,l1/2,l2/2);
+			return contains(root->NW,x1,y1,l1/2,l2/2);
 
 		if( x1 < l1 && y1 >= l2)
-			return contains22(root->NE,x1,y1,l1/2,l2+l2/2);
+			return contains(root->NE,x1,y1,l1/2,l2+l2/2);
 
 		if( x1 >= l1 && y1 < l2)
-			return contains22(root->SW,x1,y1,l1+l1/2,l2/2);
+			return contains(root->SW,x1,y1,l1+l1/2,l2/2);
 
 		if( x1 >= l1 && y1 >= l2)
-			return contains22(root->SE,x1,y1,l1+l1/2,l2+l2/2);
+			return contains(root->SE,x1,y1,l1+l1/2,l2+l2/2);
 	}
 
 	if(root->tag == isLeaf){
@@ -125,7 +125,7 @@ bool contains22(struct node* root, int x1, int y1, double l1,double l2){
 
 
 
-bool contains21(struct node* root, int x1, int y1, double l1,double l2){
+bool contains2(struct node* root, int x1, int y1, double l1,double l2){
 
 	if(root==NULL) return false;
 
@@ -136,22 +136,22 @@ bool contains21(struct node* root, int x1, int y1, double l1,double l2){
 	if(root->tag == isInternal){
 
 		if( x1 < l1 && y1 < l2)
-			return contains21(root->NW,x1,y1,l1/2,l2/2);
+			return contains2(root->NW,x1,y1,l1/2,l2/2);
 
 		if( x1 < l1 && y1 >= l2)
-			return contains21(root->NE,x1,y1,l1/2,l2+l2/2);
+			return contains2(root->NE,x1,y1,l1/2,l2+l2/2);
 
 		if( x1 >= l1 && y1 < l2)
-			return contains21(root->SW,x1,y1,l1+l1/2,l2/2);
+			return contains2(root->SW,x1,y1,l1+l1/2,l2/2);
 
 		if( x1 >= l1 && y1 >= l2)
-			return contains21(root->SE,x1,y1,l1+l1/2,l2+l2/2);
+			return contains2(root->SE,x1,y1,l1+l1/2,l2+l2/2);
 	}
 
 	if(root->tag == isLeaf){
 		if(root->c->x == x1 && root->c->y == y1){
 			if(root->field_shot == 2){
-				printf("Shot already taken!\n");
+				//printf("Shot already taken!\n");
 				return false;
 			}
 			else {
@@ -160,7 +160,9 @@ bool contains21(struct node* root, int x1, int y1, double l1,double l2){
 				return true;
 			}
 		}
+
 	}
+
 	return false;
 }
 
@@ -197,7 +199,7 @@ int return_fieldShot(struct node* root, int x1, int y1, double l1,double l2){
 
 
 //ineficiente, percorre a arvore toda (para teste apenas)
-bool contains2(struct node *root, int x1, int y1){
+bool contains_inef(struct node *root, int x1, int y1){
 
 	if(root==NULL) return false;
 
@@ -210,22 +212,30 @@ bool contains2(struct node *root, int x1, int y1){
 		}
     }
 
-    return contains2(root->NW,x1,y1) || contains2(root->NE,x1,y1) || contains2(root->SW,x1,y1) || contains2(root->SE,x1,y1);
+    return contains_inef(root->NW,x1,y1) || contains_inef(root->NE,x1,y1) || contains_inef(root->SW,x1,y1) || contains_inef(root->SE,x1,y1);
 
 }
 
 
 bool shoot(struct node* root, Coordinate *coord, double l1,double l2){
 
-	if(contains21(root,coord->x,coord->y,l1,l2)) return true;
+	if(contains2(root,coord->x,coord->y,l1,l2)) return true;
 
 	printf("Missed shot!\n");
 	return false;
 }
 
 
+bool isFinished(struct node *root, int shots_hit){
 
-//teste
+	if(number_leaves(root) == shots_hit)
+		return true;
+
+	return false;
+
+}
+
+
 int number_leaves(struct node* root){
 
 	int cont=0;
