@@ -38,7 +38,8 @@ ________________________________________________________________________________
 _________________________________________________________________________________________
 
 Esta primeira parte da explicação vai apenas explicar as funções e ficheiros relativos ao
-ponto b). As explicações relativas ao a), caso necessário, estão no fim do ficheiro.
+ponto b). Os ficheiros já utilizados no a) e as explicações relativas ao a), caso necessário, 
+estão no fim do ficheiro, depois da explicação do b).
 
 O primeiro menu no jogo é o menu_inicial() com 3 instruções:
 
@@ -150,8 +151,8 @@ folha ou um nó interno (isleaf, isInternal). No caso de ser uma folha, contem o
 posição; contem  também um apontador para um barco e um field_shot (o que antes estava contido na Cell).
 No caso de ser um nó interno, contem 4 apontadores para os quadrantes (NW,NE,SW,SE).
 
-O resto do battleship.h contém as declarações das funções do jogo que vão ser explicadas
-nos ficheiros.
+O resto do battleship.h contém as declarações das funções do jogo relativas ao jogo que vão ser 
+explicadas nos ficheiros correspondetes.
 
  ____________
 |            |
