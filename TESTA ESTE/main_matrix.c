@@ -28,7 +28,7 @@ int main(){
 
 	//menu inicial
 	while(minicial != 1){
-		menu_inicial();
+		menu_inicial_matrix();
 		printf("> ");
 		scanf("%d",&minicial);
 		verificar_int();

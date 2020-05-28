@@ -78,11 +78,11 @@ void press_any_key(){
 
 
 
-void menu_inicial(){
+void menu_inicial_matrix(){
 
 	system("clear");
 	printf("*--------------------------------------------------------------------------*\n");
-	printf("|                              Battleship Game                             |\n");
+	printf("|                        Battleship Game - Matrix                          |\n");
 	printf("*--------------------------------------------------------------------------*\n");
 	printf("| 1) Play Game                                                             |\n");
 	printf("|                                                                          |\n");
@@ -90,6 +90,21 @@ void menu_inicial(){
 	printf("|                                                                          |\n");
 	printf("| 3) Quit                                                                  |\n");
 	printf("*--------------------------------------------------------------------------*\n");
+ 
+}
+
+void menu_inicial_quad(){
+
+    system("clear");
+    printf("*--------------------------------------------------------------------------*\n");
+    printf("|                        Battleship Game - QuadTree                        |\n");
+    printf("*--------------------------------------------------------------------------*\n");
+    printf("| 1) Play Game                                                             |\n");
+    printf("|                                                                          |\n");
+    printf("| 2) Instructions                                                          |\n");
+    printf("|                                                                          |\n");
+    printf("| 3) Quit                                                                  |\n");
+    printf("*--------------------------------------------------------------------------*\n");
  
 }
 

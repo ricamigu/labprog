@@ -101,7 +101,8 @@ extern int score1,score2;
 /***** Construtores *****/
 
 //menus.c
-void menu_inicial();
+void menu_inicial_matrix();
+void menu_inicial_quad();
 void print_menuB();
 void menu_inicial_instructions();
 void menu_rand();
