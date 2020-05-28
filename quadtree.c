@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "battleship.h"
 
+// cria nova coordenada
 Coordinate* new_coord(int a, int b) {
 	Coordinate* c = (Coordinate *) malloc(sizeof(Coordinate*));
 	c -> x = a;
@@ -9,6 +10,7 @@ Coordinate* new_coord(int a, int b) {
 	return c;
 }
 
+// cria nova coordenada do tipo double
 CoordinateD new_coordD(double a, double b) {
 	CoordinateD c;
 	c.x = a;
@@ -16,7 +18,7 @@ CoordinateD new_coordD(double a, double b) {
 	return c;
 }
 
-
+// inicialização dos nós internos da árvore
 struct node* new_node(){
 
 	struct node *new = malloc(sizeof(struct node)*64);
@@ -33,6 +35,7 @@ struct node* new_node(){
 	return new;
 }
 
+//inicialização dos nós folha da árvore
 struct node* new_leaf(Coordinate *coord, piece *boat){
 
 	struct node *new = malloc(sizeof(struct node)*64);
@@ -51,30 +54,36 @@ struct node* new_leaf(Coordinate *coord, piece *boat){
 
 }
 
-
+//funcao de insert da árvore
 struct node* insert(struct node* root, struct node* coord, double l1,double l2){
 
+	// caso nao exista nenhum ponto no quadrante, insere
 	if(root==NULL){
 		root = coord;
 		return root;
 	}
 
+	// caso seja um nó interno, é necessário ver em que quadrante va inserir
 	if(root->tag == isInternal){
 
+		//NW
 		if( coord->c->x < l1 && coord->c->y < l2)
 			root->NW = insert(root->NW,coord,l1/2,l2/2);
 
+		//NE
 		if( coord->c->x < l1 && coord->c->y  >= l2)
 			root->NE = insert(root->NE,coord,l1/2,l2+l2/2);
 
+		//SW
 		if( coord->c->x >= l1 && coord->c->y  < l2)
 			root->SW = insert(root->SW,coord,l1+l1/2,l2/2);
 
+		//SE
 		if( coord->c->x >= l1 && coord->c->y  >= l2)
 			root->SE = insert(root->SE,coord,l1+l1/2,l2+l2/2);
 	}
 
-
+	// se o quadrante já contiver um nó folha, é necessário substituir esse nó por um interno e colocar as coordenadas nas posições corretas
 	if(root->tag == isLeaf){
 
 		struct node *new = malloc(sizeof(struct node)*64);
@@ -91,15 +100,16 @@ struct node* insert(struct node* root, struct node* coord, double l1,double l2){
 }
 
 
-
+// funcao que verifica se a árvore contem uma coordenada dada
 bool contains(struct node* root, int x1, int y1, double l1,double l2){
 
+	// nao encontrou
 	if(root==NULL) return false;
 
 	double xx = x1;
 	double yy = y1;
 
-
+	// vai verificar o quadrante que tem de verificar a seguir
 	if(root->tag == isInternal){
 
 		if( x1 < l1 && y1 < l2)
@@ -115,6 +125,7 @@ bool contains(struct node* root, int x1, int y1, double l1,double l2){
 			return contains(root->SE,x1,y1,l1+l1/2,l2+l2/2);
 	}
 
+	// caso seja um nó folha e não é NULL, vai verificar se as coordenadas são iguais
 	if(root->tag == isLeaf){
 		if(root->c->x == x1 && root->c->y == y1)
 			return true;
@@ -123,7 +134,7 @@ bool contains(struct node* root, int x1, int y1, double l1,double l2){
 }
 
 
-
+// verifica se o ponto existe e modifica o field_shot (utilizado na funcao shoot)
 bool contains2(struct node* root, int x1, int y1, double l1,double l2){
 
 	if(root==NULL) return false;
@@ -156,9 +167,6 @@ bool contains2(struct node* root, int x1, int y1, double l1,double l2){
 			else {
 				root->field_shot = 2;
 				printf("Shot hit!\n");
-				//alterar_bitmap(root, x1, y1);
-				//print_bitmapas(root->peca->mb);
-				//if(afundado(root->peca->mb)) printf("The ship sunk!\n");
 				printf("\n");
 				return true;
 			}
@@ -169,6 +177,7 @@ bool contains2(struct node* root, int x1, int y1, double l1,double l2){
 	return false;
 }
 
+// retorna o field_shot de uma posição (utilizado no print da árvore no formato de matriz)
 int return_fieldShot(struct node* root, int x1, int y1, double l1,double l2){
 
 	if(root==NULL) return 0;
@@ -220,7 +229,7 @@ bool contains_inef(struct node *root, int x1, int y1){
 }
 
 
-
+// retorna o número de folhas
 int number_leaves(struct node* root){
 
 	int cont=0;
@@ -233,8 +242,8 @@ int number_leaves(struct node* root){
 
 }
 
+// dá print dos nós da árvore (teste)
 int contador=1;
-
 void inorder(struct node *root)
 {
     if(root!=NULL) // checking if the root is not null
@@ -248,7 +257,7 @@ void inorder(struct node *root)
 }
 
 
-
+// dá print da árvore toda (teste)
 void print_tree(struct node* root){
 
 	if(root==NULL) { printf(" N "); return; }
@@ -264,14 +273,14 @@ void print_tree(struct node* root){
 
 }
 
-
+// limpa a root da árvore (teste)
 struct node* clear_tree(struct node *root){
 	struct node *new_root = malloc(sizeof(struct node)*64);
 	new_root = new_node();
 	return new_root;
 }
 
-
+// apaga a árvore toda
 void delete_tree(struct node *root){
 
     if(root!=NULL){
@@ -283,27 +292,27 @@ void delete_tree(struct node *root){
     }
 }
 
-
+// verifica se pode inserir um barco
 bool pode_inserir_quad(struct node* root, piece boat, int size){
 
   int xx = boat.c.x-2;
   int yy = boat.c.y-2;
 
+  // caso o barco esteja fora dos limites
   if(xx < 0 || yy < 0 || xx>=size || yy>=size){
   	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, out of bounds!");
   	return false;
   }
 
-  //CoordinateD meio = new_coordD(size/2,size/2);
 
   for(int i=0; i<5; i++){
     for(int j=0; j<5; j++){
         if(boat.mb -> m[i][j] == '1'){
           if (contains(root, xx+i, yy+j, size/2,size/2)){
+          	// caso o barco fique sobreposto com outro já existente
           	printf("\033[0;31m"); printf("\nError: "); printf("\033[0m");printf("Invalid coordinate, boat already there!");
           	return false;
           }
-          //printf("point (%d,%d) ", xx+i,yy+j);
         }
     }
   }
@@ -318,15 +327,12 @@ void inserir_barco_quad(struct node* root, piece *boat, int size){
 		for(int i=0; i<5; i++){
 	    	for(int j=0; j<5; j++){
 	       		if(boat-> mb -> m[i][j] == '1'){
-
 	       			Coordinate *a = (Coordinate *) malloc(sizeof(Coordinate*)*64);
 	       			a = new_coord(boat->c.x-2+i, boat->c.y-2+j);
-	       			//CoordinateD meio = new_coordD(size/2,size/2);
 	       			struct node* leaf = malloc(sizeof(struct node)*64);
 	       			leaf = new_leaf(a,boat);
 	        		insert(root, leaf, size/2,size/2);
 
-	          		//printf("point (%d,%d) ", boat->c.x-2+i,boat->c.y-2+j);
 	        	}
 	    	}
 	  	}
@@ -350,7 +356,7 @@ void inserir_barco_quad(struct node* root, piece *boat, int size){
 	printf("\n");
 }
 
-
+// funcao igual à pode_inserir_quad, mas não utiliza printfs porque trata-se do modo random
 bool pode_inserirRANDOMS_quad(struct node* root, piece boat, int size){
 
   int xx = boat.c.x-2;
@@ -375,6 +381,7 @@ bool pode_inserirRANDOMS_quad(struct node* root, piece boat, int size){
   return true;
 }
 
+// funcao igual à inserir_barco_quad, mas não utiliza printfs nem scanfs porque trata-se do modo random
 void inserir_barcoRANDOMS_quad(struct node* root, piece *boat, int size){
 
 	if(pode_inserirRANDOMS_quad(root, *boat, size)){
@@ -395,7 +402,7 @@ void inserir_barcoRANDOMS_quad(struct node* root, piece *boat, int size){
 	}
 
 	else {
-		// caso nao possa inserir, volta a pedir coordenadas ao jogador
+		// caso nao possa inserir, volta a criar coordenadas aleatórias
 		int x1,y1;
 		x1 = return_randoms(2,size-3);
 		y1 = return_randoms(2,size-3);
@@ -406,6 +413,7 @@ void inserir_barcoRANDOMS_quad(struct node* root, piece *boat, int size){
 	}
 }
 
+// verifica se o tiro acertou ou não num barco.
 bool shoot(struct node* root, Coordinate *coord, double l1,double l2){
 
 	if(contains2(root,coord->x,coord->y,l1,l2)) return true;
@@ -413,7 +421,6 @@ bool shoot(struct node* root, Coordinate *coord, double l1,double l2){
 	printf("Missed shot!\n");
 	return false;
 }
-
 
 
 //funcao que "transforma" a árvore numa matriz para representar
@@ -443,8 +450,10 @@ void matriz_jogador(struct node *root, int size){
 
 }
 
+// funcao que verifica se o jogo já acabou
 bool isFinished_quad(struct node *root, int shots_hit){
 
+	// se o número de folhas da árvore for igual ao número de tiros diferentes acertados nessa árvore, retorna true
 	if(number_leaves(root) == shots_hit)
 		return true;
 

@@ -16,11 +16,11 @@ int return_randoms(int lower, int upper){
 	return num;
 }
 
-
+//funcao de print dos field_shots
 void print_shots(char m[n][n]){
 
 	for(int i=0;i<n;i++){
-		if(i<10) printf(" %d",i);																						//
+		if(i<10) printf(" %d",i);																						
 		if(i>=10) printf("%d",i);
 		for(int j=0;j<n;j++){
 			if(m[i][j] == '0'){
@@ -403,15 +403,6 @@ int main(){
 					rootp1 = clear_tree(rootp1);											// repor a tree
 			}
 		}
-
-		//bool acertou = false;
-		//acertou = shoot(rootp1, 5,5,n/2,n/2);
-		//if(acertou) {printf("ACERTOU!\n");}
-		//else {printf("nope\n");}
-		//printf("\n\n");
-		//print_m(p1m, rootp1);
-
-		//matriz_jogador(rootp1, n);
 	
 
 		//p2
