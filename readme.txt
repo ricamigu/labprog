@@ -147,9 +147,9 @@ apontador para um bitmap que vai armazenar o bitmap desse barco/peça. Por últi
 count que armazena o número de vezes que foi acertado.
 
 - Node, que representam os nós usados na QuadTree. Cada nó contem uma tag que indica se é uma
-folha ou um nó interno (isleaf, isInternal). No caso de ser uma folha, contem o ponto dessa
-posição; contem  também um apontador para um barco e um field_shot (o que antes estava contido na Cell).
-No caso de ser um nó interno, contem 4 apontadores para os quadrantes (NW,NE,SW,SE).
+folha ou um nó interno (isleaf, isInternal). No caso de ser uma folha, contém o ponto dessa
+posição; contém  também um apontador para um barco e um field_shot (o que antes estava contido na Cell).
+No caso de ser um nó interno, contém 4 apontadores para os quadrantes (NW,NE,SW,SE).
 
 O resto do battleship.h contém as declarações das funções do jogo relativas ao jogo que vão ser 
 explicadas nos ficheiros correspondetes.
@@ -176,7 +176,7 @@ relativos apenas a nós internos.
 struct node* insert(struct node* root, struct node* coord, double l1,double l2)
 - Esta função insere um nó na árvore. No caso de ser NULL, é colocado nessa posição.
 No caso da árvore não ser NULL, vai-se verificar qual o quadrante em que deve ser
-inserido o nó e volta a verificar recursivamente se essa nova poisição é NULL.
+inserido o nó e volta a verificar recursivamente se essa nova posição é NULL.
 No caso de já estar no quadrante certo e o nó não ser NULL, vai tratar-se de um nó
 folha. Nesse caso, é necessário criar um nó interno para substituir essa folha já
 existente. De seguida, a partir desse novo nó vamos inserir o nó temp que foi removido
@@ -223,7 +223,7 @@ desta função é que não libertava a memória, por isso foi usada apenas como 
 void delete_tree(struct node *root)
 - Esta função, ao contrário da anterior, vai percorrer todos os nós da árvore e libertar
 a memória ocupada por eles com a função free. É utilizado nos mesmos casos que foram
-mencionados na função de cima.
+mencionados na função em cima.
 
 bool pode_inserir_quad(struct node* root, piece boat, int size)
 -  Esta função verifica se o input dado pelo utilizador pode ser inserido. Para isso, vai
@@ -240,18 +240,18 @@ Caso a função pode_inserir_quad der false, vai ser pedido um input de uma coor
 bool pode_inserirRANDOMS_quad(struct node* root, piece boat, int size)
 void inserir_barcoRANDOMS_quad(struct node* root, piece *boat, int size)
 - Estas duas funções fazem exatamente o mesmo que a função anterior mas adaptadas aos randoms.
-Assim, os printfs e os scanfs são removidos. No caso de necessário uma nova coordenada, é efetuado
+Assim, os printfs e os scanfs são removidos. No caso de ser necessário uma nova coordenada, é efetuada
 novamente a função return_randoms.
 
 bool shoot(struct node* root, Coordinate *coord, double l1,double l2)
 - Esta função verifica o resultado dos tiros do utilizador. Para isso usa apenas a função
-contains2 que já foi falada. No caso de retornar true, retorna true também. Caso contrário,
+contains2 que já foi mencionada. No caso de retornar true, retorna true também. Caso contrário,
 retorna false.
 
 void matriz_jogador(struct node *root, int size)
 - Esta função "traduz" a QuadTree e dá print em formato de matriz. Dá print de um 0 caso
 a posição não exista na árvore, dá print de um X vermelho caso já tenha sido acertada e
-1 no caso de existir lá um barco não acertado.
+1 no caso de existir um barco não acertado.
 
 bool isFinished_quad(struct node *root, int shots_hit)
 - A função verifica se o jogo já acabou recorrendo ao número de folhas e ao número de
@@ -263,7 +263,7 @@ tiros que foram acertados nessa árvore. Caso o número de tiros diferentes acer
 |main_quad.c |  -> main relativa à Quadtree
 |____________|
 
-Na main apenas queria explicar que para os field_shots e print deles foram utilizadas matrizes
+Na main apenas queriamos explicar que para os field_shots e print deles foram utilizadas matrizes
 para armazenar e a função void print_shots(char m[n][n])  para printar os tiros dos utilizadores.
 
 Aqui vou colocar a explicação relativa ao ponto a) caso seja necessário rever as funções.
